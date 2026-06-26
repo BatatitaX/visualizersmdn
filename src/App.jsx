@@ -7,9 +7,9 @@ import web3 from './assets/slides/web3.jpeg'
 import webClaro from './assets/slides/web-Claro.jpeg'
 import webClaro1 from './assets/slides/web-Claro1.jpeg'
 import webClaro2 from './assets/slides/web-Claro2.jpeg'
-import mob1 from './assets/slides/mob1.svg'
-import mob2 from './assets/slides/mob2.svg'
-import mob3 from './assets/slides/mob3.svg'
+import mob1 from './assets/slides/mob1.jpeg'
+import mob2 from './assets/slides/mob2.jpeg'
+import mob3 from './assets/slides/mob3..jpeg'
 
 const DEFAULT_ACCESSIBILITY = {
   fontSize: 'medium',
@@ -61,9 +61,9 @@ const mobileSlides = [
     image: mob2,
   },
   {
-    eyebrow: 'Prevenção',
-    title: 'Clima e prevenção',
-    text: 'Consulta de clima, guia preventivo e suporte ao cidadão.',
+    eyebrow: 'IA integrada',
+    title: 'Guia de sobrevivência',
+    text: 'Tutorial e passo a passo de como agir em situações de risco, com inteligência artificial.',
     badge: '03',
     image: mob3,
   },
