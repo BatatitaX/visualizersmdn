@@ -1,0 +1,14 @@
+{
+  "name": "SMDN Viewer",
+  "short_name": "SMDN",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#071226",
+  "background_color": "#071226",
+  "display": "standalone"
+}
