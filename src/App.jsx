@@ -4,10 +4,70 @@ import logoClara from './assets/brand/logo-clara.svg'
 import web1 from './assets/slides/web1.jpeg'
 import web2 from './assets/slides/web2.jpeg'
 import web3 from './assets/slides/web3.jpeg'
+import webClaro from './assets/slides/web-claro.jpeg'
+import webClaro1 from './assets/slides/web-claro1.jpeg'
+import webClaro2 from './assets/slides/web-claro2.jpeg'
 import mob1 from './assets/slides/mob1.svg'
 import mob2 from './assets/slides/mob2.svg'
 import mob3 from './assets/slides/mob3.svg'
 
+const DEFAULT_ACCESSIBILITY = {
+  fontSize: 'medium',
+  theme: 'system',
+  highContrast: false,
+  reduceMotion: false,
+}
+
+const webSlides = [
+  {
+    eyebrow: 'Dashboard Web',
+    title: 'Painel web em tempo real',
+    text: 'Mapa, alertas e ocorrências para leitura operacional rápida.',
+    badge: '01',
+    image: web1,
+    lightImage: webClaro,
+  },
+  {
+    eyebrow: 'Relatórios',
+    title: 'Relatórios operacionais',
+    text: 'Indicadores e gráficos para apoiar resposta e planejamento.',
+    badge: '02',
+    image: web2,
+    lightImage: webClaro1,
+  },
+  {
+    eyebrow: 'Auditoria',
+    title: 'Auditoria e rastreio',
+    text: 'Histórico de ações e responsáveis para controle administrativo.',
+    badge: '03',
+    image: web3,
+    lightImage: webClaro2,
+  },
+]
+
+const mobileSlides = [
+  {
+    eyebrow: 'Aplicativo Mobile',
+    title: 'Mapa e alertas móveis',
+    text: 'Riscos, localização e avisos importantes direto no celular.',
+    badge: '01',
+    image: mob1,
+  },
+  {
+    eyebrow: 'Emergência',
+    title: 'SOS e relato rápido',
+    text: 'Pedido de ajuda e registro de ocorrência em poucos toques.',
+    badge: '02',
+    image: mob2,
+  },
+  {
+    eyebrow: 'Prevenção',
+    title: 'Clima e prevenção',
+    text: 'Consulta de clima, guia preventivo e suporte ao cidadão.',
+    badge: '03',
+    image: mob3,
+  },
+]
 
 function XIcon() {
   return (
@@ -26,61 +86,6 @@ function XIcon() {
     </svg>
   )
 }
-
-const DEFAULT_ACCESSIBILITY = {
-  fontSize: 'medium',
-  theme: 'system',
-  highContrast: false,
-  reduceMotion: false,
-}
-
-const webSlides = [
-  {
-    eyebrow: 'Dashboard',
-    title: 'Painel Operacional',
-    text: 'Visualização do painel web do SMDN para apoiar decisões críticas em tempo real.',
-    badge: '01',
-    image: web1,
-  },
-  {
-    eyebrow: 'Relatórios',
-    title: 'Dados para decisão',
-    text: 'Indicadores, gráficos e leitura rápida para apoiar planejamento, resposta e prestação de contas.',
-    badge: '02',
-    image: web2,
-  },
-  {
-    eyebrow: 'Auditoria',
-    title: 'Rastreabilidade das ações',
-    text: 'Registro de alterações, responsáveis e histórico operacional para controle administrativo.',
-    badge: '03',
-    image: web3,
-  },
-]
-
-const mobileSlides = [
-  {
-    eyebrow: 'Aplicativo Mobile',
-    title: 'Mapa e alertas',
-    text: 'Experiência mobile para acompanhar riscos, localização e alertas importantes.',
-    badge: '01',
-    image: mob1,
-  },
-  {
-    eyebrow: 'Emergência',
-    title: 'SOS e relatos',
-    text: 'Fluxo mobile para pedir ajuda, registrar ocorrências e enviar informações rapidamente.',
-    badge: '02',
-    image: mob2,
-  },
-  {
-    eyebrow: 'Prevenção',
-    title: 'Clima e suporte',
-    text: 'Consulta de clima, guia preventivo e apoio visual integrado ao ecossistema SMDN.',
-    badge: '03',
-    image: mob3,
-  },
-]
 
 function ChevronLeftIcon() {
   return (
@@ -188,7 +193,7 @@ function AccessibilityMenu({ accessibility, setAccessibility }) {
   )
 }
 
-function ImageSlide({ slide, variant = 'web' }) {
+function ImageSlide({ slide, variant = 'web', onImageClick }) {
   return (
     <figure className={`imageSlide ${variant === 'mobile' ? 'mobileImageSlide' : ''}`}>
       <div className="imageSlideHeader">
@@ -196,9 +201,28 @@ function ImageSlide({ slide, variant = 'web' }) {
         <strong>{slide.badge}</strong>
       </div>
 
-      <div className="imageFrame">
-        <img src={slide.image} alt={`${slide.title} - ${slide.eyebrow}`} draggable="false" />
-      </div>
+      <button
+        type="button"
+        className="imageFrame imageOpenButton"
+        onClick={() => onImageClick(slide)}
+        aria-label={`Ampliar imagem ${slide.title}`}
+      >
+        <img
+          src={slide.image}
+          alt={`${slide.title} - ${slide.eyebrow}`}
+          draggable="false"
+          className={slide.lightImage ? 'slideImageDark' : ''}
+        />
+        {slide.lightImage && (
+          <img
+            src={slide.lightImage}
+            alt={`${slide.title} - ${slide.eyebrow} em tema claro`}
+            draggable="false"
+            className="slideImageLight"
+          />
+        )}
+        <span className="tapZoomHint">Toque para ampliar</span>
+      </button>
 
       <figcaption>
         <strong>{slide.title}</strong>
@@ -210,6 +234,7 @@ function ImageSlide({ slide, variant = 'web' }) {
 
 function AutoCarousel({ slides, paused, setPaused, variant = 'web' }) {
   const [index, setIndex] = useState(0)
+  const [zoomedSlide, setZoomedSlide] = useState(null)
   const active = slides[index]
   const dragStartX = useRef(null)
   const dragDeltaX = useRef(0)
@@ -225,6 +250,19 @@ function AutoCarousel({ slides, paused, setPaused, variant = 'web' }) {
     return () => window.clearInterval(interval)
   }, [paused, slides.length])
 
+  useEffect(() => {
+    if (!zoomedSlide) return undefined
+
+    function closeOnEscape(event) {
+      if (event.key === 'Escape') {
+        setZoomedSlide(null)
+      }
+    }
+
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [zoomedSlide])
+
   function previousSlide() {
     setIndex((current) => (current - 1 + slides.length) % slides.length)
   }
@@ -234,6 +272,7 @@ function AutoCarousel({ slides, paused, setPaused, variant = 'web' }) {
   }
 
   function startDrag(event) {
+    if (event.target.closest('.imageOpenButton')) return
     dragStartX.current = event.clientX
     dragDeltaX.current = 0
     isDragging.current = true
@@ -296,7 +335,34 @@ function AutoCarousel({ slides, paused, setPaused, variant = 'web' }) {
           </>
         )}
 
-        <ImageSlide slide={active} variant={variant} />
+        <ImageSlide slide={active} variant={variant} onImageClick={setZoomedSlide} />
+
+        {zoomedSlide && (
+          <div className="imageZoomOverlay" role="dialog" aria-modal="true" aria-label={`Imagem ampliada ${zoomedSlide.title}`}>
+            <button type="button" className="imageZoomBackdrop" onClick={() => setZoomedSlide(null)} aria-label="Fechar imagem ampliada" />
+
+            <div className="imageZoomPanel">
+              <button type="button" className="imageZoomClose" onClick={() => setZoomedSlide(null)} aria-label="Fechar imagem ampliada">
+                <XIcon />
+              </button>
+
+              <img
+                src={zoomedSlide.image}
+                alt={`${zoomedSlide.title} ampliado`}
+                draggable="false"
+                className={zoomedSlide.lightImage ? 'slideImageDark' : ''}
+              />
+              {zoomedSlide.lightImage && (
+                <img
+                  src={zoomedSlide.lightImage}
+                  alt={`${zoomedSlide.title} ampliado em tema claro`}
+                  draggable="false"
+                  className="slideImageLight"
+                />
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="carouselDots" aria-label="Indicadores do carrossel">
           {slides.map((slide, slideIndex) => (
@@ -386,7 +452,7 @@ export default function App() {
             </h1>
 
             <p className="lead">
-              Uma vitrine visual do sistema para auxiliar autoridades e gestores a tomar decisões rápidas, com base em dados
+              Uma vitrine visual do sistema para apresentar o painel web, seus recursos
               operacionais e a integração com a experiência mobile.
             </p>
           </article>
@@ -397,11 +463,10 @@ export default function App() {
         <section className="mobileShowcase" aria-label="Apresentação do aplicativo mobile">
           <article className="mobileCopy">
             <span className="eyebrow">Aplicativo Mobile · cidadão conectado</span>
-            <h2>Uma experiência pensada para necessita de ajuda rápida.</h2>
+            <h2>Uma experiência pensada para quem acessa pelo celular.</h2>
             <p>
-              No mobile, o negócio é rápido, clicou, chamou ajuda
-              de forma instantânea, com geolocalização e envio de informações para o painel web, de modo
-              que autoridades possam agir rapidamente. Além disso, o aplicativo oferece informações preventivas e de suporte para o cidadão.
+              No mobile, o viewer vira uma apresentação vertical: leitura rápida, cards empilhados,
+              controles grandes e navegação confortável para toque.
             </p>
           </article>
 
