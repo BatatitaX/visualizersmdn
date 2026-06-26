@@ -9,7 +9,7 @@ import webClaro1 from './assets/slides/web-Claro1.jpeg'
 import webClaro2 from './assets/slides/web-Claro2.jpeg'
 import mob1 from './assets/slides/mob1.jpeg'
 import mob2 from './assets/slides/mob2.jpeg'
-import mob3 from './assets/slides/mob3..jpeg'
+import mob3 from './assets/slides/mob3.jpeg'
 
 const DEFAULT_ACCESSIBILITY = {
   fontSize: 'medium',
