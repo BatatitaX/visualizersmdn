@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import logo from './assets/brand/logo.svg'
 import logoClara from './assets/brand/logo-clara.svg'
+import web1 from './assets/slides/web1.jpeg'
+import web2 from './assets/slides/web2.jpeg'
+import web3 from './assets/slides/web3.jpeg'
+import mob1 from './assets/slides/mob1.svg'
+import mob2 from './assets/slides/mob2.svg'
+import mob3 from './assets/slides/mob3.svg'
 
 
 function XIcon() {
@@ -30,49 +36,49 @@ const DEFAULT_ACCESSIBILITY = {
 
 const webSlides = [
   {
-    eyebrow: 'Dashboard Web',
-    title: 'Panorama operacional',
-    text: 'Mapa, alertas ativos, vítimas, ocorrências críticas e status de atendimento em uma visão centralizada.',
+    eyebrow: 'Dashboard',
+    title: 'Painel Operacional',
+    text: 'Visualização do painel web do SMDN para apoiar decisões críticas em tempo real.',
     badge: '01',
-    items: ['Mapa', 'Alertas', 'Ocorrências'],
+    image: web1,
   },
   {
     eyebrow: 'Relatórios',
     title: 'Dados para decisão',
     text: 'Indicadores, gráficos e leitura rápida para apoiar planejamento, resposta e prestação de contas.',
     badge: '02',
-    items: ['KPI', 'Municípios', 'Severidade'],
+    image: web2,
   },
   {
     eyebrow: 'Auditoria',
     title: 'Rastreabilidade das ações',
     text: 'Registro de alterações, responsáveis e histórico operacional para controle administrativo.',
     badge: '03',
-    items: ['Logs', 'Usuários', 'Controle'],
+    image: web3,
   },
 ]
 
 const mobileSlides = [
   {
     eyebrow: 'Aplicativo Mobile',
-    title: 'Mapa e alertas do cidadão',
-    text: 'O usuário visualiza riscos, acompanha alertas e entende rapidamente a situação do território.',
+    title: 'Mapa e alertas',
+    text: 'Experiência mobile para acompanhar riscos, localização e alertas importantes.',
     badge: '01',
-    items: ['Mapa', 'Alerta', 'Localização'],
+    image: mob1,
   },
   {
     eyebrow: 'Emergência',
-    title: 'SOS e relato em poucos toques',
-    text: 'Fluxo pensado para emergência: pedir ajuda, registrar ocorrência e enviar informações relevantes.',
+    title: 'SOS e relatos',
+    text: 'Fluxo mobile para pedir ajuda, registrar ocorrências e enviar informações rapidamente.',
     badge: '02',
-    items: ['SOS', 'Relato', 'Foto'],
+    image: mob2,
   },
   {
     eyebrow: 'Prevenção',
-    title: 'Clima, guia e suporte',
-    text: 'Consulta de clima, guia de sobrevivência e apoio visual para prevenção de desastres.',
+    title: 'Clima e suporte',
+    text: 'Consulta de clima, guia preventivo e apoio visual integrado ao ecossistema SMDN.',
     badge: '03',
-    items: ['Clima', 'Guia', 'Chat'],
+    image: mob3,
   },
 ]
 
@@ -182,80 +188,23 @@ function AccessibilityMenu({ accessibility, setAccessibility }) {
   )
 }
 
-function WebMockup({ slide }) {
+function ImageSlide({ slide, variant = 'web' }) {
   return (
-    <div className="webMockup">
-      <div className="mockHeader">
-        <div>
-          <span>{slide.eyebrow}</span>
-          <strong>{slide.title}</strong>
-        </div>
-        <b>{slide.badge}</b>
+    <figure className={`imageSlide ${variant === 'mobile' ? 'mobileImageSlide' : ''}`}>
+      <div className="imageSlideHeader">
+        <span>{slide.eyebrow}</span>
+        <strong>{slide.badge}</strong>
       </div>
 
-      <div className="dashboardGrid">
-        <div className="mapPanel">
-          <span className="pin pinA" />
-          <span className="pin pinB" />
-          <span className="pin pinC" />
-          <div className="routeLine" />
-        </div>
-
-        <div className="sidePanel">
-          <strong>{slide.title}</strong>
-          <p>{slide.text}</p>
-          <div className="mockList">
-            {slide.items.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
-        </div>
-
-        <div className="metricCard">
-          <span>Alertas</span>
-          <strong>06</strong>
-        </div>
-        <div className="metricCard">
-          <span>Registros</span>
-          <strong>164</strong>
-        </div>
-        <div className="metricCard">
-          <span>Operadores</span>
-          <strong>08</strong>
-        </div>
+      <div className="imageFrame">
+        <img src={slide.image} alt={`${slide.title} - ${slide.eyebrow}`} draggable="false" />
       </div>
-    </div>
-  )
-}
 
-function MobileMockup({ slide }) {
-  return (
-    <div className="mobileMockup">
-      <div className="phoneShell">
-        <div className="phoneNotch" />
-        <div className="phoneScreen">
-          <div className="phoneTop">
-            <span>{slide.eyebrow}</span>
-            <b>{slide.badge}</b>
-          </div>
-          <div className="phoneMap">
-            <span className="pin pinA" />
-            <span className="pin pinB" />
-            <span className="pin pinC" />
-            <div className="routeLine" />
-          </div>
-          <div className="phoneCard">
-            <strong>{slide.title}</strong>
-            <p>{slide.text}</p>
-            <div className="mockList">
-              {slide.items.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <figcaption>
+        <strong>{slide.title}</strong>
+        <p>{slide.text}</p>
+      </figcaption>
+    </figure>
   )
 }
 
@@ -347,7 +296,7 @@ function AutoCarousel({ slides, paused, setPaused, variant = 'web' }) {
           </>
         )}
 
-        {variant === 'web' ? <WebMockup slide={active} /> : <MobileMockup slide={active} />}
+        <ImageSlide slide={active} variant={variant} />
 
         <div className="carouselDots" aria-label="Indicadores do carrossel">
           {slides.map((slide, slideIndex) => (
@@ -432,13 +381,13 @@ export default function App() {
             <span className="eyebrow">SMDN Web · painel de monitoramento</span>
 
             <h1>
-              Apresente o painel web do SMDN em tempo real.
-              <span>Decisão rápida para cenários críticos.</span>
+              Para mais segurança e agilidade, SMDN apresenta seu primeiro painel web.
+              <span>Em tempo real, para decisões críticas.</span>
             </h1>
 
             <p className="lead">
-              O viewer prioriza a visão operacional do painel web: mapa, alertas,
-              ocorrências, relatórios e auditoria em uma vitrine única para demonstrações.
+              Uma vitrine visual do sistema para auxiliar autoridades e gestores a tomar decisões rápidas, com base em dados
+              operacionais e a integração com a experiência mobile.
             </p>
           </article>
 
@@ -448,10 +397,11 @@ export default function App() {
         <section className="mobileShowcase" aria-label="Apresentação do aplicativo mobile">
           <article className="mobileCopy">
             <span className="eyebrow">Aplicativo Mobile · cidadão conectado</span>
-            <h2>Uma experiência pensada para quem acessa pelo celular.</h2>
+            <h2>Uma experiência pensada para necessita de ajuda rápida.</h2>
             <p>
-              No mobile, o viewer vira uma apresentação vertical: leitura rápida, cards empilhados,
-              controles grandes e navegação confortável para toque.
+              No mobile, o negócio é rápido, clicou, chamou ajuda
+              de forma instantânea, com geolocalização e envio de informações para o painel web, de modo
+              que autoridades possam agir rapidamente. Além disso, o aplicativo oferece informações preventivas e de suporte para o cidadão.
             </p>
           </article>
 
