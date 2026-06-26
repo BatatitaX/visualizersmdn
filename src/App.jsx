@@ -1,279 +1,311 @@
 import { useEffect, useMemo, useState } from 'react'
-import authFlow from './assets/mobile/auth-flow.png'
-import coreFlow from './assets/mobile/core-flow.png'
-import safetyFlow from './assets/mobile/safety-profile-flow.png'
+import smdnLogo from './assets/brand/smdn-logo.svg'
 
-const slides = [
+const carouselSlides = [
   {
-    id: 'overview',
-    kicker: 'Visão geral',
-    title: 'SMDN em execução automática',
-    label: 'Dashboard Web',
-    image: coreFlow,
-    accent: '#7ec8ff',
-    description:
-      'Painel de apresentação do Sistema de Monitoramento de Desastres Naturais, pensado para rodar sozinho em telão, banca ou demonstração.',
-    bullets: [
-      'Centraliza alertas, ocorrências, mapa e status operacional.',
-      'Mostra a jornada mobile sem trocar de página.',
-      'Mantém a identidade visual escura do painel SMDN Web.',
-    ],
-    metric: { value: '24/7', label: 'monitoramento visual' },
+    eyebrow: 'Dashboard Web',
+    title: 'Panorama operacional',
+    text: 'Mapa, alertas ativos, ocorrências críticas e leitura rápida da situação municipal.',
+    badge: '01',
+    items: ['Alertas', 'Mapa', 'Ocorrências'],
   },
   {
-    id: 'auth',
-    kicker: 'Acesso e cadastro',
-    title: 'Entrada segura para cidadão e operador',
-    label: 'Login • Registro • Recuperação',
-    image: authFlow,
-    accent: '#93b8d0',
-    description:
-      'O fluxo mobile apresenta login, registro e recuperação de acesso com visual claro, reforçando segurança e continuidade do serviço.',
-    bullets: [
-      'Registro de novos usuários com dados de identificação.',
-      'Login e recuperação de senha em etapas simples.',
-      'Base visual coerente com o ecossistema SMDN.',
-    ],
-    metric: { value: '3', label: 'fluxos de autenticação' },
+    eyebrow: 'Aplicativo Mobile',
+    title: 'Alerta na palma da mão',
+    text: 'O cidadão acompanha riscos, consulta mapa e aciona suporte em momentos de emergência.',
+    badge: '02',
+    items: ['SOS', 'Mapa', 'Relato'],
   },
   {
-    id: 'sos',
-    kicker: 'Emergência',
-    title: 'SOS, mapa e relato em poucos toques',
-    label: 'SOS • Mapa • Reportar',
-    image: coreFlow,
-    accent: '#ff4d4f',
-    description:
-      'O app mobile prioriza ações rápidas: pedir ajuda, visualizar riscos no mapa, reportar ocorrência e consultar clima.',
-    bullets: [
-      'Botão SOS de alta visibilidade para situações críticas.',
-      'Mapa com marcadores e leitura territorial do risco.',
-      'Relato com imagem, tipo de desastre, severidade e localização.',
-    ],
-    metric: { value: 'SOS', label: 'ação crítica em destaque' },
+    eyebrow: 'Prevenção',
+    title: 'Informação antes do desastre',
+    text: 'Guia de sobrevivência, clima e orientação visual para reduzir exposição ao risco.',
+    badge: '03',
+    items: ['Clima', 'Guia', 'Chat'],
   },
   {
-    id: 'clima',
-    kicker: 'Clima e previsão',
-    title: 'Condições climáticas como apoio à decisão',
-    label: 'Clima • Busca • Chat',
-    image: coreFlow,
-    accent: '#b9d7e8',
-    description:
-      'A experiência mobile inclui consulta de clima, previsão local e apoio conversacional para orientar o usuário em contexto de risco.',
-    bullets: [
-      'Busca de cidade e cartões de temperatura por município.',
-      'Previsão com ícones simples e leitura rápida.',
-      'Chat de suporte visualmente integrado ao aplicativo.',
-    ],
-    metric: { value: '20°', label: 'exemplo climático' },
-  },
-  {
-    id: 'guide',
-    kicker: 'Prevenção',
-    title: 'Guia de sobrevivência por tipo de desastre',
-    label: 'Deslizamento • Enchente • Tempestade • Tornado',
-    image: safetyFlow,
-    accent: '#ffd166',
-    description:
-      'O guia mobile organiza orientações de sobrevivência e prevenção, ajudando o cidadão antes, durante e depois de eventos extremos.',
-    bullets: [
-      'Categorias de desastre em formato de cards expansíveis.',
-      'Texto orientativo para reduzir exposição ao risco.',
-      'Funciona como material educativo dentro do app.',
-    ],
-    metric: { value: '4', label: 'categorias de desastre' },
-  },
-  {
-    id: 'profile',
-    kicker: 'Perfil cidadão',
-    title: 'Dados pessoais e informações de atendimento',
-    label: 'Perfil • Saúde • Observações',
-    image: safetyFlow,
-    accent: '#9ee6c8',
-    description:
-      'A área de perfil reúne dados de identificação e informações úteis para atendimento em emergências, como alergias e observações.',
-    bullets: [
-      'Perfil com dados cadastrais e contato.',
-      'Campos de saúde, alergias e observações.',
-      'Edição simplificada para manter dados atualizados.',
-    ],
-    metric: { value: '1', label: 'perfil integrado' },
+    eyebrow: 'Gestão integrada',
+    title: 'Dados para tomada de decisão',
+    text: 'A Defesa Civil acompanha registros, auditoria e distribuição dos alertas em tempo real.',
+    badge: '04',
+    items: ['Auditoria', 'Relatórios', 'Usuários'],
   },
 ]
 
-const statusFeed = [
-  { label: 'SOS reportado', place: 'Taubaté', tone: 'moderado' },
-  { label: 'Enchente monitorada', place: 'Roseira', tone: 'grave' },
-  { label: 'Deslizamento em análise', place: 'Pindamonhangaba', tone: 'critico' },
-  { label: 'Previsão atualizada', place: 'São Paulo', tone: 'info' },
+const highlights = [
+  'Alertas em tempo real',
+  'Mapa de risco',
+  'Ocorrências críticas',
+  'Experiência mobile integrada',
 ]
 
-function Logo() {
+const features = [
+  'Apresentação única para telão, banca ou demonstração.',
+  'Visual escuro alinhado ao painel SMDN Web.',
+  'Carrossel automático com controle manual quando pausado.',
+]
+
+function AccessibilityMenu({ accessibility, setAccessibility }) {
+  const [open, setOpen] = useState(false)
+
+  function toggle(key) {
+    setAccessibility((current) => ({
+      ...current,
+      [key]: !current[key],
+    }))
+  }
+
+  function increaseFont() {
+    setAccessibility((current) => ({
+      ...current,
+      fontScale: Math.min(current.fontScale + 0.08, 1.24),
+    }))
+  }
+
+  function decreaseFont() {
+    setAccessibility((current) => ({
+      ...current,
+      fontScale: Math.max(current.fontScale - 0.08, 0.9),
+    }))
+  }
+
+  function reset() {
+    setAccessibility({
+      highContrast: false,
+      reduceMotion: false,
+      fontScale: 1,
+    })
+  }
+
   return (
-    <div className="logoBlock" aria-label="SMDN Viewer">
-      <div className="logoText">SMDN</div>
-      <div className="logoWave" />
-      <span>viewer</span>
+    <div className="accessMenu">
+      <button
+        type="button"
+        className="accessTrigger"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+      >
+        <span aria-hidden="true">⚙</span>
+        Acessibilidade
+      </button>
+
+      {open && (
+        <div className="accessDropdown" role="dialog" aria-label="Opções de acessibilidade">
+          <div className="accessHeader">
+            <strong>Acessibilidade</strong>
+            <span>Personalize a visualização</span>
+          </div>
+
+          <div className="accessGrid">
+            <button type="button" onClick={decreaseFont}>A-</button>
+            <button type="button" onClick={increaseFont}>A+</button>
+            <button
+              type="button"
+              className={accessibility.highContrast ? 'active' : ''}
+              onClick={() => toggle('highContrast')}
+              aria-pressed={accessibility.highContrast}
+            >
+              Alto contraste
+            </button>
+            <button
+              type="button"
+              className={accessibility.reduceMotion ? 'active' : ''}
+              onClick={() => toggle('reduceMotion')}
+              aria-pressed={accessibility.reduceMotion}
+            >
+              Reduzir movimento
+            </button>
+            <button type="button" onClick={reset} className="wide">
+              Restaurar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
-function Icon({ type }) {
-  const icons = {
-    dashboard: '⌁',
-    auth: '◫',
-    sos: '⚠',
-    clima: '☁',
-    guide: '◆',
-    profile: '◉',
-  }
-
-  return <span className="navIcon" aria-hidden="true">{icons[type] || '•'}</span>
-}
-
-function App() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const activeSlide = slides[activeIndex]
+function CarouselMock({ paused, setPaused }) {
+  const [index, setIndex] = useState(0)
+  const active = carouselSlides[index]
 
   useEffect(() => {
-    if (isPaused) return undefined
+    if (paused) return undefined
 
     const interval = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % slides.length)
-    }, 6200)
+      setIndex((current) => (current + 1) % carouselSlides.length)
+    }, 4200)
 
     return () => window.clearInterval(interval)
-  }, [isPaused])
+  }, [paused])
 
-  const progress = useMemo(() => ((activeIndex + 1) / slides.length) * 100, [activeIndex])
+  function previousSlide() {
+    setIndex((current) => (current - 1 + carouselSlides.length) % carouselSlides.length)
+  }
+
+  function nextSlide() {
+    setIndex((current) => (current + 1) % carouselSlides.length)
+  }
 
   return (
-    <div className="viewerShell" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
-      <aside className="sidebar">
-        <Logo />
-
-        <nav className="slideNav" aria-label="Módulos SMDN">
-          {slides.map((slide, index) => (
-            <button
-              key={slide.id}
-              type="button"
-              className={`navItem ${index === activeIndex ? 'active' : ''}`}
-              onClick={() => setActiveIndex(index)}
-            >
-              <Icon type={slide.id} />
-              <span>{slide.kicker}</span>
-            </button>
-          ))}
-        </nav>
-
-        <div className="operatorCard">
-          <div className="avatar">AI</div>
-          <div>
-            <strong>Modo apresentação</strong>
-            <p>{isPaused ? 'Pausado por interação' : 'Rodando automaticamente'}</p>
-          </div>
+    <section className="visualFrame" aria-label="Carrossel de apresentação do SMDN">
+      <div className="visualHeader">
+        <div>
+          <span className="visualKicker">Demonstração visual</span>
+          <h2>{active.title}</h2>
         </div>
-      </aside>
 
-      <main className="stage">
-        <header className="topbar">
-          <div>
-            <span className="eyebrow">{activeSlide.kicker}</span>
-            <h1>{activeSlide.title}</h1>
+        <button
+          type="button"
+          className={`presentationButton ${paused ? 'paused' : ''}`}
+          onClick={() => setPaused((value) => !value)}
+          aria-pressed={paused}
+        >
+          {paused ? 'Continuar apresentação' : 'Apresentação automática'}
+        </button>
+      </div>
+
+      <p className="visualDescription">{active.text}</p>
+
+      <div className="carouselArea">
+        {paused && (
+          <>
+            <button
+              type="button"
+              className="carouselArrow left"
+              onClick={previousSlide}
+              aria-label="Slide anterior"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="carouselArrow right"
+              onClick={nextSlide}
+              aria-label="Próximo slide"
+            >
+              ›
+            </button>
+          </>
+        )}
+
+        <div className="screenMockup">
+          <div className="mockTopbar">
+            <span>{active.eyebrow}</span>
+            <strong>{active.badge}</strong>
           </div>
 
-          <div className="topCards">
-            <div className="topCard">
-              <span>Status</span>
-              <strong>Online</strong>
-            </div>
-            <div className="topCard alert">
-              <span>Demonstração</span>
-              <strong>{activeIndex + 1}/{slides.length}</strong>
-            </div>
-          </div>
-        </header>
-
-        <section className="contentGrid">
-          <article className="heroPanel" style={{ '--accent': activeSlide.accent }}>
-            <div className="heroGlow" />
-            <span className="modulePill">{activeSlide.label}</span>
-            <h2>{activeSlide.description}</h2>
-
-            <ul>
-              {activeSlide.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
-
-            <div className="metricRow">
-              <div className="metricMain">
-                <strong>{activeSlide.metric.value}</strong>
-                <span>{activeSlide.metric.label}</span>
-              </div>
-              <div className="progressBox">
-                <span>Progresso da apresentação</span>
-                <div className="progressTrack">
-                  <div className="progressFill" style={{ width: `${progress}%` }} />
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article className="phonePanel">
-            <div className="phoneHeader">
-              <div>
-                <span>Mobile design</span>
-                <strong>{activeSlide.label}</strong>
-              </div>
-              <span className="liveDot">ao vivo</span>
-            </div>
-
-            <div className="deviceFrame">
-              <div className="deviceNotch" />
-              <img src={activeSlide.image} alt={`Fluxo mobile: ${activeSlide.label}`} />
-            </div>
-          </article>
-        </section>
-
-        <section className="bottomGrid">
-          <div className="mapPanel">
-            <div className="mapHeader">
-              <strong>Mapa operacional</strong>
-              <span>Vale do Paraíba • simulação visual</span>
-            </div>
-            <div className="mapCanvas">
-              <span className="pin pinRed" />
-              <span className="pin pinYellow" />
-              <span className="pin pinOrange" />
+          <div className="mockContent">
+            <div className="mockMap">
+              <span className="pin pinA" />
+              <span className="pin pinB" />
+              <span className="pin pinC" />
               <div className="routeLine" />
             </div>
-          </div>
 
-          <div className="feedPanel">
-            <div className="feedHeader">
-              <strong>Eventos recentes</strong>
-              <span>atualização automática</span>
-            </div>
+            <div className="mockPanel">
+              <strong>{active.title}</strong>
+              <p>{active.text}</p>
 
-            <div className="feedList">
-              {statusFeed.map((item) => (
-                <div className="feedItem" key={`${item.label}-${item.place}`}>
-                  <span className={`severity ${item.tone}`} />
-                  <div>
-                    <strong>{item.label}</strong>
-                    <p>{item.place} • há poucos minutos</p>
-                  </div>
-                </div>
-              ))}
+              <div className="mockList">
+                {active.items.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+
+        <div className="carouselDots" aria-label="Indicadores do carrossel">
+          {carouselSlides.map((slide, slideIndex) => (
+            <button
+              key={slide.badge}
+              type="button"
+              className={slideIndex === index ? 'active' : ''}
+              onClick={() => {
+                setIndex(slideIndex)
+                setPaused(true)
+              }}
+              aria-label={`Ir para ${slide.title}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default function App() {
+  const [paused, setPaused] = useState(false)
+  const [accessibility, setAccessibility] = useState({
+    highContrast: false,
+    reduceMotion: false,
+    fontScale: 1,
+  })
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--font-scale', accessibility.fontScale)
+  }, [accessibility.fontScale])
+
+  const shellClass = useMemo(
+    () =>
+      [
+        'viewerLanding',
+        accessibility.highContrast ? 'highContrast' : '',
+        accessibility.reduceMotion ? 'reduceMotion' : '',
+      ]
+        .filter(Boolean)
+        .join(' '),
+    [accessibility]
+  )
+
+  return (
+    <div className={shellClass}>
+      <div className="ambientGlow ambientGlowLeft" />
+      <div className="ambientGlow ambientGlowRight" />
+
+      <header className="topBar">
+        <a className="brandLink" href="#conteudo-principal" aria-label="SMDN Viewer">
+          <img src={smdnLogo} alt="SMDN Viewer" className="brandLogo" />
+        </a>
+
+        <AccessibilityMenu accessibility={accessibility} setAccessibility={setAccessibility} />
+      </header>
+
+      <main id="conteudo-principal" className="heroSection">
+        <section className="heroCopy">
+          <span className="eyebrow">SMDN · Sistema de Monitoramento de Desastres Naturais</span>
+
+          <h1>
+            Monitore riscos, apresente o sistema e convide seu público:
+            <span> instale já nosso aplicativo.</span>
+          </h1>
+
+          <p className="lead">
+            Uma vitrine visual do SMDN para rodar em telão, banca ou demonstração,
+            mantendo a identidade do painel web e destacando o aplicativo mobile.
+          </p>
+
+          <div className="chipRow" aria-label="Destaques do sistema">
+            {highlights.map((item) => (
+              <span key={item} className="chip">{item}</span>
+            ))}
+          </div>
+
+          <div className="ctaRow">
+            <button type="button" className="primaryButton">Instale já nosso aplicativo</button>
+            <button type="button" className="ghostButton">Conheça o ecossistema SMDN</button>
+          </div>
+
+          <ul className="featureList">
+            {features.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </section>
+
+        <CarouselMock paused={paused} setPaused={setPaused} />
       </main>
     </div>
   )
 }
-
-export default App
