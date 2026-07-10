@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
+    "nodemailer": "^9.0.3",
     "vite": "latest",
     "react": "latest",
     "react-dom": "latest"

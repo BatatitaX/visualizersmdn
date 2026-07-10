@@ -1,1753 +1,3713 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:wght@300;400;500;600;700;800&display=swap');
+
 :root {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #eff6ff;
-  background: #050b1f;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0A162E;
+  background: #0A162E;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --panel: rgba(8, 17, 38, 0.84);
-  --panel-strong: rgba(11, 21, 42, 0.96);
-  --line: rgba(152, 186, 222, 0.18);
-  --line-strong: rgba(126, 200, 255, 0.28);
-  --muted: #9ab2d0;
-  --text-soft: #cfe1f5;
-  --blue: #7ec8ff;
-  --blue-strong: #4aaeff;
-  --orange: #ff8a00;
-  --green: #00e072;
-  --page-bg:
-    radial-gradient(circle at top left, rgba(126, 200, 255, 0.14), transparent 32vw),
-    radial-gradient(circle at bottom right, rgba(215, 25, 32, 0.12), transparent 28vw),
-    linear-gradient(135deg, #040a19 0%, #061126 45%, #050b1f 100%);
+
+  /* Paleta coletada do protótipo */
+  --ink: #0A162E;
+  --navy: #0A162E;
+  --navy-2: #0A162E;
+  --deep-navy: #0A162E;
+  --blue-dark: #18395C;
+  --blue-dark-2: #1f3b5b;
+  --blue-card: #24496d;
+  --mid-blue: #44769B;
+  --mid-blue-2: #4c7c9f;
+  --soft-blue: #A6C1D4;
+  --soft-blue-2: #a9c4d6;
+  --pin-blue: #6b8297;
+  --white: #f7fbff;
+  --paper: #E4E6E8;
+  --headerH: clamp(72px, 6.9vw, 102px);
+  --tech-card: rgba(45, 104, 138, 0.64);
+  --tech-card-soft: rgba(73, 134, 170, 0.26);
 }
 
 * {
   box-sizing: border-box;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  background: var(--navy);
+}
+
 body,
 #root {
   min-height: 100%;
   margin: 0;
 }
 
-html {
-  width: 100%;
-  overflow-x: hidden;
-}
-
 body {
   width: 100%;
-  overflow-y: auto;
   overflow-x: hidden;
-  background: var(--page-bg);
+  background: var(--navy);
 }
 
-button {
+button,
+input,
+textarea {
   font: inherit;
 }
 
-.viewerLanding {
-  position: relative;
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.siteShell {
   width: 100%;
-  max-width: 100vw;
   min-height: 100vh;
-  overflow: clip;
-  padding: 24px 28px 34px;
-  font-size: 15px;
-  background: var(--page-bg);
+  overflow: hidden;
+  background: var(--navy);
+  color: var(--ink);
 }
 
-.viewerLanding.font-small {
-  font-size: 13.5px;
+main > section {
+  scroll-margin-top: calc(var(--headerH) + 18px);
 }
 
-.viewerLanding.font-medium {
-  font-size: 15px;
-}
-
-.viewerLanding.font-large {
-  font-size: 17px;
-}
-
-.viewerLanding.font-huge {
-  font-size: 19px;
-}
-
-.viewerLanding.theme-light {
-  color: #10213d;
-  --panel: rgba(245, 250, 255, 0.9);
-  --panel-strong: rgba(255, 255, 255, 0.96);
-  --line: rgba(38, 70, 110, 0.2);
-  --line-strong: rgba(28, 102, 164, 0.32);
-  --muted: #4f6685;
-  --text-soft: #27405f;
-  --blue: #126eb2;
-  --blue-strong: #0f80d8;
-  --orange: #d76d00;
-  --green: #008a48;
-  --page-bg:
-    radial-gradient(circle at top left, rgba(126, 200, 255, 0.22), transparent 32vw),
-    radial-gradient(circle at bottom right, rgba(255, 138, 0, 0.13), transparent 28vw),
-    linear-gradient(135deg, #eef6ff 0%, #dceeff 48%, #f7fbff 100%);
-}
-
-.viewerLanding.theme-dark {
-  color: #eff6ff;
-}
-
-@media (prefers-color-scheme: light) {
-  .viewerLanding.theme-system {
-    color: #10213d;
-    --panel: rgba(245, 250, 255, 0.9);
-    --panel-strong: rgba(255, 255, 255, 0.96);
-    --line: rgba(38, 70, 110, 0.2);
-    --line-strong: rgba(28, 102, 164, 0.32);
-    --muted: #4f6685;
-    --text-soft: #27405f;
-    --blue: #126eb2;
-    --blue-strong: #0f80d8;
-    --orange: #d76d00;
-    --green: #008a48;
-    --page-bg:
-      radial-gradient(circle at top left, rgba(126, 200, 255, 0.22), transparent 32vw),
-      radial-gradient(circle at bottom right, rgba(255, 138, 0, 0.13), transparent 28vw),
-      linear-gradient(135deg, #eef6ff 0%, #dceeff 48%, #f7fbff 100%);
-  }
-}
-
-.viewerLanding.highContrast {
-  color: #fff;
-  --panel: rgba(0, 0, 0, 0.96);
-  --panel-strong: rgba(0, 0, 0, 0.98);
-  --line: rgba(255, 255, 255, 0.72);
-  --line-strong: rgba(255, 255, 255, 0.85);
-  --muted: #ffffff;
-  --text-soft: #ffffff;
-  --blue: #ffffff;
-  --blue-strong: #ffffff;
-  --orange: #ffd400;
-  --green: #00ff75;
-  --page-bg: #000;
-}
-
-.viewerLanding.highContrast .heroCopy,
-.viewerLanding.highContrast .visualFrame,
-.viewerLanding.highContrast .mobileCopy,
-.viewerLanding.highContrast .accessDropdown {
-  border-color: #fff;
-  background: #000;
-}
-
-.viewerLanding.highContrast .accessTrigger,
-.viewerLanding.highContrast .settingsOption,
-.viewerLanding.highContrast .restoreButton {
-  border-color: #fff;
-  color: #fff;
-  background: #111;
-}
-
-.viewerLanding.reduceMotion *,
-.viewerLanding.reduceMotion *::before,
-.viewerLanding.reduceMotion *::after {
-  animation: none !important;
-  transition: none !important;
-  scroll-behavior: auto !important;
-}
-
-.ambientGlow {
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(70px);
-  pointer-events: none;
-  opacity: 0.78;
-}
-
-.ambientGlowLeft {
-  width: 260px;
-  height: 260px;
-  left: -70px;
-  top: 36px;
-  background: rgba(126, 200, 255, 0.18);
-}
-
-.ambientGlowRight {
-  width: 320px;
-  height: 320px;
-  right: -120px;
-  bottom: -40px;
-  background: rgba(255, 138, 0, 0.15);
-}
-
-.topBar {
-  position: relative;
-  z-index: 5;
-  min-height: 94px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 8px;
-  overflow: visible;
-}
-
-.brandLink {
-  display: inline-flex;
-  align-items: flex-start;
-  min-width: 160px;
-  min-height: 76px;
-  overflow: visible;
-}
-
-.brandLogo {
-  display: block;
-  width: min(168px, 34vw);
-  height: auto;
-  flex-shrink: 0;
-}
-
-.accessMenu {
-  position: relative;
-  z-index: 20;
-}
-
-.accessTrigger {
-  min-height: 40px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 0 14px;
-  background: var(--panel);
-  color: inherit;
-  font-weight: 900;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.accessDropdown {
-  position: absolute;
-  top: calc(100% + 12px);
+.siteHeader {
+  position: sticky;
+  top: 0;
+  left: 0;
   right: 0;
-  width: min(410px, calc(100vw - 40px));
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: var(--panel-strong);
-  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.35);
-  padding: 16px;
-}
-
-.accessHeader {
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--line);
+  z-index: 30;
+  height: var(--headerH);
+  padding: 0 clamp(34px, 5vw, 72px);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  border-bottom: 1px solid rgba(166, 193, 212, 0.62);
+  color: var(--white);
+  background: #0A162E;
+  backdrop-filter: none;
 }
 
-.accessHeader strong {
-  display: block;
-  font-size: 1em;
+.brand {
+  display: flex;
+  align-items: center;
+  width: clamp(118px, 12vw, 180px);
 }
 
-.accessHeader span {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 0.82em;
-}
-
-.settingsGroup {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.settingsTitle {
-  display: block;
-  margin-bottom: 9px;
-  color: var(--muted);
-  font-size: 0.74em;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.settingsGrid {
-  display: grid;
-  gap: 8px;
-}
-
-.settingsGrid.four {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.settingsGrid.three {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.settingsGrid.two {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.settingsOption,
-.restoreButton {
-  min-height: 38px;
-  border: 1px solid var(--line-strong);
-  border-radius: 12px;
-  padding: 0 10px;
-  background: rgba(126, 200, 255, 0.08);
-  color: inherit;
-  font-size: 0.82em;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.settingsOption.active {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #041120;
-}
-
-.restoreButton {
+.brand img {
   width: 100%;
-  margin-top: 14px;
-  min-height: 42px;
+  height: auto;
 }
 
-.restoreButton:hover,
-.settingsOption:hover,
-.accessTrigger:hover {
-  border-color: var(--blue);
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: clamp(58px, 8vw, 126px);
+  padding-right: clamp(2px, 1vw, 14px);
+  color: #eef8ff;
+  font-size: clamp(0.8rem, 1.02vw, 1.08rem);
+  font-weight: 850;
+  letter-spacing: 0.01em;
 }
 
-.pageStack {
+.navLinks a {
+  opacity: 0.98;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.18);
+}
+
+.navLinks a:hover,
+.navLinks a:focus-visible {
+  color: #b9d7ea;
+  outline: none;
+}
+
+.heroSection {
   position: relative;
-  z-index: 2;
+  min-height: clamp(560px, 53vw, 790px);
+  padding-top: 0;
   display: grid;
-  gap: 28px;
-}
-
-.webHeroSection {
-  min-height: calc(100vh - 132px);
-  display: grid;
-  grid-template-columns: minmax(320px, 0.56fr) minmax(660px, 1.44fr);
-  gap: 20px;
-}
-
-.heroCopy,
-.visualFrame,
-.mobileCopy {
-  min-width: 0;
-  border: 1px solid var(--line);
-  border-radius: 26px;
-  background: linear-gradient(180deg, var(--panel-strong), var(--panel));
-  backdrop-filter: blur(16px);
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.22);
+  place-items: center;
+  overflow: hidden;
+  color: var(--white);
+  background: var(--navy);
 }
 
 .heroCopy {
-  padding: 34px clamp(24px, 3vw, 38px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 520px;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  color: var(--blue);
-  font-size: 0.68em;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-h1,
-h2,
-p {
-  margin: 0;
-}
-
-h1 {
-  max-width: 560px;
-  font-size: clamp(2.28em, 3.08vw, 3.7em);
-  line-height: 0.98;
-  letter-spacing: -0.06em;
-  overflow-wrap: anywhere;
-}
-
-h1 span {
-  display: block;
-  margin-top: 10px;
-  color: var(--blue);
-}
-
-.lead {
-  max-width: 520px;
-  margin-top: 20px;
-  color: var(--text-soft);
-  font-size: clamp(0.96em, 1vw, 1.06em);
-  line-height: 1.55;
-}
-
-.visualFrame {
-  min-height: 100%;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-}
-
-.visualHeader {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.visualKicker {
-  display: block;
-  color: var(--muted);
-  font-size: 0.72em;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.visualHeader h2 {
-  margin-top: 8px;
-  font-size: clamp(1.7em, 2.25vw, 2.45em);
-  line-height: 1.06;
-  letter-spacing: -0.04em;
-}
-
-.presentationButton {
-  min-height: 38px;
-  border: 1px solid rgba(0, 224, 114, 0.18);
-  border-radius: 999px;
-  padding: 0 14px;
-  background: rgba(0, 224, 114, 0.12);
-  color: var(--green);
-  font-size: 0.72em;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.presentationButton.paused {
-  border-color: rgba(255, 138, 0, 0.25);
-  background: rgba(255, 138, 0, 0.12);
-  color: var(--orange);
-}
-
-.visualDescription {
-  margin-top: 14px;
-  max-width: 92%;
-  color: var(--text-soft);
-  font-size: 0.94em;
-  line-height: 1.5;
-}
-
-.carouselArea {
   position: relative;
-  min-height: 590px;
-  flex: 1;
-  display: grid;
-  place-items: center;
-  margin-top: 18px;
+  z-index: 3;
+  width: min(86vw, 1120px);
+  padding: clamp(96px, 9vw, 142px) 0 clamp(135px, 13vw, 210px);
+  text-align: center;
 }
 
-.webMockup {
+.heroCopy h1 {
+  max-width: 1040px;
+  margin: 0 auto;
+  font-size: clamp(2.65rem, 4.9vw, 5rem);
+  line-height: 1.22;
+  font-weight: 950;
+  letter-spacing: -0.06em;
+  text-shadow: 0 5px 0 rgba(0, 0, 0, 0.28);
+}
+
+.heroActions {
+  display: flex;
+  justify-content: center;
+  gap: clamp(42px, 6vw, 96px);
+  margin-top: clamp(48px, 5vw, 78px);
+}
+
+.heroActions a {
+  min-width: clamp(200px, 20vw, 300px);
+  min-height: clamp(48px, 4.2vw, 68px);
+  display: inline-grid;
+  place-items: center;
+  border: 2px solid rgba(166, 193, 212, 0.46);
+  border-radius: 999px;
+  padding: 0 clamp(28px, 3vw, 44px);
+  color: #eef8ff;
+  background: rgba(31, 59, 91, 0.7);
+  font-size: clamp(0.9rem, 1.05vw, 1.18rem);
+  font-weight: 850;
+  line-height: 1;
+  box-shadow: inset 0 0 24px rgba(166, 193, 212, 0.1);
+}
+
+.wave {
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.waveDeep {
+  z-index: 1;
+  height: clamp(210px, 23vw, 350px);
+  background: #0f2d4c;
+  clip-path: polygon(0 48%, 7% 40%, 14% 58%, 22% 78%, 34% 72%, 43% 51%, 54% 60%, 64% 50%, 74% 33%, 84% 18%, 93% 0, 100% 8%, 100% 100%, 0 100%);
+}
+
+.waveMid {
+  z-index: 2;
+  height: clamp(190px, 20vw, 320px);
+  background: #44769B;
+  clip-path: polygon(0 58%, 8% 64%, 16% 78%, 27% 83%, 39% 70%, 51% 69%, 62% 60%, 74% 39%, 84% 24%, 92% 5%, 100% 0, 100% 100%, 0 100%);
+}
+
+.waveLight {
+  z-index: 3;
+  height: clamp(150px, 17vw, 280px);
+  background: var(--soft-blue);
+  clip-path: polygon(0 62%, 6% 60%, 13% 74%, 22% 78%, 32% 86%, 47% 84%, 58% 77%, 70% 74%, 80% 54%, 89% 41%, 95% 19%, 100% 12%, 100% 100%, 0 100%);
+}
+
+.missionSection {
+  position: relative;
+  min-height: clamp(570px, 45vw, 780px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: var(--soft-blue);
+}
+
+.missionText {
   position: relative;
   z-index: 2;
-  width: min(820px, 96%);
-  min-height: 500px;
-  border: 1px solid rgba(126, 200, 255, 0.22);
-  border-radius: 30px;
-  padding: 18px;
-  background:
-    linear-gradient(135deg, rgba(126, 200, 255, 0.12), transparent 45%),
-    rgba(9, 20, 40, 0.95);
-  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.28);
+  width: min(52vw, 720px);
+  margin-left: clamp(56px, 7vw, 120px);
+  padding: clamp(42px, 6vw, 90px) 0;
 }
 
-.mockHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  color: var(--muted);
-  font-size: 0.78em;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  gap: 12px;
+.missionText h2 {
+  max-width: 710px;
+  margin: 0;
+  color: #102142;
+  font-size: clamp(2.2rem, 3.45vw, 4rem);
+  line-height: 0.96;
+  font-weight: 950;
+  letter-spacing: -0.065em;
 }
 
-.mockHeader strong {
-  display: block;
-  margin-top: 8px;
-  color: white;
-  font-size: 1.65em;
-  letter-spacing: -0.05em;
-  text-transform: none;
+.missionText p {
+  max-width: 650px;
+  margin: clamp(34px, 4vw, 60px) 0 0;
+  color: #0A162E;
+  font-size: clamp(1rem, 1.4vw, 1.36rem);
+  line-height: 1.34;
+  font-weight: 500;
 }
 
-.theme-light .mockHeader strong {
-  color: #10213d;
+.pinOutline {
+  position: absolute;
+  right: clamp(-250px, -13vw, -120px);
+  top: 50%;
+  width: clamp(430px, 38vw, 640px);
+  height: clamp(430px, 38vw, 640px);
+  border: clamp(8px, 0.75vw, 12px) solid rgba(24, 57, 92, 0.34);
+  border-radius: 50% 50% 50% 0;
+  transform: translateY(-48%) rotate(-45deg);
 }
 
-.mockHeader b {
-  color: var(--blue);
+.pinOutline::before,
+.pinOutline::after {
+  content: "";
+  position: absolute;
+  border: clamp(7px, 0.62vw, 10px) solid rgba(24, 57, 92, 0.3);
+  border-radius: inherit;
 }
 
-.dashboardGrid {
-  min-height: 420px;
-  display: grid;
-  grid-template-columns: 1.2fr 0.76fr;
-  grid-template-rows: 1fr 92px;
-  gap: 16px;
-  margin-top: 16px;
+.pinOutline::before {
+  inset: clamp(18px, 1.6vw, 28px);
 }
 
-.mapPanel,
-.sidePanel,
-.metricCard {
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.035);
+.pinOutline::after {
+  inset: clamp(42px, 3vw, 58px);
 }
 
-.mapPanel {
+.systemSection {
+  position: relative;
+  min-height: clamp(540px, 45.5vw, 675px);
+  padding-top: 0;
+  overflow: hidden;
+  background: var(--mid-blue);
+}
+
+.systemsTitle {
+  position: absolute;
+  left: clamp(28px, 4vw, 72px);
+  top: clamp(8px, 1vw, 18px);
+  z-index: 1;
+  color: #c6ddf4;
+  font-size: clamp(5.6rem, 12.2vw, 12.4rem);
+  line-height: 0.88;
+  font-weight: 950;
+  letter-spacing: -0.075em;
+  white-space: nowrap;
+  opacity: 0.98;
+}
+
+.systemDevices {
+  position: relative;
+  z-index: 2;
+  width: min(88vw, 1160px);
+  height: clamp(500px, 40.8vw, 620px);
+  margin: 0 auto;
+}
+
+.phoneMockup {
   position: relative;
   overflow: hidden;
-  grid-row: span 2;
-  background:
-    linear-gradient(90deg, rgba(126, 200, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(rgba(126, 200, 255, 0.08) 1px, transparent 1px),
-    radial-gradient(circle at 30% 30%, rgba(126, 200, 255, 0.18), transparent 30%),
-    radial-gradient(circle at 75% 70%, rgba(255, 138, 0, 0.16), transparent 28%),
-    rgba(8, 18, 38, 0.92);
-  background-size: 40px 40px, 40px 40px, auto, auto, auto;
-}
-
-.routeLine {
-  position: absolute;
-  width: 120%;
-  height: 3px;
-  left: -10%;
-  top: 54%;
-  transform: rotate(-23deg);
-  background: linear-gradient(90deg, transparent, var(--blue), transparent);
-  opacity: 0.8;
-}
-
-.pin {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  border: 3px solid #fff;
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  box-shadow: 0 0 0 6px rgba(126, 200, 255, 0.12);
-}
-
-.pinA {
-  left: 24%;
-  top: 26%;
-  background: var(--orange);
-}
-
-.pinB {
-  right: 18%;
-  top: 42%;
-  background: #ff4d4f;
-}
-
-.pinC {
-  left: 45%;
-  bottom: 20%;
-  background: var(--green);
-}
-
-.sidePanel {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.sidePanel strong {
-  font-size: 1.36em;
-}
-
-.sidePanel p {
-  margin-top: 10px;
-  color: var(--text-soft);
-  line-height: 1.45;
-  font-size: 0.95em;
-}
-
-.mockList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-.mockList span {
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 7px 11px;
-  color: var(--blue);
-  font-size: 0.78em;
-  font-weight: 900;
-}
-
-.metricCard {
-  padding: 16px;
-}
-
-.metricCard span {
-  display: block;
-  color: var(--muted);
-  font-size: 0.72em;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.metricCard strong {
-  display: block;
-  margin-top: 6px;
-  color: var(--orange);
-  font-size: 1.8em;
-}
-
-.carouselDots {
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  z-index: 4;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.carouselDots button {
-  width: 8px;
-  height: 8px;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.28);
-  cursor: pointer;
-}
-
-.carouselDots button.active {
-  width: 28px;
-  background: var(--blue);
-}
-
-.carouselArrow {
-  position: absolute;
-  z-index: 5;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--line-strong);
-  border-radius: 50%;
-  background: rgba(6, 15, 31, 0.9);
-  color: #f4f9ff;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease,
-    color 0.2s ease;
-}
-
-.carouselArrow:hover {
-  transform: translateY(-50%) scale(1.06);
-  border-color: var(--blue);
-  background: rgba(126, 200, 255, 0.14);
-  color: var(--blue);
-}
-
-.carouselArrow:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-
-.carouselArrow.left {
-  left: 8px;
-}
-
-.carouselArrow.right {
-  right: 8px;
-}
-
-.featherIcon {
-  width: 26px;
-  height: 26px;
-  display: block;
-}
-
-.mobileShowcase {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: minmax(320px, 0.56fr) minmax(660px, 1.44fr);
-  gap: 20px;
-  padding-top: 16px;
-}
-
-.mobileCopy {
-  padding: 34px clamp(24px, 3vw, 38px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 460px;
-}
-
-.mobileCopy h2 {
-  max-width: 540px;
-  font-size: clamp(2em, 2.8vw, 3.4em);
-  line-height: 1;
-  letter-spacing: -0.05em;
-}
-
-.mobileCopy p {
-  max-width: 500px;
-  margin-top: 20px;
-  color: var(--text-soft);
-  font-size: 1em;
-  line-height: 1.55;
-}
-
-.mobileFrame .carouselArea {
-  min-height: 610px;
-}
-
-.mobileMockup {
-  width: min(440px, 72%);
-  display: grid;
-  place-items: center;
-}
-
-.phoneShell {
-  position: relative;
-  width: 310px;
-  min-height: 610px;
-  border: 1px solid rgba(126, 200, 255, 0.25);
-  border-radius: 44px;
-  padding: 14px;
-  background: linear-gradient(180deg, #0e1c35, #071221);
-  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.28);
+  width: clamp(150px, 12.2vw, 226px);
+  aspect-ratio: 110 / 224;
+  border: clamp(5px, 0.45vw, 8px) solid #05070d;
+  border-radius: clamp(20px, 1.8vw, 31px);
+  background: #101010;
+  box-shadow: 0 2px 0 #667383, 0 0 0 1px rgba(255, 255, 255, 0.16);
 }
 
 .phoneNotch {
   position: absolute;
   left: 50%;
-  top: 12px;
-  width: 110px;
-  height: 16px;
-  border-radius: 999px;
-  transform: translateX(-50%);
-  background: rgba(2, 8, 16, 0.8);
+  top: -1px;
   z-index: 3;
+  width: 31%;
+  height: 4.4%;
+  border-radius: 0 0 12px 12px;
+  transform: translateX(-50%) scale(var(--tech-icon-scale));
+  transform-origin: center;
+  background: #05070d;
 }
 
 .phoneScreen {
-  min-height: 582px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  border-radius: 32px;
-  background: rgba(9, 20, 40, 0.95);
-  padding: 28px 16px 16px;
+  border-radius: inherit;
+  background: #808080;
 }
 
-.phoneTop {
-  display: flex;
-  justify-content: space-between;
-  color: var(--muted);
-  font-size: 0.7em;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.phoneTop b {
-  color: var(--blue);
-}
-
-.phoneMap {
+.monitorMockup {
   position: relative;
-  min-height: 280px;
-  margin-top: 16px;
-  border: 1px solid var(--line);
-  border-radius: 24px;
+}
+
+.monitorScreen {
   overflow: hidden;
-  background:
-    linear-gradient(90deg, rgba(126, 200, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(rgba(126, 200, 255, 0.08) 1px, transparent 1px),
-    rgba(8, 18, 38, 0.92);
-  background-size: 34px 34px;
+  border: clamp(7px, 0.62vw, 10px) solid #05070d;
+  border-radius: clamp(10px, 0.9vw, 16px);
+  background: #E4E6E8;
+  box-shadow: 0 2px 0 rgba(255, 255, 255, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
-.phoneCard {
-  margin-top: 14px;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.035);
+.monitorScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: #E4E6E8;
 }
 
-.phoneCard strong {
-  font-size: 1.08em;
+.systemPhone {
+  position: absolute;
+  left: clamp(0px, 1vw, 16px);
+  top: clamp(118px, 12vw, 172px);
 }
 
-.phoneCard p {
-  margin-top: 8px;
-  color: var(--text-soft);
-  font-size: 0.88em;
-  line-height: 1.45;
+.systemMonitor {
+  position: absolute;
+  right: clamp(0px, 1vw, 16px);
+  top: clamp(130px, 13.2vw, 188px);
+  width: min(67%, 760px);
 }
 
-@media (max-width: 1180px) {
-  .viewerLanding {
-    padding: 20px;
-  }
-
-  .webHeroSection,
-  .mobileShowcase {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .heroCopy,
-  .mobileCopy {
-    min-height: auto;
-  }
-
-  .carouselArea {
-    min-height: 520px;
-  }
-
-  .mobileShowcase {
-    min-height: auto;
-  }
+.systemMonitor .monitorScreen {
+  aspect-ratio: 1.48 / 1;
 }
 
-@media (max-width: 760px) {
-  .viewerLanding {
-    padding: 14px;
-    font-size: 14px;
-    overflow: hidden;
-  }
-
-  .viewerLanding.font-small {
-    font-size: 13px;
-  }
-
-  .viewerLanding.font-medium {
-    font-size: 14px;
-  }
-
-  .viewerLanding.font-large {
-    font-size: 15.5px;
-  }
-
-  .viewerLanding.font-huge {
-    font-size: 17px;
-  }
-
-  .ambientGlowLeft {
-    width: 190px;
-    height: 190px;
-    left: -80px;
-    top: 10px;
-  }
-
-  .ambientGlowRight {
-    width: 220px;
-    height: 220px;
-    right: -100px;
-    bottom: 20%;
-  }
-
-  .topBar {
-    min-height: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-
-  .brandLink {
-    min-width: 0;
-    min-height: auto;
-    justify-content: center;
-  }
-
-  .brandLogo {
-    width: 136px;
-    margin-inline: auto;
-  }
-
-  .accessMenu,
-  .accessTrigger {
-    width: 100%;
-  }
-
-  .accessTrigger {
-    justify-content: center;
-    min-height: 42px;
-    border-radius: 16px;
-  }
-
-  .accessDropdown {
-    position: fixed;
-    inset: 76px 12px auto;
-    width: auto;
-    max-height: calc(100dvh - 92px);
-    overflow-y: auto;
-    border-radius: 22px;
-  }
-
-  .settingsGrid.four,
-  .settingsGrid.three,
-  .settingsGrid.two {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .restoreButton {
-    min-height: 44px;
-  }
-
-  .pageStack {
-    gap: 18px;
-  }
-
-  .webHeroSection,
-  .mobileShowcase {
-    min-height: auto;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-  }
-
-  .heroCopy,
-  .mobileCopy,
-  .visualFrame {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 22px;
-  }
-
-  .heroCopy,
-  .mobileCopy {
-    padding: 24px 20px;
-  }
-
-  .eyebrow {
-    display: block;
-    font-size: 0.68em;
-    line-height: 1.45;
-    margin-bottom: 14px;
-  }
-
-  h1 {
-    max-width: 100%;
-    font-size: clamp(2.25rem, 11.4vw, 3.05rem);
-    line-height: 1.02;
-    letter-spacing: -0.055em;
-  }
-
-  h1 span {
-    margin-top: 12px;
-  }
-
-  .lead,
-  .mobileCopy p {
-    max-width: 100%;
-    margin-top: 18px;
-    font-size: 1rem;
-    line-height: 1.62;
-  }
-
-  .mobileCopy h2 {
-    max-width: 100%;
-    font-size: clamp(2rem, 10vw, 2.8rem);
-    line-height: 1.02;
-  }
-
-  .visualFrame {
-    padding: 18px;
-  }
-
-  .visualHeader {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .visualHeader h2 {
-    font-size: clamp(1.65rem, 8vw, 2.25rem);
-  }
-
-  .presentationButton {
-    width: 100%;
-    min-height: 42px;
-    justify-content: center;
-  }
-
-  .visualDescription {
-    max-width: 100%;
-    font-size: 0.98rem;
-    line-height: 1.55;
-  }
-
-  .carouselArea,
-  .mobileFrame .carouselArea {
-    min-height: auto;
-    display: block;
-    margin-top: 16px;
-    padding-bottom: 42px;
-  }
-
-  .webMockup {
-    width: 100%;
-    min-height: auto;
-    padding: 14px;
-    border-radius: 24px;
-  }
-
-  .mockHeader {
-    font-size: 0.72rem;
-  }
-
-  .mockHeader strong {
-    font-size: 1.35rem;
-    line-height: 1.1;
-  }
-
-  .dashboardGrid {
-    min-height: auto;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 12px;
-    margin-top: 14px;
-  }
-
-  .mapPanel {
-    grid-row: auto;
-    min-height: 230px;
-  }
-
-  .sidePanel {
-    padding: 16px;
-  }
-
-  .sidePanel strong {
-    font-size: 1.18rem;
-  }
-
-  .metricCard {
-    padding: 14px;
-  }
-
-  .metricCard strong {
-    font-size: 1.55rem;
-  }
-
-  .mockList span {
-    font-size: 0.72rem;
-    padding: 7px 10px;
-  }
-
-  .pin {
-    width: 24px;
-    height: 24px;
-  }
-
-  .carouselDots {
-    bottom: 8px;
-  }
-
-  .carouselArrow {
-    top: auto;
-    bottom: 0;
-    width: 42px;
-    height: 42px;
-    transform: none;
-  }
-
-  .carouselArrow:hover {
-    transform: scale(1.04);
-  }
-
-  .carouselArrow.left {
-    left: 0;
-  }
-
-  .carouselArrow.right {
-    right: 0;
-  }
-
-  .featherIcon {
-    width: 23px;
-    height: 23px;
-  }
-
-  .mobileShowcase {
-    padding-top: 4px;
-  }
-
-  .mobileMockup {
-    width: 100%;
-  }
-
-  .phoneShell {
-    width: min(100%, 310px);
-    min-height: auto;
-    margin-inline: auto;
-    border-radius: 38px;
-  }
-
-  .phoneScreen {
-    min-height: auto;
-  }
-
-  .phoneMap {
-    min-height: 240px;
-  }
+.techSection {
+  min-height: clamp(570px, 43vw, 650px);
+  padding: clamp(54px, 4.4vw, 72px) clamp(46px, 6vw, 90px) clamp(62px, 5vw, 82px);
+  color: var(--white);
+  background: var(--blue-dark);
 }
 
-@media (max-width: 380px) {
-  .viewerLanding {
-    padding: 10px;
-  }
-
-  h1 {
-    font-size: clamp(2rem, 10.6vw, 2.65rem);
-  }
-
-  .heroCopy,
-  .mobileCopy,
-  .visualFrame {
-    border-radius: 20px;
-  }
-
-  .heroCopy,
-  .mobileCopy {
-    padding: 22px 16px;
-  }
-
-  .visualFrame {
-    padding: 16px;
-  }
-
-  .settingsGrid.four,
-  .settingsGrid.three,
-  .settingsGrid.two {
-    grid-template-columns: 1fr;
-  }
-
-  .mapPanel {
-    min-height: 210px;
-  }
-}
-
-.logoLight {
-  display: none;
-}
-
-.logoDark {
-  display: block;
-}
-
-.viewerLanding.theme-light .logoLight {
-  display: block;
-}
-
-.viewerLanding.theme-light .logoDark {
-  display: none;
-}
-
-.viewerLanding.theme-dark .logoLight,
-.viewerLanding.highContrast .logoLight {
-  display: none;
-}
-
-.viewerLanding.theme-dark .logoDark,
-.viewerLanding.highContrast .logoDark {
-  display: block;
-}
-
-@media (prefers-color-scheme: light) {
-  .viewerLanding.theme-system .logoLight {
-    display: block;
-  }
-
-  .viewerLanding.theme-system .logoDark {
-    display: none;
-  }
-}
-
-.accessClose {
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(126, 200, 255, 0.08);
-  color: inherit;
-  font-size: 22px;
+.techSection h2 {
+  margin: 0 0 clamp(56px, 4.8vw, 72px);
+  text-align: center;
+  color: #fff;
+  font-size: clamp(2.25rem, 3.2vw, 4.2rem);
   line-height: 1;
-  font-weight: 900;
-  cursor: pointer;
+  font-weight: 950;
+  letter-spacing: -0.045em;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(54px, 5.4vw, 78px) clamp(58px, 7vw, 100px);
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.techCard {
+  --tech-icon-size: clamp(58px, 4.6vw, 74px);
+  --tech-icon-top: clamp(-44px, -3.5vw, -31px);
+  --tech-icon-scale: 1;
+  position: relative;
+  min-height: clamp(96px, 8vw, 126px);
+  border-radius: 3px;
+  display: grid;
+  place-items: end center;
+  padding: clamp(44px, 4vw, 62px) 12px clamp(18px, 1.6vw, 25px);
+  isolation: isolate;
+  background: linear-gradient(90deg, rgba(45, 104, 138, 0.72), rgba(65, 125, 162, 0.46));
+  box-shadow: inset 0 0 26px rgba(166, 193, 212, 0.07);
+}
+
+.techIcon {
+  position: absolute;
+  left: 50%;
+  top: var(--tech-icon-top);
+  width: var(--tech-icon-size);
+  height: var(--tech-icon-size);
+  object-fit: contain;
+  object-position: center;
+  transform: translateX(-50%) scale(var(--tech-icon-scale));
+  transform-origin: center;
+}
+
+.tech-react,
+.tech-node,
+.tech-postgis,
+.tech-vertex {
+  --tech-icon-size: clamp(72px, 5.5vw, 88px);
+  --tech-icon-top: clamp(-48px, -3.7vw, -34px);
+  --tech-icon-scale: 3.9;
+}
+
+.tech-flutter,
+.tech-vercel,
+.tech-supabase,
+.tech-firebase {
+  --tech-icon-size: clamp(72px, 5.3vw, 86px);
+  --tech-icon-top: clamp(-48px, -3.7vw, -34px);
+  --tech-icon-scale: 2.75;
+}
+
+.tech-github {
+  --tech-icon-size: clamp(58px, 4.3vw, 70px);
+  --tech-icon-top: clamp(-42px, -3.1vw, -30px);
+  --tech-icon-scale: 1.15;
+}
+
+
+.tech-postgis {
+  --tech-icon-scale: 5.2;
+}
+
+.tech-vertex {
+  --tech-icon-scale: 4.4;
+}
+
+.tech-node {
+  --tech-icon-scale: 4.6;
+}
+
+.tech-react {
+  --tech-icon-scale: 4.4;
+}
+
+.tech-firebase {
+  --tech-icon-scale: 3.3;
+}
+
+.tech-supabase {
+  --tech-icon-scale: 3.15;
+}
+
+.tech-vercel {
+  --tech-icon-scale: 3.15;
+}
+
+.tech-flutter {
+  --tech-icon-scale: 3.0;
+}
+
+.techCard span {
+  color: #fff;
+  font-size: clamp(0.95rem, 1.08vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.featuresSection {
+  min-height: clamp(600px, 45vw, 690px);
+  padding: clamp(54px, 4.2vw, 70px) clamp(36px, 5vw, 84px) clamp(54px, 5vw, 78px);
+  color: var(--white);
+  background: var(--mid-blue);
+}
+
+.featuresInner {
+  width: min(92vw, 1180px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
+  gap: clamp(40px, 5vw, 74px);
+  align-items: center;
+}
+
+.featureIntro h2 {
+  max-width: 680px;
+  margin: 0 0 clamp(34px, 3vw, 48px);
+  color: #d9edf8;
+  font-size: clamp(2rem, 2.65vw, 3.55rem);
+  line-height: 1.34;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+}
+
+.featureIntro h2 strong {
+  color: #0A162E;
+  font-weight: 950;
+}
+
+.dashboardMockup {
+  width: min(100%, 650px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.16));
+}
+
+.featureList {
+  display: grid;
+  gap: clamp(28px, 3vw, 46px);
+}
+
+.featureItem {
+  display: grid;
+  grid-template-columns: clamp(70px, 5.8vw, 92px) 1fr;
+  gap: clamp(20px, 2vw, 30px);
+  align-items: start;
+}
+
+.featureIcon {
+  width: clamp(70px, 5.8vw, 92px);
+  height: clamp(70px, 5.8vw, 92px);
   display: grid;
   place-items: center;
-  flex-shrink: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
 }
 
-.accessClose:hover,
-.accessClose:focus-visible {
-  border-color: var(--blue);
-  color: var(--blue);
+.featureIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.featureItem h3 {
+  margin: 0;
+  color: #d7ecf7;
+  font-size: clamp(1.18rem, 1.55vw, 1.55rem);
+  font-weight: 850;
+  line-height: 1.05;
+}
+
+.featureItem p {
+  max-width: 430px;
+  margin: clamp(10px, 1vw, 15px) 0 0;
+  color: #f0f8ff;
+  font-size: clamp(0.82rem, 0.98vw, 1rem);
+  font-weight: 500;
+  line-height: 1.42;
+}
+
+.contactSection {
+  min-height: clamp(610px, 43vw, 780px);
+  padding: clamp(64px, 6vw, 100px) clamp(42px, 7vw, 116px);
+  display: grid;
+  grid-template-columns: minmax(300px, 0.96fr) minmax(380px, 1fr);
+  gap: clamp(56px, 7vw, 112px);
+  align-items: start;
+  background: var(--soft-blue);
+}
+
+.contactCopy {
+  max-width: 560px;
+}
+
+.contactCopy h2 {
+  margin: 0;
+  color: #0A162E;
+  font-size: clamp(2.45rem, 3.8vw, 4.75rem);
+  line-height: 1.16;
+  font-weight: 950;
+  letter-spacing: -0.065em;
+}
+
+.contactCopy p {
+  max-width: 500px;
+  margin: clamp(26px, 2.5vw, 44px) 0 0;
+  color: #102142;
+  font-size: clamp(1.04rem, 1.24vw, 1.34rem);
+  line-height: 1.75;
+  font-weight: 700;
+}
+
+.contactForm {
+  display: grid;
+  gap: clamp(12px, 1.05vw, 17px);
+  align-content: start;
+  color: #092345;
+  font-size: clamp(0.78rem, 0.92vw, 1rem);
+  font-weight: 750;
+}
+
+.contactForm label {
+  display: grid;
+  gap: 3px;
+}
+
+.contactForm span,
+.contactForm legend {
+  padding-left: 8px;
+}
+
+.contactForm legend {
+  font-size: clamp(0.88rem, 0.98vw, 1.06rem);
+  font-weight: 850;
+  line-height: 1.08;
+}
+
+.contactForm input[type="text"],
+.contactForm input[type="email"],
+.contactForm input[type="tel"],
+.contactForm textarea {
+  width: 100%;
+  border: 2px solid #08274c;
+  border-radius: 5px;
+  background: transparent;
+  color: #0A162E;
+  min-height: clamp(42px, 3.35vw, 56px);
+  padding: 7px 12px;
   outline: none;
 }
 
-@media (max-width: 760px) {
-  .accessDropdown {
-    background: var(--panel-strong);
-    backdrop-filter: blur(20px);
-  }
-
-  .accessClose {
-    width: 38px;
-    height: 38px;
-    border-radius: 14px;
-  }
+.contactForm textarea {
+  min-height: clamp(104px, 8vw, 142px);
+  resize: vertical;
 }
 
-.accessClose {
-  font-size: 0;
+.contactForm input:focus,
+.contactForm textarea:focus {
+  box-shadow: 0 0 0 4px rgba(24, 57, 92, 0.18);
 }
 
-.accessClose .closeIcon {
-  width: 20px;
-  height: 20px;
+.contactForm fieldset {
+  border: 0;
+  margin: 0;
+  padding: 7px 0 0;
+  display: grid;
+  gap: 6px;
 }
 
-.accessClose:hover .closeIcon,
-.accessClose:focus-visible .closeIcon {
-  transform: rotate(90deg);
+.contactForm fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #092345;
+  font-size: clamp(0.78rem, 0.86vw, 0.96rem);
+  font-weight: 850;
+  line-height: 1.08;
 }
 
-.closeIcon {
-  transition: transform 0.2s ease;
+.contactForm input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: clamp(12px, 0.95vw, 15px);
+  height: clamp(12px, 0.95vw, 15px);
+  margin: 0;
+  border: 2px solid #18395C;
+  border-radius: 2px;
+  background: transparent;
 }
 
+.contactForm input[type="checkbox"]:checked {
+  background: #18395C;
+  box-shadow: inset 0 0 0 3px var(--soft-blue);
+}
 
-.swipeHint {
-  display: none;
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 0.78em;
+.contactForm button {
+  min-height: clamp(44px, 3.5vw, 58px);
+  margin-top: clamp(8px, 1vw, 14px);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: #18395C;
+  font-size: clamp(0.95rem, 1.05vw, 1.18rem);
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.contactForm button:hover,
+.contactForm button:focus-visible {
+  background: #0f2d4c;
+  outline: none;
+}
+
+.connectSection {
+  min-height: clamp(510px, 36vw, 690px);
+  padding: clamp(58px, 5.5vw, 88px) clamp(38px, 5vw, 84px);
+  color: #fff;
+  text-align: center;
+  background: var(--navy);
+}
+
+.connectSection h2 {
+  margin: 0;
+  font-size: clamp(2.35rem, 3.5vw, 4.25rem);
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -0.045em;
+}
+
+.connectLead {
+  max-width: 1040px;
+  margin: clamp(28px, 2.6vw, 42px) auto clamp(32px, 3.1vw, 50px);
+  font-size: clamp(0.96rem, 1.05vw, 1.2rem);
+  line-height: 1.55;
+  font-weight: 450;
+}
+
+.connectCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 3.2vw, 48px);
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.connectCard {
+  min-height: clamp(210px, 17vw, 280px);
+  border-radius: clamp(22px, 2vw, 34px);
+  padding: clamp(24px, 2.2vw, 34px) clamp(22px, 2vw, 30px) clamp(18px, 1.8vw, 26px);
+  color: #0A162E;
+  background: var(--soft-blue);
+  box-shadow: inset 0 -14px 0 rgba(24, 57, 92, 0.16);
+}
+
+.connectIcon {
+  width: clamp(56px, 4.8vw, 76px);
+  height: clamp(56px, 4.8vw, 76px);
+  margin-bottom: clamp(-42px, -2.8vw, -28px);
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(14, 49, 78, 0.42);
+  border-radius: 50%;
+  background: rgba(68, 118, 155, 0.28);
+}
+
+.connectIcon img {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+}
+
+.connectCard h3 {
+  margin: 0 0 0 clamp(74px, 6vw, 94px);
+  min-height: clamp(58px, 4.8vw, 72px);
+  display: flex;
+  align-items: center;
+  color: #0A162E;
+  font-size: clamp(1rem, 1.16vw, 1.3rem);
+  font-weight: 850;
+}
+
+.connectCard p {
+  min-height: clamp(64px, 5.2vw, 86px);
+  margin: clamp(16px, 1.6vw, 24px) 0 clamp(16px, 1.4vw, 22px);
+  font-size: clamp(0.72rem, 0.82vw, 0.94rem);
+  line-height: 1.48;
+  font-weight: 650;
+}
+
+.connectCard a {
+  display: grid;
+  place-items: center;
+  min-height: clamp(28px, 2.2vw, 38px);
+  border-radius: 4px;
+  color: #fff;
+  background: linear-gradient(180deg, #315670, #18395C);
+  font-size: clamp(0.75rem, 0.82vw, 0.95rem);
   font-weight: 800;
 }
 
-.carouselArea {
-  touch-action: pan-y;
-  user-select: none;
+.siteFooter {
+  position: relative;
+  min-height: clamp(170px, 14vw, 250px);
+  padding: clamp(38px, 4vw, 62px) clamp(32px, 5vw, 72px);
+  overflow: hidden;
+  color: #d8edf8;
+  background: var(--navy);
 }
 
-@media (max-width: 760px) {
-  .swipeHint {
+.siteFooter::before,
+.siteFooter::after {
+  content: "";
+  position: absolute;
+  width: clamp(150px, 13vw, 220px);
+  height: clamp(150px, 13vw, 220px);
+  border: 1px solid rgba(208, 230, 241, 0.46);
+  border-radius: 50%;
+}
+
+.siteFooter::before {
+  left: clamp(-180px, -10vw, -120px);
+  top: 24px;
+}
+
+.siteFooter::after {
+  right: clamp(-184px, -10vw, -120px);
+  top: -42px;
+}
+
+.siteFooter img {
+  width: clamp(120px, 10vw, 180px);
+  height: auto;
+}
+
+.siteFooter small {
+  display: block;
+  max-width: 100%;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(204, 225, 237, 0.78);
+  font-size: clamp(0.58rem, 0.68vw, 0.78rem);
+}
+
+@media (max-width: 900px) {
+  .featuresInner,
+  .contactSection {
+    grid-template-columns: 1fr;
+  }
+
+  .featuresInner {
+    gap: 42px;
+  }
+
+  .featureList {
+    max-width: 640px;
+  }
+
+  .contactForm,
+  .contactCopy {
+    max-width: 680px;
+  }
+
+  .connectCards {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --headerH: clamp(34px, 7.25vw, 48px);
+  }
+
+  main > section {
+    scroll-margin-top: calc(var(--headerH) + 10px);
+  }
+
+  .siteHeader {
+    position: sticky;
+    height: var(--headerH);
+    padding: 0 clamp(14px, 3.4vw, 24px);
+    background: #0A162E;
+    backdrop-filter: none;
+  }
+
+  .brand {
+    width: clamp(64px, 15.5vw, 102px);
+  }
+
+  .navLinks {
+    gap: clamp(28px, 11vw, 72px);
+    padding-right: clamp(6px, 2.1vw, 16px);
+    font-size: clamp(0.5rem, 1.45vw, 0.74rem);
+  }
+
+  .heroSection {
+    min-height: clamp(293px, 70.8vw, 445px);
+    padding-top: 0;
+  }
+
+  .heroCopy {
+    width: 100%;
+    padding: clamp(70px, 17.4vw, 116px) clamp(28px, 7.2vw, 48px) clamp(86px, 21.7vw, 142px);
+  }
+
+  .heroCopy h1 {
+    max-width: clamp(320px, 82vw, 540px);
+    font-size: clamp(1.34rem, 4.85vw, 2.12rem);
+    line-height: 1.35;
+    letter-spacing: -0.045em;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.26);
+  }
+
+  .heroActions {
+    gap: clamp(20px, 5.3vw, 38px);
+    margin-top: clamp(28px, 6.8vw, 48px);
+  }
+
+  .heroActions a {
+    min-width: clamp(94px, 22.7vw, 154px);
+    min-height: clamp(22px, 4.6vw, 34px);
+    border-width: 1px;
+    padding: 4px clamp(12px, 3vw, 20px);
+    font-size: clamp(0.5rem, 1.45vw, 0.72rem);
+  }
+
+  .waveDeep {
+    height: clamp(120px, 29vw, 188px);
+  }
+
+  .waveMid {
+    height: clamp(108px, 26vw, 170px);
+  }
+
+  .waveLight {
+    height: clamp(102px, 24.6vw, 160px);
+  }
+
+  .missionSection {
+    min-height: clamp(292px, 70.5vw, 430px);
     display: block;
   }
 
-  .carouselArrow {
-    display: none;
+  .missionText {
+    width: 100%;
+    margin-left: 0;
+    padding: clamp(52px, 13.3vw, 88px) clamp(27px, 6.5vw, 48px) clamp(30px, 7.2vw, 52px);
   }
 
-  .dashboardGrid {
+  .missionText h2 {
+    width: auto;
+    max-width: clamp(272px, 68vw, 455px);
+    font-size: clamp(1.13rem, 4.1vw, 1.86rem);
+    line-height: 0.96;
+  }
+
+  .missionText p {
+    width: auto;
+    max-width: clamp(290px, 70vw, 470px);
+    margin: clamp(28px, 7.25vw, 48px) 0 0;
+    font-size: clamp(0.61rem, 2.04vw, 0.94rem);
+    line-height: 1.28;
+  }
+
+  .pinOutline {
+    right: clamp(-132px, -24.9vw, -86px);
+    top: clamp(12px, 3.6vw, 26px);
+    width: clamp(250px, 70.5vw, 455px);
+    height: clamp(250px, 70.5vw, 455px);
+    border-width: clamp(5px, 1.45vw, 9px);
+    transform: rotate(-45deg);
+  }
+
+  .pinOutline::before {
+    inset: clamp(9px, 2.4vw, 16px);
+    border-width: clamp(5px, 1.45vw, 9px);
+  }
+
+  .pinOutline::after {
+    inset: clamp(22px, 5.8vw, 38px);
+    border-width: clamp(4px, 1.2vw, 7px);
+  }
+
+  .systemSection {
+    min-height: clamp(293px, 70.8vw, 430px);
+    padding-top: 0;
+  }
+
+  .systemsTitle {
+    left: clamp(15px, 3.6vw, 28px);
+    top: clamp(-16px, -2.2vw, -6px);
+    font-size: clamp(4rem, 17.3vw, 7.2rem);
+    color: #c6ddf4;
+  }
+
+  .systemDevices {
+    width: 100%;
+    height: clamp(293px, 70.8vw, 430px);
+  }
+
+  .phoneMockup {
+    width: clamp(86px, 26.6vw, 160px);
+    border-width: clamp(3px, 0.96vw, 6px);
+    border-radius: clamp(13px, 3.9vw, 23px);
+  }
+
+  .systemPhone {
+    left: clamp(8px, 2vw, 18px);
+    top: clamp(52px, 12.6vw, 80px);
+  }
+
+  .systemMonitor {
+    left: clamp(118px, 33.3vw, 220px);
+    right: clamp(10px, 2.9vw, 24px);
+    top: clamp(62px, 15vw, 98px);
+    width: auto;
+  }
+
+  .systemMonitor .monitorScreen {
+    height: clamp(154px, 48.5vw, 300px);
+    aspect-ratio: auto;
+    border-width: clamp(4px, 1.45vw, 8px);
+    border-radius: clamp(8px, 2.2vw, 14px);
+  }
+
+  .techSection {
+    min-height: clamp(292px, 70.5vw, 430px);
+    padding: clamp(23px, 5.6vw, 40px) clamp(24px, 6.8vw, 52px) clamp(25px, 6vw, 42px);
+  }
+
+  .techSection h2 {
+    margin: 0 0 clamp(26px, 6.3vw, 44px);
+    font-size: clamp(1.22rem, 4vw, 2rem);
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .techGrid {
+    width: 100%;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto;
+    gap: clamp(27px, 6.5vw, 46px) clamp(20px, 6.5vw, 50px);
+    max-width: clamp(350px, 86vw, 560px);
   }
 
-  .mapPanel,
-  .sidePanel {
-    grid-column: 1 / -1;
+  .techCard {
+    --tech-icon-size: clamp(38px, 10.1vw, 66px);
+    --tech-icon-top: clamp(-32px, -6.3vw, -22px);
+    min-height: clamp(42px, 10.1vw, 68px);
+    padding: clamp(19px, 4.6vw, 32px) 4px clamp(6px, 1.45vw, 10px);
+    border-radius: 2px;
   }
 
-  .metricCard {
-    min-width: 0;
-    padding: 12px 8px;
-    border-radius: 18px;
+  .tech-react,
+  .tech-node,
+  .tech-postgis,
+  .tech-vertex {
+    --tech-icon-size: clamp(70px, 18.8vw, 116px);
+    --tech-icon-top: clamp(-57px, -11.1vw, -40px);
+  }
+
+  .tech-flutter,
+  .tech-vercel,
+  .tech-supabase,
+  .tech-firebase {
+    --tech-icon-size: clamp(62px, 16.4vw, 104px);
+    --tech-icon-top: clamp(-54px, -10.4vw, -38px);
+  }
+
+  .tech-github {
+    --tech-icon-size: clamp(36px, 8.7vw, 56px);
+    --tech-icon-top: clamp(-29px, -5.3vw, -20px);
+  }
+
+  .techCard span {
+    font-size: clamp(0.48rem, 1.69vw, 0.72rem);
+  }
+
+  .featuresSection {
+    min-height: clamp(292px, 70.5vw, 440px);
+    padding: clamp(24px, 5.8vw, 42px) clamp(14px, 3.4vw, 26px) clamp(20px, 4.8vw, 36px);
+  }
+
+  .featuresInner {
+    width: 100%;
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    gap: clamp(14px, 3.9vw, 28px);
+    align-items: start;
+  }
+
+  .featureIntro h2 {
+    margin: 0 0 clamp(22px, 5.8vw, 38px) clamp(4px, 1.2vw, 8px);
+    max-width: clamp(205px, 53vw, 340px);
+    font-size: clamp(0.95rem, 3.28vw, 1.55rem);
+    line-height: 1.38;
+  }
+
+  .dashboardMockup {
+    width: clamp(200px, 49.8vw, 330px);
+  }
+
+  .featureList {
+    gap: clamp(11px, 3vw, 20px);
+    padding-top: 0;
+  }
+
+  .featureItem {
+    grid-template-columns: clamp(32px, 7.8vw, 52px) 1fr;
+    gap: clamp(8px, 1.9vw, 14px);
+  }
+
+  .featureIcon {
+    width: clamp(32px, 7.8vw, 52px);
+    height: clamp(32px, 7.8vw, 52px);
+  }
+
+  .featureItem h3 {
+    font-size: clamp(0.52rem, 1.98vw, 0.9rem);
+  }
+
+  .featureItem p {
+    margin: clamp(5px, 1.7vw, 10px) 0 0;
+    font-size: clamp(0.32rem, 1.11vw, 0.55rem);
+    line-height: 1.35;
+  }
+
+  .contactSection {
+    min-height: clamp(292px, 70.5vw, 440px);
+    grid-template-columns: minmax(0, 0.98fr) minmax(0, 1fr);
+    gap: clamp(16px, 4.8vw, 34px);
+    padding: clamp(30px, 7.25vw, 52px) clamp(16px, 3.86vw, 30px) clamp(28px, 6.76vw, 48px);
+  }
+
+  .contactCopy h2 {
+    max-width: clamp(195px, 47vw, 310px);
+    font-size: clamp(1.28rem, 5vw, 2rem);
+    line-height: 1.26;
+  }
+
+  .contactCopy p {
+    max-width: clamp(180px, 43.5vw, 300px);
+    margin: clamp(15px, 3.6vw, 26px) 0 0;
+    font-size: clamp(0.62rem, 2.1vw, 0.9rem);
+    line-height: 1.78;
+    font-weight: 700;
+  }
+
+  .contactForm {
+    gap: clamp(7px, 1.69vw, 12px);
+    font-size: clamp(0.42rem, 1.55vw, 0.7rem);
+  }
+
+  .contactForm span,
+  .contactForm legend {
+    padding-left: clamp(4px, 1vw, 7px);
+  }
+
+  .contactForm input[type="text"],
+  .contactForm input[type="email"],
+  .contactForm input[type="tel"],
+  .contactForm textarea {
+    min-height: clamp(21px, 5.1vw, 36px);
+    border-width: clamp(1.2px, 0.34vw, 2px);
+    border-radius: 3px;
+    padding: 2px clamp(6px, 1.45vw, 10px);
+  }
+
+  .contactForm textarea {
+    min-height: clamp(46px, 11.1vw, 74px);
+  }
+
+  .contactForm fieldset {
+    padding: 3px 0 0;
+    gap: clamp(3px, 0.72vw, 5px);
+  }
+
+  .contactForm legend {
+    font-size: clamp(0.48rem, 1.7vw, 0.76rem);
+    font-weight: 850;
+  }
+
+  .contactForm fieldset label {
+    gap: clamp(5px, 1.2vw, 8px);
+    font-size: clamp(0.44rem, 1.56vw, 0.7rem);
+    font-weight: 850;
+  }
+
+  .contactForm input[type="checkbox"] {
+    width: clamp(8px, 1.95vw, 13px);
+    height: clamp(8px, 1.95vw, 13px);
+    border-width: clamp(1.5px, 0.42vw, 2px);
+  }
+
+  .contactForm button {
+    min-height: clamp(22px, 5.3vw, 36px);
+    margin-top: clamp(5px, 1.2vw, 8px);
+    font-size: clamp(0.52rem, 1.93vw, 0.84rem);
+  }
+
+  .connectSection {
+    min-height: clamp(276px, 66.7vw, 420px);
+    padding: clamp(27px, 6.5vw, 44px) clamp(22px, 5.3vw, 38px) clamp(24px, 5.8vw, 40px);
+  }
+
+  .connectSection h2 {
+    font-size: clamp(1.34rem, 4.55vw, 1.94rem);
+  }
+
+  .connectLead {
+    max-width: clamp(330px, 90vw, 570px);
+    margin: clamp(15px, 3.6vw, 26px) auto clamp(18px, 4.35vw, 30px);
+    font-size: clamp(0.48rem, 1.7vw, 0.78rem);
+  }
+
+  .connectCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 3.62vw, 24px);
+    max-width: clamp(340px, 88.9vw, 570px);
+  }
+
+  .connectCard {
+    min-height: clamp(98px, 23.7vw, 156px);
+    border-radius: clamp(14px, 3.38vw, 24px);
+    padding: clamp(10px, 2.4vw, 18px) clamp(8px, 1.93vw, 14px) clamp(8px, 1.93vw, 14px);
+    box-shadow: inset 0 clamp(-12px, -1.93vw, -8px) 0 rgba(24, 57, 92, 0.16);
+  }
+
+  .connectIcon {
+    width: clamp(28px, 6.76vw, 44px);
+    height: clamp(28px, 6.76vw, 44px);
+    margin-bottom: clamp(-28px, -5.8vw, -20px);
+  }
+
+  .connectCard h3 {
+    margin: clamp(4px, 1.2vw, 8px) 0 0 clamp(38px, 9.2vw, 60px);
+    min-height: clamp(24px, 5.8vw, 38px);
+    font-size: clamp(0.46rem, 1.69vw, 0.76rem);
+  }
+
+  .connectCard p {
+    min-height: clamp(30px, 7.25vw, 50px);
+    margin: clamp(7px, 1.69vw, 12px) 0 clamp(8px, 1.93vw, 14px);
+    font-size: clamp(0.31rem, 1.16vw, 0.52rem);
+    line-height: 1.45;
+  }
+
+  .connectCard a {
+    min-height: clamp(10px, 2.42vw, 18px);
+    font-size: clamp(0.31rem, 1.18vw, 0.55rem);
+  }
+
+  .siteFooter {
+    min-height: clamp(105px, 25.4vw, 170px);
+    padding: clamp(22px, 5.3vw, 36px) clamp(12px, 2.9vw, 22px) clamp(18px, 4.35vw, 30px);
+  }
+
+  .siteFooter::before,
+  .siteFooter::after {
+    width: clamp(84px, 20.3vw, 136px);
+    height: clamp(84px, 20.3vw, 136px);
+  }
+
+  .siteFooter::before {
+    left: clamp(-90px, -17.4vw, -56px);
+    top: 6px;
+  }
+
+  .siteFooter::after {
+    right: clamp(-94px, -18.6vw, -60px);
+    top: clamp(-34px, -5.8vw, -18px);
+  }
+
+  .siteFooter img {
+    width: clamp(78px, 18.8vw, 126px);
+  }
+
+  .siteFooter small {
+    font-size: clamp(0.32rem, 1.18vw, 0.54rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .heroActions {
+    gap: 12px;
+  }
+
+  .heroActions a {
+    min-width: 90px;
+  }
+
+  .featuresSection {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .featuresInner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .featureIntro h2 {
+    max-width: 100%;
+    margin-left: 0;
     text-align: center;
+    font-size: 1.08rem;
   }
 
-  .metricCard span {
-    font-size: 0.56rem;
-    letter-spacing: 0.08em;
-    white-space: nowrap;
+  .dashboardMockup {
+    width: min(88vw, 300px);
+    margin: 0 auto;
   }
 
-  .metricCard strong {
-    font-size: 1.28rem;
+  .featureList {
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 16px;
   }
 
-  .carouselArea {
-    cursor: grab;
+  .featureItem {
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
   }
 
-  .carouselArea:active {
-    cursor: grabbing;
+  .featureIcon {
+    width: 42px;
+    height: 42px;
   }
 
-  .carouselDots {
-    bottom: 4px;
-  }
-}
-
-@media (max-width: 380px) {
-  .metricCard {
-    padding: 10px 5px;
+  .featureItem h3 {
+    font-size: 0.78rem;
   }
 
-  .metricCard span {
-    font-size: 0.5rem;
-    letter-spacing: 0.05em;
+  .featureItem p {
+    font-size: 0.58rem;
   }
 
-  .metricCard strong {
-    font-size: 1.12rem;
-  }
-}
-
-
-/* Image carousel patch */
-.imageSlide {
-  position: relative;
-  z-index: 2;
-  width: min(900px, 96%);
-  margin: 0;
-  border: 1px solid rgba(126, 200, 255, 0.22);
-  border-radius: 30px;
-  padding: 18px;
-  background:
-    linear-gradient(135deg, rgba(126, 200, 255, 0.12), transparent 45%),
-    rgba(9, 20, 40, 0.95);
-  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.28);
-}
-
-.imageSlideHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--muted);
-  font-size: 0.78em;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.imageSlideHeader strong {
-  color: var(--blue);
-}
-
-.imageFrame {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.035);
-}
-
-.imageFrame img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 520px;
-  object-fit: contain;
-  user-select: none;
-  pointer-events: none;
-}
-
-.imageSlide figcaption {
-  display: grid;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.imageSlide figcaption strong {
-  font-size: 1.35em;
-  line-height: 1.1;
-}
-
-.imageSlide figcaption p {
-  color: var(--text-soft);
-  line-height: 1.45;
-}
-
-.mobileImageSlide {
-  width: min(430px, 92%);
-}
-
-.mobileImageSlide .imageFrame img {
-  max-height: 620px;
-}
-
-@media (max-width: 760px) {
-  .imageSlide {
-    width: 100%;
-    border-radius: 24px;
-    padding: 14px;
+  .contactSection {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
-  .imageSlideHeader {
+  .contactCopy,
+  .contactCopy h2,
+  .contactCopy p,
+  .contactForm {
+    max-width: 100%;
+  }
+
+  .contactForm {
     font-size: 0.72rem;
-    margin-bottom: 12px;
   }
 
-  .imageFrame {
-    border-radius: 18px;
+  .contactForm fieldset label {
+    font-size: 0.68rem;
   }
 
-  .imageFrame img {
-    max-height: none;
+  .connectCards {
+    grid-template-columns: 1fr;
+    max-width: 292px;
   }
 
-  .imageSlide figcaption strong {
-    font-size: 1.18rem;
+  .connectCard {
+    min-height: 150px;
+    padding: 18px 18px 14px;
   }
 
-  .imageSlide figcaption p {
-    font-size: 0.92rem;
+  .connectIcon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: -40px;
   }
 
-  .mobileImageSlide {
-    width: 100%;
+  .connectCard h3 {
+    margin-left: 58px;
+    min-height: 44px;
+    font-size: 0.9rem;
+  }
+
+  .connectCard p {
+    min-height: 0;
+    font-size: 0.64rem;
+  }
+
+  .connectCard a {
+    min-height: 24px;
+    font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .siteShell {
+    min-width: 320px;
   }
 }
 
 
-/* Stable carousel text patch */
-.visualHeader {
-  min-height: 86px;
+/* v7: contato alinhado ao protótipo, com escala responsiva */
+:root {
+  --ink: #0A162E;
+  --navy: #0A162E;
+  --navy-2: #0A162E;
+  --deep-navy: #0A162E;
+  --blue-dark: #18395C;
+  --blue-dark-2: #254A6A;
+  --blue-card: #254A6A;
+  --mid-blue: #44769B;
+  --mid-blue-2: #44769B;
+  --soft-blue: #A6C1D4;
+  --soft-blue-2: #A6C1D4;
+  --pin-blue: #728EA6;
+  --paper: #E4E6E8;
 }
 
-.visualHeader h2 {
-  min-height: 2.12em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.visualDescription {
-  min-height: 4.5em;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.swipeHint {
-  min-height: 1.25em;
-}
-
-.imageSlide figcaption {
-  min-height: 104px;
-  align-content: start;
-}
-
-.imageSlide figcaption strong {
-  min-height: 2.22em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.imageSlide figcaption p {
-  min-height: 4.35em;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.imageFrame {
-  aspect-ratio: 16 / 9;
+.contactSection {
+  min-height: clamp(420px, 40vw, 610px);
+  padding: clamp(54px, 6.4vw, 92px) clamp(44px, 7vw, 96px);
   display: grid;
-  place-items: center;
+  grid-template-columns: minmax(300px, 0.86fr) minmax(420px, 1fr);
+  gap: clamp(58px, 8.5vw, 132px);
+  align-items: start;
+  color: #0A162E;
+  background: #A6C1D4 !important;
 }
 
-.imageFrame img {
-  height: 100%;
-  object-fit: contain;
-}
-
-.mobileImageSlide .imageFrame {
-  aspect-ratio: 9 / 16;
-}
-
-.mobileImageSlide .imageFrame img {
+.contactCopy {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  max-width: 520px;
 }
 
-@media (max-width: 760px) {
-  .visualHeader {
-    min-height: 112px;
-  }
-
-  .visualDescription {
-    min-height: 4.8em;
-  }
-
-  .imageSlide figcaption {
-    min-height: 112px;
-  }
-
-  .imageSlide figcaption strong {
-    min-height: 2.36em;
-  }
-
-  .imageSlide figcaption p {
-    min-height: 4.5em;
-  }
-
-  .imageFrame {
-    aspect-ratio: 16 / 10;
-  }
-
-  .mobileImageSlide .imageFrame {
-    aspect-ratio: 9 / 16;
-  }
+.contactCopy h2 {
+  max-width: 520px;
+  margin: 0;
+  color: #0A162E;
+  font-size: clamp(2.3rem, 3.45vw, 4.1rem);
+  line-height: 1.14;
+  font-weight: 950;
+  letter-spacing: -0.065em;
+  text-shadow: none;
 }
 
-@media (max-width: 380px) {
-  .visualHeader {
-    min-height: 104px;
-  }
-
-  .visualDescription {
-    min-height: 5.1em;
-  }
-
-  .imageSlide figcaption {
-    min-height: 118px;
-  }
+.contactCopy p {
+  max-width: 485px;
+  margin: clamp(22px, 2.2vw, 34px) 0 0;
+  color: #18395C;
+  font-size: clamp(0.92rem, 1.12vw, 1.16rem);
+  line-height: 1.86;
+  font-weight: 500;
 }
 
-
-/* Mobile image zoom patch */
-.imageOpenButton {
-  position: relative;
-  border: 1px solid var(--line);
-  padding: 0;
-  color: inherit;
-  cursor: zoom-in;
-}
-
-.tapZoomHint {
-  display: none;
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  border: 1px solid rgba(126, 200, 255, 0.28);
-  border-radius: 999px;
-  padding: 7px 10px;
-  background: rgba(6, 15, 31, 0.78);
-  color: #f4f9ff;
-  font-size: 0.68rem;
-  font-weight: 900;
-  pointer-events: none;
-  backdrop-filter: blur(10px);
-}
-
-.imageZoomOverlay {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  display: none;
-  place-items: center;
-  padding: 18px;
-}
-
-.imageZoomBackdrop {
-  position: absolute;
-  inset: 0;
-  border: 0;
-  background: rgba(1, 6, 16, 0.88);
-  cursor: zoom-out;
-}
-
-.imageZoomPanel {
-  position: relative;
-  z-index: 2;
-  width: min(94vw, 980px);
-  max-height: 92dvh;
+.contactForm {
+  width: min(100%, 560px);
+  justify-self: end;
   display: grid;
-  place-items: center;
+  gap: clamp(10px, 1vw, 14px);
+  align-content: start;
+  color: #18395C;
+  font-size: clamp(0.78rem, 0.92vw, 0.96rem);
+  font-weight: 850;
 }
 
-.imageZoomPanel img {
+.contactForm > label {
+  position: relative;
   display: block;
-  max-width: 100%;
-  max-height: 92dvh;
-  border: 1px solid rgba(126, 200, 255, 0.32);
-  border-radius: 24px;
-  background: rgba(9, 20, 40, 0.95);
-  box-shadow: 0 24px 100px rgba(0, 0, 0, 0.55);
-  user-select: none;
+  padding-top: 0.56em;
 }
 
-.imageZoomClose {
+.contactForm > label > span {
   position: absolute;
-  top: -14px;
-  right: -14px;
-  z-index: 3;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(126, 200, 255, 0.32);
-  border-radius: 16px;
-  background: rgba(8, 17, 38, 0.94);
-  color: #f4f9ff;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  backdrop-filter: blur(14px);
+  left: 13px;
+  top: 0;
+  z-index: 1;
+  padding: 0 4px;
+  color: #18395C;
+  background: #A6C1D4;
+  line-height: 1;
 }
 
-.imageZoomClose:hover,
-.imageZoomClose:focus-visible {
-  border-color: var(--blue);
-  color: var(--blue);
+.contactForm input[type="text"],
+.contactForm input[type="email"],
+.contactForm input[type="tel"],
+.contactForm textarea {
+  width: 100%;
+  min-height: clamp(39px, 3.05vw, 50px);
+  border: 2px solid #18395C;
+  border-radius: 4px;
+  background: transparent;
+  color: #0A162E;
+  padding: 7px 12px;
   outline: none;
 }
 
-@media (max-width: 760px) {
-  .tapZoomHint {
-    display: inline-flex;
+.contactForm textarea {
+  min-height: clamp(86px, 6.9vw, 118px);
+  resize: vertical;
+}
+
+.contactForm fieldset {
+  border: 0;
+  margin: 0;
+  padding: clamp(4px, 0.55vw, 8px) 0 0;
+  display: grid;
+  gap: 5px;
+}
+
+.contactForm legend {
+  margin: 0 0 4px;
+  padding: 0 0 0 8px;
+  color: #18395C;
+  line-height: 1.1;
+}
+
+.contactForm fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #18395C;
+  font-size: clamp(0.68rem, 0.72vw, 0.82rem);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.contactForm input[type="checkbox"] {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  accent-color: #18395C;
+}
+
+.contactForm button {
+  width: 100%;
+  min-height: clamp(42px, 3.2vw, 54px);
+  margin-top: clamp(8px, 0.9vw, 13px);
+  border: 0;
+  border-radius: 999px;
+  color: #ffffff;
+  background: #18395C;
+  font-size: clamp(0.94rem, 1.05vw, 1.16rem);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.contactForm input:focus,
+.contactForm textarea:focus {
+  box-shadow: 0 0 0 3px rgba(24, 57, 92, 0.18);
+}
+
+@media (max-width: 900px) {
+  .contactSection {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+    gap: clamp(18px, 6vw, 48px);
+    padding: clamp(34px, 7.5vw, 62px) clamp(18px, 5vw, 44px) clamp(34px, 7vw, 56px);
   }
 
-  .imageZoomOverlay {
-    display: grid;
+  .contactForm {
+    justify-self: stretch;
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .contactSection {
+    min-height: clamp(292px, 70.5vw, 430px);
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+    gap: clamp(18px, 4.9vw, 34px);
+    padding: clamp(30px, 7.25vw, 52px) clamp(17px, 4.12vw, 30px) clamp(28px, 6.76vw, 48px);
+    background: #A6C1D4 !important;
   }
 
-  .imageZoomPanel {
-    width: 92dvh;
-    max-width: none;
-    transform: rotate(90deg) scale(1.04);
+  .contactCopy h2 {
+    max-width: clamp(190px, 47vw, 310px);
+    font-size: clamp(1.27rem, 5vw, 2rem);
+    line-height: 1.24;
+    letter-spacing: -0.055em;
   }
 
-  .imageZoomPanel img {
-    width: 92dvh;
-    max-width: 92dvh;
-    max-height: 92vw;
-    object-fit: contain;
-    border-radius: 20px;
+  .contactCopy p {
+    max-width: clamp(177px, 42.8vw, 290px);
+    margin: clamp(12px, 3.2vw, 24px) 0 0;
+    font-size: clamp(0.48rem, 1.78vw, 0.76rem);
+    line-height: 1.85;
   }
 
-  .imageZoomClose {
-    top: -12px;
-    right: -12px;
-    transform: rotate(-90deg);
+  .contactForm {
+    gap: clamp(5px, 1.45vw, 10px);
+    font-size: clamp(0.42rem, 1.55vw, 0.68rem);
+  }
+
+  .contactForm > label {
+    padding-top: 0.54em;
+  }
+
+  .contactForm > label > span {
+    left: clamp(7px, 1.8vw, 12px);
+    padding: 0 clamp(2px, 0.6vw, 4px);
+  }
+
+  .contactForm input[type="text"],
+  .contactForm input[type="email"],
+  .contactForm input[type="tel"],
+  .contactForm textarea {
+    min-height: clamp(21px, 5.1vw, 36px);
+    border-width: clamp(1.2px, 0.34vw, 2px);
+    border-radius: 3px;
+    padding: 2px clamp(6px, 1.45vw, 10px);
+  }
+
+  .contactForm textarea {
+    min-height: clamp(45px, 10.9vw, 74px);
+  }
+
+  .contactForm fieldset {
+    padding-top: clamp(2px, 0.6vw, 4px);
+    gap: clamp(1px, 0.4vw, 3px);
+  }
+
+  .contactForm legend {
+    margin-bottom: clamp(1px, 0.35vw, 3px);
+    padding-left: clamp(5px, 1.2vw, 8px);
+  }
+
+  .contactForm fieldset label {
+    gap: clamp(4px, 0.97vw, 7px);
+    font-size: clamp(0.35rem, 1.28vw, 0.58rem);
+  }
+
+  .contactForm input[type="checkbox"] {
+    width: clamp(6px, 1.45vw, 10px);
+    height: clamp(6px, 1.45vw, 10px);
+  }
+
+  .contactForm button {
+    min-height: clamp(22px, 5.3vw, 36px);
+    margin-top: clamp(5px, 1.2vw, 8px);
+    font-size: clamp(0.52rem, 1.93vw, 0.84rem);
   }
 }
 
 @media (max-width: 380px) {
-  .tapZoomHint {
-    font-size: 0.62rem;
-    padding: 6px 8px;
+  .contactSection {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    min-height: auto;
   }
 
-  .imageZoomPanel {
-    transform: rotate(90deg) scale(1.02);
-  }
-}
-
-
-/* Light card + JPEG theme image patch */
-.slideImageLight {
-  display: none !important;
-}
-
-.slideImageDark {
-  display: block;
-}
-
-.viewerLanding.theme-light .slideImageDark {
-  display: none !important;
-}
-
-.viewerLanding.theme-light .slideImageLight {
-  display: block !important;
-}
-
-@media (prefers-color-scheme: light) {
-  .viewerLanding.theme-system .slideImageDark {
-    display: none !important;
+  .contactCopy,
+  .contactCopy h2,
+  .contactCopy p,
+  .contactForm {
+    max-width: 100%;
   }
 
-  .viewerLanding.theme-system .slideImageLight {
-    display: block !important;
+  .contactForm {
+    font-size: 0.72rem;
+  }
+
+  .contactForm fieldset label {
+    font-size: 0.68rem;
   }
 }
 
-.viewerLanding.theme-light .imageSlide {
-  background:
-    linear-gradient(135deg, rgba(18, 110, 178, 0.08), transparent 45%),
-    #ffffff;
-  border-color: rgba(18, 110, 178, 0.22);
-  box-shadow: 0 24px 80px rgba(25, 70, 110, 0.16);
+/* v8: ajustes finos de paleta, sistema, missão, ondas e ícones */
+:root {
+  --ink: #0A162E;
+  --navy: #0A162E;
+  --navy-2: #0A162E;
+  --deep-navy: #0A162E;
+  --blue-dark: #18395C;
+  --blue-dark-2: #18395C;
+  --blue-card: #254A6A;
+  --mid-blue: #44769B;
+  --mid-blue-2: #44769B;
+  --soft-blue: #A6C1D4;
+  --soft-blue-2: #A6C1D4;
+  --pin-blue: #6F8EA6;
+  --paper: #E4E6E8;
+  --tech-card: rgba(45, 104, 138, 0.64);
 }
 
-.viewerLanding.theme-light .imageFrame {
-  background: #f8fbff;
-  border-color: rgba(18, 110, 178, 0.18);
+body,
+#root,
+.siteShell,
+.siteHeader,
+.connectSection,
+.siteFooter {
+  background-color: #0A162E;
 }
 
-.viewerLanding.theme-light .imageSlide figcaption strong {
-  color: #10213d;
+.heroSection {
+  background: #0A162E;
 }
 
-.viewerLanding.theme-light .imageSlide figcaption p {
-  color: #27405f;
+.siteHeader {
+  background: #0A162E;
+  border-bottom-color: rgba(166, 193, 212, 0.66);
 }
 
-@media (prefers-color-scheme: light) {
-  .viewerLanding.theme-system .imageSlide {
-    background:
-      linear-gradient(135deg, rgba(18, 110, 178, 0.08), transparent 45%),
-      #ffffff;
-    border-color: rgba(18, 110, 178, 0.22);
-    box-shadow: 0 24px 80px rgba(25, 70, 110, 0.16);
+.techSection {
+  background: #18395C;
+}
+
+.systemSection,
+.featuresSection {
+  background: #44769B;
+}
+
+.missionSection,
+.contactSection,
+.contactForm > label > span,
+.connectCard {
+  background-color: #A6C1D4 !important;
+}
+
+/* Ondas mais altas e com curvas arredondadas, sem sair da paleta */
+.wave {
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  clip-path: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% 100%;
+}
+
+.waveDeep {
+  height: clamp(245px, 25vw, 390px);
+  background-image: url("data:image/svg+xml,%3Csvg width='1440' height='390' viewBox='0 0 1440 390' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath fill='%2318395C' d='M0 205C64 180 111 202 161 236C212 270 245 316 315 308C386 300 448 292 518 254C588 216 640 177 712 201C770 220 799 236 861 215C931 192 971 126 1028 92C1088 56 1124 37 1189 12C1267 -18 1341 23 1440 48V390H0Z'/%3E%3C/svg%3E");
+}
+
+.waveMid {
+  height: clamp(220px, 22vw, 350px);
+  background-image: url("data:image/svg+xml,%3Csvg width='1440' height='350' viewBox='0 0 1440 350' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath fill='%2344769B' d='M0 210C55 218 91 199 126 224C168 254 196 282 256 288C332 296 414 307 501 283C582 260 655 250 727 252C801 254 861 233 927 201C1003 164 1050 124 1104 93C1165 58 1195 31 1240 22C1290 11 1351 37 1440 49V350H0Z'/%3E%3C/svg%3E");
+}
+
+.waveLight {
+  height: clamp(180px, 18vw, 305px);
+  background-image: url("data:image/svg+xml,%3Csvg width='1440' height='305' viewBox='0 0 1440 305' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath fill='%23A6C1D4' d='M0 172C55 165 85 166 123 193C172 228 225 223 277 229C352 237 425 265 512 264C610 263 695 259 783 241C875 222 974 222 1053 204C1141 184 1186 137 1225 104C1263 72 1279 48 1323 44C1365 40 1396 61 1440 73V305H0Z'/%3E%3C/svg%3E");
+}
+
+.heroCopy {
+  padding-bottom: clamp(150px, 14vw, 230px);
+}
+
+/* Sistema: frame centralizado e margens consistentes com o web */
+.systemSection {
+  min-height: clamp(520px, 43vw, 660px);
+  padding: clamp(18px, 1.6vw, 28px) 0 0;
+}
+
+.systemsTitle {
+  left: 50%;
+  top: clamp(2px, 0.45vw, 8px);
+  transform: translateX(-50%);
+  width: min(92vw, 1160px);
+  text-align: center;
+  color: #C6DDF4;
+  font-size: clamp(5.1rem, 10.8vw, 11.3rem);
+  line-height: 0.86;
+}
+
+.systemDevices {
+  width: min(88vw, 1120px);
+  height: clamp(470px, 38.5vw, 590px);
+  margin-inline: auto;
+}
+
+.systemPhone {
+  left: clamp(10px, 1.5vw, 28px);
+  top: clamp(112px, 10.8vw, 160px);
+}
+
+.systemMonitor {
+  right: clamp(10px, 1.5vw, 28px);
+  top: clamp(126px, 11.8vw, 176px);
+  width: min(68%, 740px);
+}
+
+.monitorScreen {
+  border-color: #05070D;
+  background: #E4E6E8;
+}
+
+/* Missão: tipografia um pouco maior e pin mais próximo do protótipo */
+.missionText h2 {
+  max-width: 800px;
+  color: #0A162E;
+  font-size: clamp(2.55rem, 3.95vw, 4.65rem);
+  line-height: 0.95;
+}
+
+.missionText p {
+  max-width: 720px;
+  color: #0A162E;
+  font-size: clamp(1.08rem, 1.52vw, 1.48rem);
+  line-height: 1.34;
+}
+
+.pinOutline {
+  border-width: clamp(11px, 1vw, 17px);
+  border-color: rgba(24, 57, 92, 0.42);
+}
+
+.pinOutline::before {
+  border-width: clamp(9px, 0.82vw, 14px);
+  border-color: rgba(24, 57, 92, 0.36);
+}
+
+.pinOutline::after {
+  border-width: clamp(8px, 0.72vw, 12px);
+  border-color: rgba(24, 57, 92, 0.32);
+}
+
+/* Tecnologias: o SVG do PostGIS já vem composto; não pode receber escala gigante */
+.tech-postgis {
+  --tech-icon-size: clamp(58px, 4.4vw, 76px);
+  --tech-icon-top: clamp(-44px, -3.3vw, -31px);
+  --tech-icon-scale: 1;
+}
+
+.tech-vertex {
+  --tech-icon-scale: 2.9;
+}
+
+.techCard {
+  background: linear-gradient(90deg, rgba(45, 104, 138, 0.72), rgba(68, 118, 155, 0.46));
+}
+
+.contactForm input[type="text"],
+.contactForm input[type="email"],
+.contactForm input[type="tel"],
+.contactForm textarea {
+  border-color: #18395C;
+}
+
+.contactForm,
+.contactForm > label > span,
+.contactForm legend,
+.contactForm fieldset label,
+.contactCopy p {
+  color: #18395C;
+}
+
+.contactForm button {
+  background: #18395C;
+}
+
+@media (max-width: 700px) {
+  .waveDeep {
+    height: clamp(132px, 32vw, 205px);
   }
 
-  .viewerLanding.theme-system .imageFrame {
-    background: #f8fbff;
-    border-color: rgba(18, 110, 178, 0.18);
+  .waveMid {
+    height: clamp(122px, 29.5vw, 188px);
   }
 
-  .viewerLanding.theme-system .imageSlide figcaption strong {
-    color: #10213d;
+  .waveLight {
+    height: clamp(112px, 27vw, 176px);
   }
 
-  .viewerLanding.theme-system .imageSlide figcaption p {
-    color: #27405f;
+  .heroCopy {
+    padding-bottom: clamp(98px, 23.5vw, 154px);
   }
+
+  .missionText h2 {
+    max-width: clamp(294px, 72vw, 500px);
+    font-size: clamp(1.28rem, 4.55vw, 2.1rem);
+    line-height: 0.98;
+  }
+
+  .missionText p {
+    max-width: clamp(304px, 74vw, 510px);
+    font-size: clamp(0.68rem, 2.2vw, 1rem);
+    line-height: 1.33;
+  }
+
+  .pinOutline {
+    border-width: clamp(7px, 1.75vw, 11px);
+    border-color: rgba(24, 57, 92, 0.42);
+  }
+
+  .pinOutline::before {
+    border-width: clamp(6px, 1.45vw, 9px);
+  }
+
+  .pinOutline::after {
+    border-width: clamp(5px, 1.2vw, 8px);
+  }
+
+  .systemSection {
+    min-height: clamp(302px, 73vw, 440px);
+    padding-top: clamp(6px, 1.45vw, 12px);
+  }
+
+  .systemsTitle {
+    left: 50%;
+    top: clamp(-8px, -1.2vw, -3px);
+    width: 96vw;
+    text-align: center;
+    transform: translateX(-50%);
+    font-size: clamp(4.2rem, 17vw, 7rem);
+  }
+
+  .systemDevices {
+    width: min(94vw, 590px);
+    height: clamp(300px, 72.5vw, 440px);
+  }
+
+  .systemPhone {
+    left: clamp(10px, 2.5vw, 20px);
+    top: clamp(56px, 13.4vw, 84px);
+  }
+
+  .systemMonitor {
+    left: clamp(118px, 33.3vw, 220px);
+    right: clamp(10px, 2.5vw, 20px);
+    top: clamp(66px, 15.6vw, 100px);
+    width: auto;
+  }
+
+  .tech-postgis {
+    --tech-icon-size: clamp(38px, 10vw, 64px);
+    --tech-icon-top: clamp(-32px, -6.3vw, -22px);
+    --tech-icon-scale: 1;
+  }
+
+  .tech-vertex {
+    --tech-icon-scale: 2.65;
+  }
+}
+
+/* v9: correções finais de escala, paleta, sistema, ondas e contato */
+:root {
+  --ink: #0A162E;
+  --navy: #0A162E;
+  --navy-2: #0A162E;
+  --deep-navy: #0A162E;
+  --blue-dark: #18395C;
+  --blue-dark-2: #18395C;
+  --blue-card: #44769B;
+  --mid-blue: #44769B;
+  --mid-blue-2: #44769B;
+  --soft-blue: #A6C1D4;
+  --soft-blue-2: #A6C1D4;
+  --pin-blue: #18395C;
+  --white: #F7FBFF;
+  --paper: #E4E6E8;
+}
+
+body,
+#root,
+.siteShell,
+.siteHeader,
+.heroSection,
+.connectSection,
+.siteFooter {
+  background: #0A162E !important;
+}
+
+.techSection {
+  background: #18395C !important;
+}
+
+.systemSection,
+.featuresSection {
+  background: #44769B !important;
+}
+
+.missionSection,
+.contactSection,
+.contactForm > label > span,
+.connectCard {
+  background: #A6C1D4 !important;
+}
+
+/* Hero: ondas mais cheias, arredondadas e dentro da paleta original */
+.heroSection {
+  min-height: clamp(560px, 54vw, 780px);
+}
+
+.wave {
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  background-color: transparent !important;
+  background-position: center bottom;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  clip-path: none !important;
+}
+
+.waveDeep {
+  height: clamp(255px, 25.8vw, 398px);
+  background-image: url("data:image/svg+xml,%3Csvg width='1440' height='398' viewBox='0 0 1440 398' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath fill='%2318395C' d='M0 207C44 190 78 184 116 196C168 212 204 259 259 290C306 317 364 319 425 308C489 297 538 275 590 242C650 204 703 179 769 198C827 215 845 229 889 218C958 201 996 138 1054 100C1129 51 1192 19 1255 4C1311 -9 1376 17 1440 39V398H0Z'/%3E%3C/svg%3E");
+}
+
+.waveMid {
+  height: clamp(230px, 23vw, 360px);
+  background-image: url("data:image/svg+xml,%3Csvg width='1440' height='360' viewBox='0 0 1440 360' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath fill='%2344769B' d='M0 205C45 213 80 210 115 225C168 248 188 280 253 290C333 302 406 307 496 286C573 268 639 254 714 256C794 258 862 236 936 198C1019 155 1068 119 1120 89C1181 54 1208 36 1256 28C1305 20 1360 35 1440 55V360H0Z'/%3E%3C/svg%3E");
+}
+
+.waveLight {
+  height: clamp(190px, 19vw, 315px);
+  background-image: url("data:image/svg+xml,%3Csvg width='1440' height='315' viewBox='0 0 1440 315' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath fill='%23A6C1D4' d='M0 171C51 166 88 168 124 190C178 223 218 223 279 229C351 236 431 262 516 263C610 264 691 259 787 242C884 225 975 224 1054 205C1137 185 1188 142 1227 109C1265 77 1283 54 1320 50C1364 45 1399 62 1440 75V315H0Z'/%3E%3C/svg%3E");
+}
+
+.heroCopy {
+  padding-bottom: clamp(150px, 14.6vw, 226px);
+}
+
+/* Missão: letras maiores e pin direito mais presente */
+.missionSection {
+  min-height: clamp(585px, 46vw, 760px);
+}
+
+.missionText {
+  width: min(56vw, 760px);
+  margin-left: clamp(52px, 7vw, 120px);
+}
+
+.missionText h2 {
+  max-width: 760px;
+  color: #0A162E !important;
+  font-size: clamp(2.7rem, 4.05vw, 4.7rem);
+  line-height: 0.96;
+  letter-spacing: -0.065em;
+}
+
+.missionText p {
+  max-width: 690px;
+  color: #0A162E !important;
+  font-size: clamp(1.12rem, 1.55vw, 1.45rem);
+  line-height: 1.36;
+}
+
+.pinOutline {
+  right: clamp(-260px, -12vw, -120px);
+  width: clamp(455px, 40vw, 670px);
+  height: clamp(455px, 40vw, 670px);
+  border-width: clamp(13px, 1.12vw, 18px) !important;
+  border-color: rgba(24, 57, 92, 0.46) !important;
+}
+
+.pinOutline::before {
+  border-width: clamp(10px, 0.9vw, 15px) !important;
+  border-color: rgba(24, 57, 92, 0.39) !important;
+}
+
+.pinOutline::after {
+  border-width: clamp(9px, 0.78vw, 13px) !important;
+  border-color: rgba(24, 57, 92, 0.34) !important;
+}
+
+/* Sistema: título centralizado e mockups grandes sem estourar a seção */
+.systemSection {
+  min-height: clamp(525px, 44vw, 640px);
+  padding-top: clamp(10px, 1vw, 20px);
+  overflow: hidden;
+}
+
+.systemsTitle {
+  left: 50% !important;
+  top: clamp(8px, 0.85vw, 16px) !important;
+  width: max-content !important;
+  max-width: 96vw;
+  text-align: center;
+  transform: translateX(-50%) !important;
+  color: #C6DDF4;
+  font-size: clamp(5.6rem, 9.8vw, 10.9rem);
+  line-height: 0.84;
+  letter-spacing: -0.075em;
+}
+
+.systemDevices {
+  width: min(92vw, 1180px);
+  height: clamp(460px, 38vw, 565px);
+  margin-inline: auto;
+}
+
+.phoneMockup {
+  --tech-icon-scale: 1;
+}
+
+.systemPhone {
+  left: clamp(24px, 4.3vw, 82px) !important;
+  top: clamp(112px, 10vw, 148px) !important;
+  width: clamp(168px, 12.5vw, 215px) !important;
+}
+
+.systemMonitor {
+  left: auto !important;
+  right: clamp(24px, 4.6vw, 82px) !important;
+  top: clamp(122px, 10.8vw, 158px) !important;
+  width: clamp(520px, 53.5vw, 770px) !important;
+}
+
+.systemMonitor .monitorScreen {
+  aspect-ratio: 1.48 / 1;
+  height: auto !important;
+  border-width: clamp(7px, 0.62vw, 10px);
+  border-color: #05070D;
+  background: #E4E6E8 !important;
+}
+
+.monitorScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #E4E6E8 !important;
+}
+
+/* Tecnologias: PostGIS volta para a escala do asset, sem mascote gigante */
+.tech-postgis {
+  --tech-icon-size: clamp(40px, 3.6vw, 60px) !important;
+  --tech-icon-top: clamp(-34px, -2.7vw, -24px) !important;
+  --tech-icon-scale: 1 !important;
+}
+
+.tech-postgis .techIcon {
+  object-fit: contain;
+}
+
+.techCard {
+  background: linear-gradient(90deg, rgba(68, 118, 155, 0.42), rgba(68, 118, 155, 0.62)) !important;
+}
+
+/* Contato: mantém o layout certo, mas aumenta textos, campos e botão */
+.contactSection {
+  min-height: clamp(520px, 38vw, 610px);
+  padding: clamp(52px, 5.3vw, 76px) clamp(38px, 7vw, 96px);
+  grid-template-columns: minmax(320px, 0.86fr) minmax(460px, 1fr);
+  gap: clamp(54px, 8vw, 122px);
+  align-items: center;
+  color: #0A162E !important;
+}
+
+.contactCopy {
+  max-width: 540px;
+}
+
+.contactCopy h2 {
+  max-width: 540px;
+  color: #0A162E !important;
+  font-size: clamp(2.75rem, 3.7vw, 4.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.065em;
+}
+
+.contactCopy p {
+  max-width: 500px;
+  margin-top: clamp(24px, 2.35vw, 34px);
+  color: #18395C !important;
+  font-size: clamp(1.02rem, 1.18vw, 1.26rem);
+  line-height: 1.76;
+}
+
+.contactForm {
+  width: min(100%, 590px);
+  gap: clamp(12px, 1.05vw, 16px);
+  color: #18395C !important;
+  font-size: clamp(0.9rem, 1vw, 1.04rem);
+}
+
+.contactForm > label {
+  padding-top: 0.6em;
+}
+
+.contactForm > label > span,
+.contactForm legend {
+  color: #18395C !important;
+  background: #A6C1D4 !important;
+}
+
+.contactForm input[type="text"],
+.contactForm input[type="email"],
+.contactForm input[type="tel"],
+.contactForm textarea {
+  min-height: clamp(46px, 3.25vw, 56px);
+  border: 2.4px solid #18395C;
+  border-radius: 5px;
+  color: #0A162E;
+  padding: 8px 13px;
+}
+
+.contactForm textarea {
+  min-height: clamp(104px, 7.5vw, 126px);
+}
+
+.contactForm fieldset {
+  gap: 6px;
+}
+
+.contactForm fieldset label {
+  color: #18395C !important;
+  font-size: clamp(0.76rem, 0.82vw, 0.9rem);
+  line-height: 1.12;
+}
+
+.contactForm input[type="checkbox"] {
+  width: 13px;
+  height: 13px;
+}
+
+.contactForm button {
+  min-height: clamp(48px, 3.55vw, 58px);
+  margin-top: clamp(8px, 0.8vw, 12px);
+  border-radius: 999px;
+  background: #18395C !important;
+  color: #F7FBFF !important;
+  font-size: clamp(1.02rem, 1.18vw, 1.28rem);
+  font-weight: 900;
+}
+
+@media (max-width: 900px) {
+  .systemPhone {
+    left: clamp(16px, 3vw, 32px) !important;
+  }
+
+  .systemMonitor {
+    right: clamp(16px, 3vw, 32px) !important;
+    width: clamp(420px, 60vw, 630px) !important;
+  }
+
+  .contactSection {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.08fr);
+    gap: clamp(24px, 5vw, 54px);
+  }
+}
+
+@media (max-width: 700px) {
+  .heroSection {
+    min-height: clamp(430px, 105vw, 585px);
+  }
+
+  .heroCopy {
+    padding-top: clamp(70px, 17vw, 98px);
+    padding-bottom: clamp(112px, 28vw, 170px);
+  }
+
+  .waveDeep {
+    height: clamp(150px, 36vw, 216px);
+  }
+
+  .waveMid {
+    height: clamp(135px, 32vw, 198px);
+  }
+
+  .waveLight {
+    height: clamp(122px, 29vw, 182px);
+  }
+
+  .missionSection {
+    min-height: clamp(438px, 106vw, 640px);
+  }
+
+  .missionText {
+    width: min(76vw, 520px);
+    margin-left: clamp(28px, 7vw, 48px);
+  }
+
+  .missionText h2 {
+    max-width: clamp(315px, 76vw, 520px);
+    font-size: clamp(1.5rem, 5.7vw, 2.45rem);
+    line-height: 0.98;
+  }
+
+  .missionText p {
+    max-width: clamp(310px, 75vw, 520px);
+    font-size: clamp(0.82rem, 2.6vw, 1.08rem);
+    line-height: 1.36;
+  }
+
+  .pinOutline {
+    right: clamp(-170px, -34vw, -120px);
+    width: clamp(270px, 72vw, 430px);
+    height: clamp(270px, 72vw, 430px);
+    border-width: clamp(8px, 2.1vw, 12px) !important;
+  }
+
+  .pinOutline::before {
+    border-width: clamp(6px, 1.65vw, 9px) !important;
+  }
+
+  .pinOutline::after {
+    border-width: clamp(5px, 1.35vw, 8px) !important;
+  }
+
+  .systemSection {
+    min-height: clamp(318px, 77vw, 440px);
+    padding-top: clamp(4px, 1vw, 10px);
+  }
+
+  .systemsTitle {
+    top: clamp(2px, 0.8vw, 8px) !important;
+    width: 96vw !important;
+    font-size: clamp(4.5rem, 17.5vw, 7.2rem);
+  }
+
+  .systemDevices {
+    width: min(95vw, 620px);
+    height: clamp(306px, 74vw, 438px);
+  }
+
+  .systemPhone {
+    left: clamp(12px, 3.5vw, 22px) !important;
+    top: clamp(62px, 15vw, 90px) !important;
+    width: clamp(82px, 20vw, 124px) !important;
+  }
+
+  .systemMonitor {
+    left: clamp(126px, 34vw, 222px) !important;
+    right: clamp(12px, 3.5vw, 22px) !important;
+    top: clamp(70px, 16.8vw, 100px) !important;
+    width: auto !important;
+  }
+
+  .systemMonitor .monitorScreen {
+    height: clamp(170px, 47vw, 292px) !important;
+    aspect-ratio: auto;
+    border-width: clamp(4px, 1.3vw, 8px);
+  }
+
+  .tech-postgis {
+    --tech-icon-size: clamp(34px, 8.8vw, 54px) !important;
+    --tech-icon-top: clamp(-28px, -6.2vw, -20px) !important;
+    --tech-icon-scale: 1 !important;
+  }
+
+  .contactSection {
+    min-height: clamp(410px, 103vw, 492px);
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(12px, 3.8vw, 24px);
+    padding: clamp(24px, 6.2vw, 38px) clamp(16px, 4.3vw, 28px) clamp(26px, 6.4vw, 40px);
+    align-items: center;
+  }
+
+  .contactCopy h2 {
+    max-width: clamp(170px, 43vw, 280px);
+    font-size: clamp(1.55rem, 6.25vw, 2.2rem);
+    line-height: 1.18;
+  }
+
+  .contactCopy p {
+    max-width: clamp(170px, 42vw, 276px);
+    margin-top: clamp(13px, 3.4vw, 22px);
+    font-size: clamp(0.69rem, 2.75vw, 0.96rem);
+    line-height: 1.72;
+  }
+
+  .contactForm {
+    gap: clamp(6px, 1.65vw, 10px);
+    font-size: clamp(0.62rem, 2.48vw, 0.88rem);
+  }
+
+  .contactForm > label {
+    padding-top: 0.58em;
+  }
+
+  .contactForm > label > span {
+    left: clamp(8px, 1.9vw, 13px);
+    padding-inline: clamp(2px, 0.75vw, 5px);
+  }
+
+  .contactForm input[type="text"],
+  .contactForm input[type="email"],
+  .contactForm input[type="tel"],
+  .contactForm textarea {
+    min-height: clamp(30px, 8.2vw, 42px);
+    border-width: clamp(1.6px, 0.46vw, 2.2px);
+    border-radius: 4px;
+    padding: 3px clamp(7px, 1.75vw, 11px);
+  }
+
+  .contactForm textarea {
+    min-height: clamp(66px, 17vw, 92px);
+  }
+
+  .contactForm legend {
+    margin-bottom: clamp(2px, 0.55vw, 4px);
+    padding-left: clamp(7px, 1.55vw, 10px);
+    line-height: 1.08;
+  }
+
+  .contactForm fieldset {
+    gap: clamp(2px, 0.7vw, 4px);
+    padding-top: clamp(3px, 0.8vw, 5px);
+  }
+
+  .contactForm fieldset label {
+    gap: clamp(4px, 1vw, 7px);
+    font-size: clamp(0.48rem, 1.92vw, 0.68rem);
+    line-height: 1.1;
+  }
+
+  .contactForm input[type="checkbox"] {
+    width: clamp(8px, 2.05vw, 12px);
+    height: clamp(8px, 2.05vw, 12px);
+  }
+
+  .contactForm button {
+    min-height: clamp(34px, 8.5vw, 45px);
+    margin-top: clamp(6px, 1.55vw, 9px);
+    font-size: clamp(0.78rem, 3vw, 1.02rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .contactSection {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) !important;
+    gap: 10px;
+    padding-inline: 12px;
+  }
+
+  .contactCopy,
+  .contactCopy h2,
+  .contactCopy p,
+  .contactForm {
+    max-width: none;
+  }
+
+  .contactCopy h2 {
+    font-size: clamp(1.28rem, 6vw, 1.55rem);
+  }
+
+  .contactCopy p {
+    font-size: clamp(0.56rem, 2.55vw, 0.72rem);
+  }
+
+  .contactForm {
+    font-size: clamp(0.52rem, 2.25vw, 0.68rem);
+  }
+
+  .contactForm fieldset label {
+    font-size: clamp(0.4rem, 1.75vw, 0.55rem);
+  }
+}
+
+/* v10: reforço do texto do contato e checkboxes conforme referência */
+.contactCopy p {
+  font-weight: 750 !important;
+}
+
+.contactForm legend {
+  color: #18395C !important;
+  font-size: clamp(0.94rem, 1.02vw, 1.08rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.08 !important;
+}
+
+.contactForm fieldset {
+  gap: 5px !important;
+}
+
+.contactForm fieldset label {
+  color: #18395C !important;
+  gap: 8px !important;
+  font-size: clamp(0.82rem, 0.95vw, 1rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.08 !important;
+}
+
+.contactForm input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  flex: 0 0 auto !important;
+  width: clamp(13px, 1vw, 16px) !important;
+  height: clamp(13px, 1vw, 16px) !important;
+  margin: 0 !important;
+  border: 2px solid #18395C !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+}
+
+.contactForm input[type="checkbox"]:checked {
+  background: #18395C !important;
+  box-shadow: inset 0 0 0 3px #A6C1D4 !important;
+}
+
+@media (max-width: 700px) {
+  .contactCopy p {
+    font-weight: 750 !important;
+  }
+
+  .contactForm legend {
+    font-size: clamp(0.58rem, 2.22vw, 0.84rem) !important;
+    font-weight: 900 !important;
+  }
+
+  .contactForm fieldset {
+    gap: clamp(3px, 0.72vw, 5px) !important;
+  }
+
+  .contactForm fieldset label {
+    gap: clamp(5px, 1.2vw, 8px) !important;
+    font-size: clamp(0.54rem, 2.08vw, 0.78rem) !important;
+    font-weight: 900 !important;
+  }
+
+  .contactForm input[type="checkbox"] {
+    width: clamp(9px, 2.25vw, 13px) !important;
+    height: clamp(9px, 2.25vw, 13px) !important;
+    border-width: clamp(1.6px, 0.42vw, 2px) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .contactForm legend {
+    font-size: 0.68rem !important;
+  }
+
+  .contactForm fieldset label {
+    font-size: 0.62rem !important;
+  }
+}
+
+/* v11: ajustes da seção "Outras formas de se conectar" */
+.connectSection {
+  min-height: clamp(470px, 35vw, 620px) !important;
+  padding: clamp(34px, 3.6vw, 56px) clamp(38px, 5.4vw, 84px) clamp(44px, 4.2vw, 70px) !important;
+  color: #F7FBFF !important;
+  background: #0A162E !important;
+}
+
+.connectSection h2 {
+  margin: 0 auto !important;
+  color: #F7FBFF !important;
+  font-size: clamp(2.35rem, 3.05vw, 3.55rem) !important;
+  line-height: 1.05 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.045em !important;
+  text-align: center !important;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.24) !important;
+}
+
+.connectLead {
+  max-width: 1080px !important;
+  margin: clamp(20px, 1.95vw, 30px) auto clamp(34px, 3.2vw, 50px) !important;
+  color: #F7FBFF !important;
+  font-size: clamp(1rem, 1.13vw, 1.28rem) !important;
+  line-height: 1.52 !important;
+  font-weight: 550 !important;
+  text-align: center !important;
+}
+
+.connectCards {
+  max-width: 1120px !important;
+  gap: clamp(34px, 3.4vw, 52px) !important;
+}
+
+.connectCard {
+  min-height: clamp(218px, 17vw, 272px) !important;
+  border-radius: clamp(20px, 1.9vw, 30px) !important;
+  padding: clamp(24px, 2.15vw, 32px) clamp(24px, 2.15vw, 32px) clamp(18px, 1.6vw, 24px) !important;
+  color: #0A162E !important;
+  background: #A6C1D4 !important;
+  box-shadow: inset 0 clamp(-14px, -1.25vw, -10px) 0 rgba(24, 57, 92, 0.18) !important;
+}
+
+.connectIcon {
+  width: clamp(58px, 4.75vw, 76px) !important;
+  height: clamp(58px, 4.75vw, 76px) !important;
+  margin-bottom: clamp(-46px, -3vw, -34px) !important;
+  border: 1.6px solid rgba(24, 57, 92, 0.42) !important;
+  background: #44769B !important;
+  box-shadow: inset 0 0 18px rgba(166, 193, 212, 0.2) !important;
+}
+
+.connectIcon img {
+  width: 56% !important;
+  height: 56% !important;
+  object-fit: contain !important;
+}
+
+.connectCard h3 {
+  margin: 0 0 0 clamp(78px, 6.2vw, 98px) !important;
+  min-height: clamp(58px, 4.7vw, 72px) !important;
+  display: flex !important;
+  align-items: center !important;
+  color: #0A162E !important;
+  font-size: clamp(1.18rem, 1.34vw, 1.52rem) !important;
+  line-height: 1.05 !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.connectCard p {
+  min-height: clamp(70px, 5.4vw, 88px) !important;
+  margin: clamp(16px, 1.5vw, 22px) 0 clamp(18px, 1.55vw, 24px) !important;
+  color: #0A162E !important;
+  font-size: clamp(0.86rem, 0.94vw, 1.06rem) !important;
+  line-height: 1.42 !important;
+  font-weight: 800 !important;
+}
+
+.connectAction,
+.connectCard a.connectAction,
+.connectCard button.connectAction {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 100% !important;
+  min-height: clamp(32px, 2.35vw, 40px) !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  padding: 0 14px !important;
+  color: #F7FBFF !important;
+  background: linear-gradient(180deg, #315670 0%, #18395C 100%) !important;
+  font: inherit !important;
+  font-size: clamp(0.82rem, 0.9vw, 1rem) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  cursor: pointer !important;
+}
+
+.connectAction:hover,
+.connectAction:focus-visible {
+  background: linear-gradient(180deg, #44769B 0%, #18395C 100%) !important;
+  outline: none !important;
+}
+
+@media (max-width: 900px) {
+  .connectSection {
+    min-height: clamp(360px, 68vw, 520px) !important;
+    padding: clamp(28px, 5.4vw, 42px) clamp(24px, 4.8vw, 38px) clamp(34px, 5.6vw, 48px) !important;
+  }
+
+  .connectCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    max-width: 720px !important;
+    gap: clamp(16px, 3.6vw, 28px) !important;
+  }
+
+  .connectSection h2 {
+    font-size: clamp(1.6rem, 4.75vw, 2.35rem) !important;
+  }
+
+  .connectLead {
+    max-width: 680px !important;
+    margin: clamp(14px, 3.2vw, 24px) auto clamp(24px, 4.2vw, 34px) !important;
+    font-size: clamp(0.72rem, 2vw, 1rem) !important;
+  }
+
+  .connectCard {
+    min-height: clamp(146px, 28vw, 205px) !important;
+    border-radius: clamp(16px, 3.25vw, 24px) !important;
+    padding: clamp(14px, 2.8vw, 22px) clamp(12px, 2.5vw, 18px) clamp(10px, 2.2vw, 16px) !important;
+  }
+
+  .connectIcon {
+    width: clamp(38px, 8.2vw, 58px) !important;
+    height: clamp(38px, 8.2vw, 58px) !important;
+    margin-bottom: clamp(-38px, -6.2vw, -26px) !important;
+  }
+
+  .connectCard h3 {
+    margin-left: clamp(48px, 10.8vw, 72px) !important;
+    min-height: clamp(34px, 7.5vw, 52px) !important;
+    font-size: clamp(0.78rem, 2.15vw, 1.08rem) !important;
+  }
+
+  .connectCard p {
+    min-height: clamp(50px, 10vw, 74px) !important;
+    margin: clamp(10px, 2vw, 16px) 0 clamp(10px, 2vw, 16px) !important;
+    font-size: clamp(0.52rem, 1.35vw, 0.72rem) !important;
+    line-height: 1.42 !important;
+  }
+
+  .connectAction,
+  .connectCard a.connectAction,
+  .connectCard button.connectAction {
+    min-height: clamp(22px, 4.4vw, 32px) !important;
+    font-size: clamp(0.5rem, 1.38vw, 0.72rem) !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .connectSection {
+    min-height: clamp(310px, 74vw, 380px) !important;
+    padding: clamp(20px, 4.8vw, 28px) clamp(16px, 3.9vw, 24px) clamp(24px, 5.8vw, 34px) !important;
+  }
+
+  .connectCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    max-width: 100% !important;
+    gap: clamp(10px, 3vw, 14px) !important;
+  }
+
+  .connectSection h2 {
+    font-size: clamp(1.22rem, 5vw, 1.55rem) !important;
+    text-shadow: none !important;
+  }
+
+  .connectLead {
+    margin: clamp(10px, 2.7vw, 14px) auto clamp(16px, 3.8vw, 22px) !important;
+    font-size: clamp(0.58rem, 2.2vw, 0.72rem) !important;
+    line-height: 1.45 !important;
+  }
+
+  .connectCard {
+    min-height: clamp(118px, 29vw, 148px) !important;
+    border-radius: clamp(14px, 3.4vw, 18px) !important;
+    padding: clamp(10px, 2.4vw, 14px) clamp(8px, 1.9vw, 10px) clamp(8px, 1.9vw, 10px) !important;
+    box-shadow: inset 0 -8px 0 rgba(24, 57, 92, 0.16) !important;
+  }
+
+  .connectIcon {
+    width: clamp(30px, 7.3vw, 36px) !important;
+    height: clamp(30px, 7.3vw, 36px) !important;
+    margin-bottom: clamp(-30px, -6.3vw, -24px) !important;
+  }
+
+  .connectCard h3 {
+    margin-left: clamp(38px, 9.2vw, 45px) !important;
+    min-height: clamp(26px, 6.3vw, 34px) !important;
+    font-size: clamp(0.58rem, 2.25vw, 0.72rem) !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .connectCard p {
+    min-height: clamp(38px, 9.3vw, 48px) !important;
+    margin: clamp(7px, 1.7vw, 10px) 0 clamp(8px, 1.9vw, 10px) !important;
+    font-size: clamp(0.39rem, 1.55vw, 0.5rem) !important;
+    line-height: 1.36 !important;
+    font-weight: 750 !important;
+  }
+
+  .connectAction,
+  .connectCard a.connectAction,
+  .connectCard button.connectAction {
+    min-height: clamp(16px, 4vw, 22px) !important;
+    border-radius: 3px !important;
+    font-size: clamp(0.38rem, 1.55vw, 0.5rem) !important;
+  }
+}
+
+/* v12: alinhamento final de sistema, features, formulário e cards de conexão */
+:root {
+  --ink: #0A162E;
+  --navy: #0A162E;
+  --blue-dark: #18395C;
+  --mid-blue: #44769B;
+  --soft-blue: #A6C1D4;
+  --white: #F7FBFF;
+  --paper: #E4E6E8;
+}
+
+body,
+#root,
+.siteShell,
+.siteHeader,
+.heroSection,
+.connectSection,
+.siteFooter {
+  background: #0A162E !important;
+}
+
+.techSection {
+  background: #18395C !important;
+}
+
+.systemSection,
+.featuresSection {
+  background: #44769B !important;
+}
+
+.missionSection,
+.contactSection,
+.contactForm > label > span,
+.connectCard {
+  background: #A6C1D4 !important;
+}
+
+/* Sistema: respeita o wireframe, com duas áreas grandes e centralizadas */
+.systemSection {
+  min-height: clamp(560px, 45vw, 690px) !important;
+  padding: clamp(18px, 1.5vw, 28px) 0 0 !important;
+  overflow: hidden !important;
+}
+
+.systemsTitle {
+  left: 50% !important;
+  right: auto !important;
+  top: clamp(18px, 1.55vw, 32px) !important;
+  width: max-content !important;
+  max-width: 94vw !important;
+  transform: translateX(-50%) !important;
+  text-align: center !important;
+  color: #C6DDF4 !important;
+  font-size: clamp(5.4rem, 9vw, 10.35rem) !important;
+  line-height: 0.84 !important;
+  letter-spacing: -0.055em !important;
+}
+
+.systemDevices {
+  position: relative !important;
+  z-index: 2 !important;
+  width: min(92vw, 1140px) !important;
+  height: auto !important;
+  min-height: clamp(500px, 39vw, 600px) !important;
+  margin: 0 auto !important;
+  padding-top: clamp(135px, 11vw, 168px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(190px, 0.31fr) minmax(0, 1fr) !important;
+  gap: clamp(28px, 4vw, 58px) !important;
+  align-items: start !important;
+}
+
+.systemPhone,
+.systemMonitor {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+}
+
+.systemPhone {
+  justify-self: center !important;
+  width: clamp(172px, 13.4vw, 226px) !important;
+}
+
+.systemMonitor {
+  justify-self: stretch !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.systemMonitor .monitorScreen {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1.58 / 1 !important;
+  border-width: clamp(8px, 0.7vw, 11px) !important;
+  border-color: #05070D !important;
+  background: #E4E6E8 !important;
+}
+
+.systemMonitor .monitorScreen img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  background: #E4E6E8 !important;
+}
+
+/* PostGIS: o asset já vem composto, então fica contido como ícone normal */
+.tech-postgis {
+  --tech-icon-size: clamp(28px, 2.65vw, 44px) !important;
+  --tech-icon-top: clamp(-28px, -2.2vw, -18px) !important;
+  --tech-icon-scale: 0.86 !important;
+}
+
+.tech-postgis .techIcon {
+  width: clamp(28px, 2.65vw, 44px) !important;
+  height: clamp(28px, 2.65vw, 44px) !important;
+  max-width: clamp(28px, 2.65vw, 44px) !important;
+  max-height: clamp(28px, 2.65vw, 44px) !important;
+  top: clamp(-28px, -2.2vw, -18px) !important;
+  transform: translateX(-50%) scale(0.86) !important;
+  object-fit: contain !important;
+}
+
+/* Features: título centralizado e com espaçamento de letra mais próximo do Figma */
+.featureIntro h2 {
+  max-width: 760px !important;
+  margin: 0 auto clamp(34px, 3vw, 48px) !important;
+  text-align: center !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.16 !important;
+  color: #D9EDF8 !important;
+}
+
+.featureIntro h2 strong {
+  color: #0A162E !important;
+  font-weight: 950 !important;
+}
+
+.dashboardMockup {
+  margin: 0 auto !important;
+}
+
+/* Contato: destaque de cor e checkboxes um pouco mais à direita */
+.contactCopy h2 span {
+  color: #18395C !important;
+  display: inline !important;
+}
+
+.contactForm fieldset label {
+  margin-left: clamp(14px, 1.2vw, 22px) !important;
+}
+
+.contactForm input[type="checkbox"] {
+  border-color: #18395C !important;
+}
+
+/* Cards finais: título sempre alinhado ao lado do ícone e centralizado verticalmente */
+.connectCard {
+  display: grid !important;
+  grid-template-rows: auto 1fr auto !important;
+  align-content: start !important;
+}
+
+.connectCardHeader {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  align-items: center !important;
+  gap: clamp(18px, 1.55vw, 25px) !important;
+  min-height: clamp(62px, 4.9vw, 78px) !important;
+}
+
+.connectIcon {
+  margin: 0 !important;
+  flex: 0 0 auto !important;
+}
+
+.connectCard h3 {
+  margin: 0 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  color: #0A162E !important;
+  font-size: clamp(1.15rem, 1.28vw, 1.48rem) !important;
+  line-height: 1.08 !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.connectCard p {
+  margin-top: clamp(22px, 1.8vw, 30px) !important;
+}
+
+.connectAction,
+.connectCard a.connectAction,
+.connectCard button.connectAction {
+  background: linear-gradient(180deg, #315670 0%, #18395C 100%) !important;
+}
+
+@media (max-width: 900px) {
+  .systemSection {
+    min-height: clamp(420px, 64vw, 560px) !important;
+  }
+
+  .systemsTitle {
+    font-size: clamp(4.4rem, 12.8vw, 7.4rem) !important;
+    top: clamp(14px, 2.4vw, 24px) !important;
+  }
+
+  .systemDevices {
+    width: min(94vw, 740px) !important;
+    min-height: clamp(365px, 58vw, 500px) !important;
+    padding-top: clamp(106px, 16vw, 142px) !important;
+    grid-template-columns: minmax(116px, 0.31fr) minmax(0, 1fr) !important;
+    gap: clamp(16px, 3.6vw, 30px) !important;
+  }
+
+  .systemPhone {
+    width: clamp(104px, 20vw, 160px) !important;
+  }
+
+  .systemMonitor .monitorScreen {
+    aspect-ratio: 1.5 / 1 !important;
+    border-width: clamp(5px, 1.1vw, 8px) !important;
+  }
+
+  .featureIntro h2 {
+    text-align: center !important;
+    max-width: min(86vw, 540px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .contactForm fieldset label {
+    margin-left: clamp(10px, 1.8vw, 16px) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .systemSection {
+    min-height: clamp(315px, 76vw, 440px) !important;
+    padding-top: clamp(4px, 1vw, 10px) !important;
+  }
+
+  .systemsTitle {
+    top: clamp(8px, 1.8vw, 14px) !important;
+    width: 96vw !important;
+    font-size: clamp(4.15rem, 16.6vw, 6.85rem) !important;
+    letter-spacing: -0.052em !important;
+  }
+
+  .systemDevices {
+    width: min(95vw, 620px) !important;
+    min-height: clamp(292px, 70vw, 420px) !important;
+    padding-top: clamp(72px, 18vw, 104px) !important;
+    grid-template-columns: minmax(84px, 0.29fr) minmax(0, 1fr) !important;
+    gap: clamp(13px, 3.4vw, 24px) !important;
+  }
+
+  .systemPhone {
+    width: clamp(82px, 22vw, 128px) !important;
+  }
+
+  .systemMonitor .monitorScreen {
+    aspect-ratio: 1.45 / 1 !important;
+    border-width: clamp(4px, 1.2vw, 7px) !important;
+    border-radius: clamp(7px, 1.8vw, 12px) !important;
+  }
+
+  .tech-postgis,
+  .tech-postgis .techIcon {
+    --tech-icon-size: clamp(23px, 6vw, 38px) !important;
+    --tech-icon-top: clamp(-22px, -5.3vw, -16px) !important;
+    width: clamp(23px, 6vw, 38px) !important;
+    height: clamp(23px, 6vw, 38px) !important;
+    max-width: clamp(23px, 6vw, 38px) !important;
+    max-height: clamp(23px, 6vw, 38px) !important;
+    top: clamp(-22px, -5.3vw, -16px) !important;
+    transform: translateX(-50%) scale(0.86) !important;
+  }
+
+  .featureIntro h2 {
+    max-width: clamp(210px, 52vw, 340px) !important;
+    margin: 0 auto clamp(20px, 5vw, 34px) !important;
+    font-size: clamp(1.02rem, 3.55vw, 1.6rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.026em !important;
+    text-align: center !important;
+  }
+
+  .contactForm fieldset label {
+    margin-left: clamp(8px, 2.2vw, 13px) !important;
+  }
+
+  .connectCardHeader {
+    gap: clamp(8px, 2.2vw, 14px) !important;
+    min-height: clamp(34px, 8vw, 52px) !important;
+  }
+
+  .connectCard h3 {
+    font-size: clamp(0.68rem, 2.18vw, 0.98rem) !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .systemDevices {
+    grid-template-columns: minmax(76px, 0.3fr) minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .connectCardHeader {
+    gap: clamp(6px, 1.8vw, 9px) !important;
+    min-height: clamp(26px, 6.5vw, 34px) !important;
+  }
+
+  .connectCard h3 {
+    font-size: clamp(0.52rem, 2.1vw, 0.68rem) !important;
+    letter-spacing: -0.015em !important;
+  }
+}
+
+/* v13: paleta do PDF, contato claro, placeholder Geodados e correções finais */
+:root {
+  --ink: #09162E !important;
+  --navy: #09162E !important;
+  --deep-navy: #09162E !important;
+  --blue-dark: #18395C !important;
+  --blue-card: #18395C !important;
+  --mid-blue: #44769B !important;
+  --soft-blue: #A6C1D4 !important;
+  --paper: #E4E6E8 !important;
+  --white: #F7FBFF !important;
+}
+
+html,
+body,
+#root,
+.siteShell {
+  background: #09162E !important;
+  color: #09162E !important;
+}
+
+.siteHeader,
+.heroSection,
+.connectSection,
+.siteFooter {
+  background: #09162E !important;
+}
+
+.techSection {
+  background: #18395C !important;
+}
+
+.systemSection,
+.featuresSection {
+  background: #44769B !important;
+}
+
+.missionSection,
+.contactSection,
+.contactForm > label > span,
+.connectCard {
+  background: #A6C1D4 !important;
+}
+
+/* Missão: mantém o bloco claro igual às nuvens do topo */
+.missionSection {
+  min-height: clamp(555px, 45vw, 740px) !important;
+  color: #09162E !important;
+}
+
+.missionText {
+  width: min(54vw, 720px) !important;
+  margin-left: clamp(54px, 7vw, 116px) !important;
+}
+
+.missionText h2 {
+  max-width: 720px !important;
+  color: #09162E !important;
+  font-size: clamp(2.55rem, 3.85vw, 4.42rem) !important;
+  line-height: 0.97 !important;
+  letter-spacing: -0.058em !important;
+  text-shadow: none !important;
+}
+
+.missionText p {
+  max-width: 670px !important;
+  color: #09162E !important;
+  font-size: clamp(1.02rem, 1.38vw, 1.32rem) !important;
+  line-height: 1.36 !important;
+  font-weight: 520 !important;
+}
+
+.pinOutline {
+  border-color: rgba(24, 57, 92, 0.42) !important;
+}
+
+.pinOutline::before {
+  border-color: rgba(24, 57, 92, 0.36) !important;
+}
+
+.pinOutline::after {
+  border-color: rgba(24, 57, 92, 0.32) !important;
+}
+
+/* Sistema: mockups grandes, com margens do web e título sempre central */
+.systemSection {
+  min-height: clamp(530px, 43vw, 660px) !important;
+  padding-top: clamp(12px, 1vw, 20px) !important;
+}
+
+.systemsTitle {
+  left: 50% !important;
+  top: clamp(12px, 1vw, 22px) !important;
+  width: 100% !important;
+  max-width: 1180px !important;
+  transform: translateX(-50%) !important;
+  text-align: center !important;
+  color: #C6DDF4 !important;
+  font-size: clamp(5.45rem, 9vw, 10.4rem) !important;
+  line-height: 0.84 !important;
+  letter-spacing: -0.06em !important;
+}
+
+.systemDevices {
+  width: min(92vw, 1160px) !important;
+  min-height: clamp(478px, 37.5vw, 580px) !important;
+  padding-top: clamp(128px, 10.6vw, 158px) !important;
+  grid-template-columns: minmax(180px, 0.31fr) minmax(0, 1fr) !important;
+  gap: clamp(34px, 4.4vw, 62px) !important;
+  align-items: start !important;
+}
+
+.systemPhone {
+  justify-self: center !important;
+  width: clamp(170px, 13.2vw, 222px) !important;
+}
+
+.systemMonitor {
+  justify-self: stretch !important;
+  width: 100% !important;
+}
+
+.systemMonitor .monitorScreen {
+  aspect-ratio: 1.58 / 1 !important;
+  border-color: #05070D !important;
+  background: #E4E6E8 !important;
+}
+
+.systemMonitor .monitorScreen img {
+  background: #E4E6E8 !important;
+}
+
+/* Tecnologias: remove PostGIS e entra um tapa-buraco neutro dentro da paleta */
+.tech-placeholder {
+  --tech-icon-size: clamp(58px, 4.6vw, 76px) !important;
+  --tech-icon-top: clamp(-44px, -3.4vw, -30px) !important;
+}
+
+.techPlaceholderIcon {
+  position: absolute !important;
+  left: 50% !important;
+  top: var(--tech-icon-top) !important;
+  width: var(--tech-icon-size) !important;
+  height: var(--tech-icon-size) !important;
+  transform: translateX(-50%) !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 2px solid rgba(166, 193, 212, 0.72) !important;
+  border-radius: 50% !important;
+  color: #A6C1D4 !important;
+  background: rgba(68, 118, 155, 0.32) !important;
+  box-shadow: 0 0 34px rgba(166, 193, 212, 0.22) !important;
+  font-size: clamp(0.84rem, 1vw, 1.08rem) !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1 !important;
+}
+
+.tech-postgis,
+.tech-postgis .techIcon {
+  transform: none !important;
+}
+
+.techCard {
+  background: linear-gradient(90deg, rgba(68, 118, 155, 0.46), rgba(68, 118, 155, 0.66)) !important;
+  box-shadow: inset 0 0 26px rgba(166, 193, 212, 0.06) !important;
+}
+
+/* Features: título centrado, sem espaçamento exagerado, e cores do PDF */
+.featuresSection {
+  color: #F7FBFF !important;
+}
+
+.featureIntro h2 {
+  max-width: 680px !important;
+  margin: 0 auto clamp(34px, 3vw, 48px) !important;
+  text-align: center !important;
+  color: #D9EDF8 !important;
+  font-size: clamp(2rem, 2.75vw, 3.35rem) !important;
+  line-height: 1.22 !important;
+  letter-spacing: -0.02em !important;
+  font-weight: 900 !important;
+}
+
+.featureIntro h2 strong {
+  color: #09162E !important;
+}
+
+.featureItem h3 {
+  color: #D9EDF8 !important;
+}
+
+.featureItem p {
+  color: #F7FBFF !important;
+}
+
+/* Contato: tudo volta ao bloco claro do Figma/PDF */
+.contactSection {
+  min-height: clamp(520px, 39vw, 630px) !important;
+  padding: clamp(54px, 5.4vw, 82px) clamp(44px, 7vw, 104px) !important;
+  grid-template-columns: minmax(320px, 0.86fr) minmax(460px, 1fr) !important;
+  gap: clamp(58px, 8vw, 128px) !important;
+  align-items: center !important;
+  color: #09162E !important;
+  background: #A6C1D4 !important;
+}
+
+.contactCopy h2 {
+  max-width: 540px !important;
+  color: #09162E !important;
+  font-size: clamp(2.75rem, 3.75vw, 4.25rem) !important;
+  line-height: 1.12 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.062em !important;
+  text-shadow: none !important;
+}
+
+.contactCopy h2 span {
+  color: #18395C !important;
+}
+
+.contactCopy p {
+  max-width: 500px !important;
+  margin-top: clamp(24px, 2.4vw, 36px) !important;
+  color: #18395C !important;
+  font-size: clamp(1.03rem, 1.18vw, 1.28rem) !important;
+  line-height: 1.76 !important;
+  font-weight: 760 !important;
+}
+
+.contactForm {
+  width: min(100%, 590px) !important;
+  justify-self: end !important;
+  color: #18395C !important;
+  font-size: clamp(0.9rem, 1vw, 1.04rem) !important;
+  font-weight: 900 !important;
+  gap: clamp(12px, 1vw, 16px) !important;
+}
+
+.contactForm > label > span,
+.contactForm legend {
+  color: #18395C !important;
+  background: #A6C1D4 !important;
+}
+
+.contactForm input[type="text"],
+.contactForm input[type="email"],
+.contactForm input[type="tel"],
+.contactForm textarea {
+  border: 2.3px solid #18395C !important;
+  color: #09162E !important;
+  background: transparent !important;
+  border-radius: 5px !important;
+}
+
+.contactForm fieldset {
+  padding-left: clamp(12px, 1vw, 20px) !important;
+}
+
+.contactForm legend {
+  margin-left: calc(clamp(12px, 1vw, 20px) * -1) !important;
+}
+
+.contactForm fieldset label {
+  margin-left: 0 !important;
+  color: #18395C !important;
+  font-size: clamp(0.8rem, 0.9vw, 0.98rem) !important;
+  font-weight: 900 !important;
+}
+
+.contactForm input[type="checkbox"] {
+  border-color: #18395C !important;
+  background: transparent !important;
+}
+
+.contactForm input[type="checkbox"]:checked {
+  background: #18395C !important;
+  box-shadow: inset 0 0 0 3px #A6C1D4 !important;
+}
+
+.contactForm button {
+  background: #18395C !important;
+  color: #F7FBFF !important;
+}
+
+/* Cards finais: paleta e contraste corrigidos */
+.connectSection {
+  color: #F7FBFF !important;
+}
+
+.connectCard {
+  color: #09162E !important;
+  background: #A6C1D4 !important;
+  box-shadow: inset 0 clamp(-14px, -1.2vw, -10px) 0 rgba(24, 57, 92, 0.18) !important;
+}
+
+.connectIcon {
+  background: #44769B !important;
+  border-color: rgba(24, 57, 92, 0.48) !important;
+}
+
+.connectCard h3,
+.connectCard p {
+  color: #09162E !important;
+}
+
+.connectAction,
+.connectCard a.connectAction,
+.connectCard button.connectAction {
+  background: linear-gradient(180deg, #315670 0%, #18395C 100%) !important;
+  color: #F7FBFF !important;
+}
+
+@media (max-width: 900px) {
+  .contactSection {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+    gap: clamp(24px, 5vw, 54px) !important;
+    padding: clamp(42px, 6vw, 62px) clamp(24px, 5vw, 44px) !important;
+  }
+
+  .contactForm {
+    justify-self: stretch !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .missionSection {
+    min-height: clamp(390px, 95vw, 580px) !important;
+    background: #A6C1D4 !important;
+  }
+
+  .missionText {
+    width: min(76vw, 520px) !important;
+    margin-left: clamp(28px, 7vw, 46px) !important;
+    padding-top: clamp(56px, 13vw, 82px) !important;
+  }
+
+  .missionText h2 {
+    max-width: clamp(300px, 72vw, 500px) !important;
+    font-size: clamp(1.28rem, 4.5vw, 2.04rem) !important;
+  }
+
+  .missionText p {
+    max-width: clamp(300px, 72vw, 500px) !important;
+    font-size: clamp(0.66rem, 2.12vw, 0.96rem) !important;
+  }
+
+  .systemSection {
+    min-height: clamp(315px, 76vw, 440px) !important;
+  }
+
+  .systemsTitle {
+    top: clamp(8px, 1.7vw, 14px) !important;
+    font-size: clamp(4.15rem, 16.5vw, 6.8rem) !important;
+  }
+
+  .systemDevices {
+    width: min(95vw, 620px) !important;
+    min-height: clamp(292px, 70vw, 420px) !important;
+    padding-top: clamp(72px, 18vw, 104px) !important;
+    grid-template-columns: minmax(84px, 0.29fr) minmax(0, 1fr) !important;
+    gap: clamp(13px, 3.4vw, 24px) !important;
+  }
+
+  .systemPhone {
+    width: clamp(82px, 22vw, 128px) !important;
+  }
+
+  .systemMonitor .monitorScreen {
+    aspect-ratio: 1.45 / 1 !important;
+  }
+
+  .tech-placeholder {
+    --tech-icon-size: clamp(38px, 9.8vw, 62px) !important;
+    --tech-icon-top: clamp(-32px, -6.2vw, -22px) !important;
+  }
+
+  .techPlaceholderIcon {
+    font-size: clamp(0.48rem, 1.85vw, 0.76rem) !important;
+  }
+
+  .featureIntro h2 {
+    max-width: clamp(210px, 52vw, 340px) !important;
+    font-size: clamp(1.02rem, 3.52vw, 1.58rem) !important;
+    line-height: 1.22 !important;
+    letter-spacing: -0.018em !important;
+  }
+
+  .contactSection {
+    min-height: clamp(410px, 100vw, 500px) !important;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+    gap: clamp(12px, 3.8vw, 24px) !important;
+    padding: clamp(24px, 6.2vw, 38px) clamp(16px, 4.3vw, 28px) clamp(26px, 6.4vw, 40px) !important;
+    background: #A6C1D4 !important;
+  }
+
+  .contactCopy h2 {
+    max-width: clamp(170px, 43vw, 280px) !important;
+    font-size: clamp(1.55rem, 6.15vw, 2.14rem) !important;
+  }
+
+  .contactCopy p {
+    max-width: clamp(170px, 42vw, 276px) !important;
+    font-size: clamp(0.68rem, 2.65vw, 0.94rem) !important;
+    line-height: 1.68 !important;
+  }
+
+  .contactForm {
+    font-size: clamp(0.62rem, 2.42vw, 0.86rem) !important;
+  }
+
+  .contactForm input[type="text"],
+  .contactForm input[type="email"],
+  .contactForm input[type="tel"],
+  .contactForm textarea {
+    min-height: clamp(30px, 8.2vw, 42px) !important;
+  }
+
+  .contactForm textarea {
+    min-height: clamp(66px, 17vw, 92px) !important;
+  }
+
+  .contactForm fieldset {
+    padding-left: clamp(10px, 2.4vw, 16px) !important;
+  }
+
+  .contactForm fieldset label {
+    font-size: clamp(0.52rem, 1.98vw, 0.72rem) !important;
+  }
+
+  .contactForm button {
+    min-height: clamp(34px, 8.5vw, 45px) !important;
+    font-size: clamp(0.78rem, 3vw, 1.02rem) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .contactSection {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) !important;
+    gap: 10px !important;
+    padding-inline: 12px !important;
+  }
+}
+
+/* v14 — contornos do formulário mais grossos e consistentes */
+.contactSection {
+  background: #A6C1D4 !important;
+  color: #09162E !important;
+}
+
+.contactForm {
+  color: #18395C !important;
+  font-weight: 920 !important;
+}
+
+.contactForm > label {
+  position: relative !important;
+  display: grid !important;
+  gap: 0 !important;
+}
+
+.contactForm > label > span {
+  position: relative !important;
+  z-index: 2 !important;
+  justify-self: start !important;
+  margin-left: clamp(13px, 1vw, 18px) !important;
+  margin-bottom: clamp(-10px, -0.72vw, -8px) !important;
+  padding: 0 clamp(5px, 0.45vw, 8px) !important;
+  color: #18395C !important;
+  background: #A6C1D4 !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+}
+
+.contactForm input[type="text"],
+.contactForm input[type="email"],
+.contactForm input[type="tel"],
+.contactForm textarea {
+  border: clamp(3px, 0.25vw, 3.8px) solid #18395C !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  color: #09162E !important;
+  box-shadow: none !important;
+}
+
+.contactForm input[type="text"],
+.contactForm input[type="email"],
+.contactForm input[type="tel"] {
+  min-height: clamp(47px, 3.65vw, 62px) !important;
+  padding: clamp(7px, 0.7vw, 10px) clamp(12px, 1vw, 16px) !important;
+}
+
+.contactForm textarea {
+  min-height: clamp(118px, 8.7vw, 160px) !important;
+  padding: clamp(12px, 1vw, 16px) !important;
+  resize: vertical !important;
+}
+
+.contactForm input:focus,
+.contactForm textarea:focus {
+  border-color: #0A162E !important;
+  box-shadow: 0 0 0 4px rgba(24, 57, 92, 0.18) !important;
+}
+
+.contactForm fieldset {
+  padding-left: clamp(20px, 1.8vw, 34px) !important;
+  padding-top: clamp(8px, 0.8vw, 12px) !important;
+}
+
+.contactForm legend {
+  margin-left: calc(clamp(20px, 1.8vw, 34px) * -1) !important;
+  padding: 0 6px !important;
+  color: #18395C !important;
+  background: #A6C1D4 !important;
+  font-weight: 950 !important;
+}
+
+.contactForm fieldset label {
+  gap: clamp(8px, 0.7vw, 11px) !important;
+  color: #18395C !important;
+  font-weight: 950 !important;
+}
+
+.contactForm input[type="checkbox"] {
+  width: clamp(15px, 1.05vw, 18px) !important;
+  height: clamp(15px, 1.05vw, 18px) !important;
+  border: clamp(2.4px, 0.22vw, 3px) solid #18395C !important;
+  border-radius: 3px !important;
+  background: transparent !important;
+}
+
+.contactForm input[type="checkbox"]:checked {
+  background: #18395C !important;
+  box-shadow: inset 0 0 0 clamp(3px, 0.28vw, 4px) #A6C1D4 !important;
+}
+
+.contactForm button {
+  min-height: clamp(52px, 4vw, 68px) !important;
+  border: clamp(3px, 0.25vw, 4px) solid #18395C !important;
+  border-radius: 999px !important;
+  background: #18395C !important;
+  color: #F7FBFF !important;
+  font-weight: 950 !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 700px) {
+  .contactForm > label > span {
+    margin-left: clamp(7px, 2.2vw, 11px) !important;
+    margin-bottom: clamp(-8px, -2vw, -6px) !important;
+    padding-inline: clamp(3px, 1vw, 5px) !important;
+  }
+
+  .contactForm input[type="text"],
+  .contactForm input[type="email"],
+  .contactForm input[type="tel"],
+  .contactForm textarea {
+    border-width: clamp(2.4px, 0.78vw, 3px) !important;
+    border-radius: 4px !important;
+  }
+
+  .contactForm input[type="text"],
+  .contactForm input[type="email"],
+  .contactForm input[type="tel"] {
+    min-height: clamp(33px, 8.9vw, 46px) !important;
+  }
+
+  .contactForm textarea {
+    min-height: clamp(76px, 19vw, 104px) !important;
+  }
+
+  .contactForm fieldset {
+    padding-left: clamp(14px, 4.2vw, 22px) !important;
+  }
+
+  .contactForm legend {
+    margin-left: calc(clamp(14px, 4.2vw, 22px) * -1) !important;
+  }
+
+  .contactForm input[type="checkbox"] {
+    width: clamp(11px, 3vw, 15px) !important;
+    height: clamp(11px, 3vw, 15px) !important;
+    border-width: clamp(2px, 0.62vw, 2.6px) !important;
+  }
+
+  .contactForm button {
+    min-height: clamp(38px, 9.5vw, 50px) !important;
+    border-width: clamp(2.4px, 0.72vw, 3px) !important;
+  }
+}
+
+/* v15: checkbox marcado preenchido por completo */
+.contactForm input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background-image: none !important;
+}
+
+.contactForm input[type="checkbox"]:checked {
+  background: #18395C !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* v16: fonte global K2D */
+:root {
+  --font-primary: 'K2D', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+html,
+body,
+#root,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-primary) !important;
+}
+
+*,
+*::before,
+*::after {
+  font-family: inherit;
+}
+
+svg text {
+  font-family: var(--font-primary) !important;
+}
+
+/* Formulário conectado ao endpoint /api/contact */
+.formHoneypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+.contactForm button:disabled {
+  cursor: wait !important;
+  opacity: 0.72 !important;
+}
+
+.formStatus {
+  min-height: 1.4em;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(0.72rem, 0.82vw, 0.92rem);
+  line-height: 1.35;
+  font-weight: 850;
+}
+
+.formStatus--success {
+  color: #0f5132;
+}
+
+.formStatus--error {
+  color: #842029;
 }

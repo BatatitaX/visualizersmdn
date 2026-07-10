@@ -1,478 +1,374 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import logo from './assets/brand/logo.svg'
-import logoClara from './assets/brand/logo-clara.svg'
-import web1 from './assets/slides/web1.jpeg'
-import web2 from './assets/slides/web2.jpeg'
-import web3 from './assets/slides/web3.jpeg'
-import webClaro from './assets/slides/web-Claro.jpeg'
-import webClaro1 from './assets/slides/web-Claro1.jpeg'
-import webClaro2 from './assets/slides/web-Claro2.jpeg'
-import mob1 from './assets/slides/mob1.jpeg'
-import mob2 from './assets/slides/mob2.jpeg'
-import mob3 from './assets/slides/mob3.jpeg'
+import { useState } from 'react'
+import logo from './assets/brand/logo-clara.svg'
+import aiNavigationIcon from './assets/landing/ai-navigation.svg'
+import criticalSecurityIcon from './assets/landing/critical-security.svg.svg'
+import dashboardMobileMockup from './assets/landing/dashboard-mobile-mockup.png'
+import downloadIcon from './assets/landing/download.svg'
+import firebaseIcon from './assets/landing/firebase.svg'
+import flutterIcon from './assets/landing/flutter.svg'
+import githubOutlineIcon from './assets/landing/github-outline.svg'
+import mailIcon from './assets/landing/mail.svg'
+import monitoringIcon from './assets/landing/monitoring.svg'
+import nodeIcon from './assets/landing/nodejs.svg'
+import reactIcon from './assets/landing/react.svg'
+import rescueCentralizationIcon from './assets/landing/rescue-centralization.svg'
+import supabaseIcon from './assets/landing/supabase.svg'
+import systemHallway from './assets/landing/system-hallway.svg'
+import vercelIcon from './assets/landing/vercel.svg'
+import vertexIcon from './assets/landing/vertexai.svg'
 
-const DEFAULT_ACCESSIBILITY = {
-  fontSize: 'medium',
-  theme: 'system',
-  highContrast: false,
-  reduceMotion: false,
-}
+const techs = [
+  { name: 'React', icon: reactIcon, kind: 'react' },
+  { name: 'Flutter', icon: flutterIcon, kind: 'flutter' },
+  { name: 'Vercel', icon: vercelIcon, kind: 'vercel' },
+  { name: 'Node.js', icon: nodeIcon, kind: 'node' },
+  { name: 'Supabase', icon: supabaseIcon, kind: 'supabase' },
+  { name: 'Geodados', icon: null, kind: 'placeholder' },
+  { name: 'Firebase', icon: firebaseIcon, kind: 'firebase' },
+  { name: 'GitHub', icon: githubOutlineIcon, kind: 'github' },
+  { name: 'VertexAI', icon: vertexIcon, kind: 'vertex' },
+]
 
-const webSlides = [
+const featureItems = [
   {
-    eyebrow: 'Dashboard Web',
-    title: 'Painel web em tempo real',
-    text: 'Mapa, alertas e ocorrências para leitura operacional rápida.',
-    badge: '01',
-    image: web1,
-    lightImage: webClaro,
+    title: 'Navegação Assistida por IA',
+    text: 'Uma IA auxiliar integrada que guia o usuário de forma intuitiva por dados complexos, facilitando o acesso a relatórios e previsões.',
+    icon: aiNavigationIcon,
   },
   {
-    eyebrow: 'Relatórios',
-    title: 'Relatórios operacionais',
-    text: 'Indicadores e gráficos para apoiar resposta e planejamento.',
-    badge: '02',
-    image: web2,
-    lightImage: webClaro1,
+    title: 'Segurança de Nível Crítico',
+    text: 'Proteção avançada com criptografia e defesa cibernética para garantir que o sistema permaneça seguro e online.',
+    icon: criticalSecurityIcon,
   },
   {
-    eyebrow: 'Auditoria',
-    title: 'Auditoria e rastreio',
-    text: 'Histórico de ações e responsáveis para controle administrativo.',
-    badge: '03',
-    image: web3,
-    lightImage: webClaro2,
+    title: 'Centralização de Socorros',
+    text: 'Unificação de canais de resgate, alertas e órgãos oficiais em uma única interface, eliminando falhas na comunicação de crise.',
+    icon: rescueCentralizationIcon,
+  },
+  {
+    title: 'Monitoramento Atualizado',
+    text: 'Um painel moderno em tempo real que fornece dados visuais claros e práticos para decisões rápidas.',
+    icon: monitoringIcon,
   },
 ]
 
-const mobileSlides = [
+const connectCards = [
   {
-    eyebrow: 'Aplicativo Mobile',
-    title: 'Mapa e alertas móveis',
-    text: 'Riscos, localização e avisos importantes direto no celular.',
-    badge: '01',
-    image: mob1,
+    title: 'Canal Direto',
+    text: 'Dúvidas, propostas ou investimento: fale diretamente pelo e-mail e receba acolhimento personalizado.',
+    action: 'Enviar email',
+    icon: mailIcon,
   },
   {
-    eyebrow: 'Emergência',
-    title: 'SOS e relato rápido',
-    text: 'Pedido de ajuda e registro de ocorrência em poucos toques.',
-    badge: '02',
-    image: mob2,
+    title: 'Repositório Tech',
+    text: 'Explore nossa arquitetura, acompanhe o desenvolvimento em tempo real e contribua com melhorias.',
+    action: 'Ver no GitHub',
+    icon: githubOutlineIcon,
   },
   {
-    eyebrow: 'IA integrada',
-    title: 'Guia de sobrevivência',
-    text: 'Tutorial e passo a passo de como agir em situações de risco, com inteligência artificial.',
-    badge: '03',
-    image: mob3,
+    title: 'Solução Mobile',
+    text: 'Receba o acesso em breve e veja a experiência de campo do cidadão conectado.',
+    action: 'Baixar o App',
+    icon: downloadIcon,
   },
 ]
 
-function XIcon() {
+function PhoneMockup({ className = '' }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className="featherIcon closeIcon"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  )
-}
-
-function ChevronLeftIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="featherIcon" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="15 18 9 12 15 6" />
-    </svg>
-  )
-}
-
-function ChevronRightIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="featherIcon" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
-  )
-}
-
-function SettingsOption({ active, children, onClick }) {
-  return (
-    <button type="button" className={`settingsOption ${active ? 'active' : ''}`} onClick={onClick} aria-pressed={active}>
-      {children}
-    </button>
-  )
-}
-
-function AccessibilityMenu({ accessibility, setAccessibility }) {
-  const [open, setOpen] = useState(false)
-
-  function update(key, value) {
-    setAccessibility((current) => ({
-      ...current,
-      [key]: value,
-    }))
-  }
-
-  function toggle(key) {
-    setAccessibility((current) => ({
-      ...current,
-      [key]: !current[key],
-    }))
-  }
-
-  function reset() {
-    setAccessibility(DEFAULT_ACCESSIBILITY)
-  }
-
-  return (
-    <div className="accessMenu">
-      <button type="button" className="accessTrigger" onClick={() => setOpen((value) => !value)} aria-expanded={open}>
-        <span aria-hidden="true">⚙</span>
-        Acessibilidade
-      </button>
-
-      {open && (
-        <div className="accessDropdown" role="dialog" aria-label="Configurações de acessibilidade">
-          <div className="accessHeader">
-            <div>
-              <strong>Acessibilidade</strong>
-              <span>Configurações da apresentação</span>
-            </div>
-
-            <button
-              type="button"
-              className="accessClose"
-              onClick={() => setOpen(false)}
-              aria-label="Fechar acessibilidade"
-            >
-              <XIcon />
-            </button>
-          </div>
-
-          <div className="settingsGroup">
-            <span className="settingsTitle">Letras</span>
-            <div className="settingsGrid four">
-              <SettingsOption active={accessibility.fontSize === 'small'} onClick={() => update('fontSize', 'small')}>Pequenas</SettingsOption>
-              <SettingsOption active={accessibility.fontSize === 'medium'} onClick={() => update('fontSize', 'medium')}>Médias</SettingsOption>
-              <SettingsOption active={accessibility.fontSize === 'large'} onClick={() => update('fontSize', 'large')}>Grandes</SettingsOption>
-              <SettingsOption active={accessibility.fontSize === 'huge'} onClick={() => update('fontSize', 'huge')}>Enormes</SettingsOption>
-            </div>
-          </div>
-
-          <div className="settingsGroup">
-            <span className="settingsTitle">Modo</span>
-            <div className="settingsGrid three">
-              <SettingsOption active={accessibility.theme === 'system'} onClick={() => update('theme', 'system')}>Sistema</SettingsOption>
-              <SettingsOption active={accessibility.theme === 'light'} onClick={() => update('theme', 'light')}>Claro</SettingsOption>
-              <SettingsOption active={accessibility.theme === 'dark'} onClick={() => update('theme', 'dark')}>Escuro</SettingsOption>
-            </div>
-          </div>
-
-          <div className="settingsGroup">
-            <span className="settingsTitle">Visualização</span>
-            <div className="settingsGrid two">
-              <SettingsOption active={accessibility.highContrast} onClick={() => toggle('highContrast')}>Alto contraste</SettingsOption>
-              <SettingsOption active={accessibility.reduceMotion} onClick={() => toggle('reduceMotion')}>Remover animações</SettingsOption>
-            </div>
-          </div>
-
-          <button type="button" className="restoreButton" onClick={reset}>
-            Restaurar ao padrão
-          </button>
-        </div>
-      )}
+    <div className={`phoneMockup ${className}`} aria-label="Visualização mobile do sistema">
+      <div className="phoneNotch" />
+      <div className="phoneScreen" />
     </div>
   )
 }
 
-function ImageSlide({ slide, variant = 'web', onImageClick }) {
+function MonitorMockup({ className = '', children }) {
   return (
-    <figure className={`imageSlide ${variant === 'mobile' ? 'mobileImageSlide' : ''}`}>
-      <div className="imageSlideHeader">
-        <span>{slide.eyebrow}</span>
-        <strong>{slide.badge}</strong>
-      </div>
-
-      <button
-        type="button"
-        className="imageFrame imageOpenButton"
-        onClick={() => onImageClick(slide)}
-        aria-label={`Ampliar imagem ${slide.title}`}
-      >
-        <img
-          src={slide.image}
-          alt={`${slide.title} - ${slide.eyebrow}`}
-          draggable="false"
-          className={slide.lightImage ? 'slideImageDark' : ''}
-        />
-        {slide.lightImage && (
-          <img
-            src={slide.lightImage}
-            alt={`${slide.title} - ${slide.eyebrow} em tema claro`}
-            draggable="false"
-            className="slideImageLight"
-          />
-        )}
-        <span className="tapZoomHint">Toque para ampliar</span>
-      </button>
-
-      <figcaption>
-        <strong>{slide.title}</strong>
-        <p>{slide.text}</p>
-      </figcaption>
-    </figure>
+    <div className={`monitorMockup ${className}`} aria-label="Visualização web do sistema">
+      <div className="monitorScreen">{children}</div>
+    </div>
   )
 }
 
-function AutoCarousel({ slides, paused, setPaused, variant = 'web' }) {
-  const [index, setIndex] = useState(0)
-  const [zoomedSlide, setZoomedSlide] = useState(null)
-  const active = slides[index]
-  const dragStartX = useRef(null)
-  const dragDeltaX = useRef(0)
-  const isDragging = useRef(false)
+function formatBrazilianPhone(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 11)
 
-  useEffect(() => {
-    if (paused) return undefined
+  if (!digits) return ''
+  if (digits.length === 1) return `(${digits}`
+  if (digits.length === 2) return `(${digits})`
 
-    const interval = window.setInterval(() => {
-      setIndex((current) => (current + 1) % slides.length)
-    }, 4200)
+  const areaCode = digits.slice(0, 2)
+  const number = digits.slice(2)
 
-    return () => window.clearInterval(interval)
-  }, [paused, slides.length])
+  if (number.length <= 4) {
+    return `(${areaCode}) ${number}`
+  }
 
-  useEffect(() => {
-    if (!zoomedSlide) return undefined
+  if (digits.length <= 10) {
+    return `(${areaCode}) ${number.slice(0, 4)}-${number.slice(4)}`
+  }
 
-    function closeOnEscape(event) {
-      if (event.key === 'Escape') {
-        setZoomedSlide(null)
+  return `(${areaCode}) ${number.slice(0, 5)}-${number.slice(5)}`
+}
+
+function App() {
+  const [formStatus, setFormStatus] = useState({ type: 'idle', message: '' })
+  const [phone, setPhone] = useState('')
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    setFormStatus({ type: 'loading', message: 'Enviando formulário...' })
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData.entries())),
+      })
+
+      const contentType = response.headers.get('content-type') || ''
+      const isJsonResponse = contentType.includes('application/json')
+      const result = isJsonResponse
+        ? await response.json().catch(() => ({}))
+        : {}
+
+      if (!response.ok) {
+        if (response.status === 404 || !isJsonResponse) {
+          throw new Error(
+            'A rota de envio não está disponível. Reinicie o projeto com npm run dev ou publique novamente na Vercel.',
+          )
+        }
+
+        throw new Error(result.message || 'Não foi possível enviar o formulário.')
       }
+
+      form.reset()
+      setPhone('')
+      setFormStatus({
+        type: 'success',
+        message: result.message || 'Formulário enviado com sucesso.',
+      })
+    } catch (error) {
+      setFormStatus({
+        type: 'error',
+        message: error instanceof Error
+          ? error.message
+          : 'Não foi possível enviar o formulário. Tente novamente.',
+      })
     }
-
-    window.addEventListener('keydown', closeOnEscape)
-    return () => window.removeEventListener('keydown', closeOnEscape)
-  }, [zoomedSlide])
-
-  function previousSlide() {
-    setIndex((current) => (current - 1 + slides.length) % slides.length)
   }
 
-  function nextSlide() {
-    setIndex((current) => (current + 1) % slides.length)
-  }
-
-  function startDrag(event) {
-    if (event.target.closest('.imageOpenButton')) return
-    dragStartX.current = event.clientX
-    dragDeltaX.current = 0
-    isDragging.current = true
-  }
-
-  function moveDrag(event) {
-    if (!isDragging.current || dragStartX.current === null) return
-    dragDeltaX.current = event.clientX - dragStartX.current
-  }
-
-  function endDrag() {
-    if (!isDragging.current) return
-
-    const distance = dragDeltaX.current
-    dragStartX.current = null
-    dragDeltaX.current = 0
-    isDragging.current = false
-
-    if (Math.abs(distance) < 42) return
-
-    if (distance > 0) {
-      previousSlide()
-    } else {
-      nextSlide()
-    }
+  function handleMobileAppClick() {
+    window.alert('Aplicativo em desenvolvimento')
   }
 
   return (
-    <section className={`visualFrame ${variant === 'mobile' ? 'mobileFrame' : ''}`} aria-label={`Carrossel ${variant}`}>
-      <div className="visualHeader">
-        <div>
-          <span className="visualKicker">{variant === 'web' ? 'Web em destaque' : 'Mobile em destaque'}</span>
-          <h2>{active.title}</h2>
-        </div>
-
-        <button type="button" className={`presentationButton ${paused ? 'paused' : ''}`} onClick={() => setPaused((value) => !value)} aria-pressed={paused}>
-          {paused ? 'Continuar' : 'Automático'}
-        </button>
-      </div>
-
-      <p className="visualDescription">{active.text}</p>
-      <p className="swipeHint">No celular, arraste para navegar pelo carrossel.</p>
-
-      <div
-        className="carouselArea"
-        onPointerDown={startDrag}
-        onPointerMove={moveDrag}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        onPointerLeave={endDrag}
-      >
-        {paused && (
-          <>
-            <button type="button" className="carouselArrow left" onClick={previousSlide} aria-label="Slide anterior">
-              <ChevronLeftIcon />
-            </button>
-            <button type="button" className="carouselArrow right" onClick={nextSlide} aria-label="Próximo slide">
-              <ChevronRightIcon />
-            </button>
-          </>
-        )}
-
-        <ImageSlide slide={active} variant={variant} onImageClick={setZoomedSlide} />
-
-        {zoomedSlide && (
-          <div className="imageZoomOverlay" role="dialog" aria-modal="true" aria-label={`Imagem ampliada ${zoomedSlide.title}`}>
-            <button type="button" className="imageZoomBackdrop" onClick={() => setZoomedSlide(null)} aria-label="Fechar imagem ampliada" />
-
-            <div className="imageZoomPanel">
-              <button type="button" className="imageZoomClose" onClick={() => setZoomedSlide(null)} aria-label="Fechar imagem ampliada">
-                <XIcon />
-              </button>
-
-              <img
-                src={zoomedSlide.image}
-                alt={`${zoomedSlide.title} ampliado`}
-                draggable="false"
-                className={zoomedSlide.lightImage ? 'slideImageDark' : ''}
-              />
-              {zoomedSlide.lightImage && (
-                <img
-                  src={zoomedSlide.lightImage}
-                  alt={`${zoomedSlide.title} ampliado em tema claro`}
-                  draggable="false"
-                  className="slideImageLight"
-                />
-              )}
-            </div>
-          </div>
-        )}
-
-        <div className="carouselDots" aria-label="Indicadores do carrossel">
-          {slides.map((slide, slideIndex) => (
-            <button
-              key={slide.badge}
-              type="button"
-              className={slideIndex === index ? 'active' : ''}
-              onClick={() => {
-                setIndex(slideIndex)
-                setPaused(true)
-              }}
-              aria-label={`Ir para ${slide.title}`}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export default function App() {
-  const [webPaused, setWebPaused] = useState(false)
-  const [mobilePaused, setMobilePaused] = useState(false)
-  const [accessibility, setAccessibility] = useState(() => {
-    try {
-      const saved = window.localStorage.getItem('smdn-viewer-accessibility')
-      return saved ? { ...DEFAULT_ACCESSIBILITY, ...JSON.parse(saved) } : DEFAULT_ACCESSIBILITY
-    } catch {
-      return DEFAULT_ACCESSIBILITY
-    }
-  })
-
-  useEffect(() => {
-    try {
-      window.localStorage.setItem('smdn-viewer-accessibility', JSON.stringify(accessibility))
-    } catch {
-      // ignora indisponibilidade do localStorage
-    }
-  }, [accessibility])
-
-  useEffect(() => {
-    if (window.location.hash) {
-      window.history.replaceState(null, '', window.location.pathname + window.location.search)
-    }
-
-    window.requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-    })
-  }, [])
-
-  const shellClass = useMemo(
-    () =>
-      [
-        'viewerLanding',
-        `font-${accessibility.fontSize}`,
-        `theme-${accessibility.theme}`,
-        accessibility.highContrast ? 'highContrast' : '',
-        accessibility.reduceMotion ? 'reduceMotion' : '',
-      ]
-        .filter(Boolean)
-        .join(' '),
-    [accessibility]
-  )
-
-  return (
-    <div className={shellClass}>
-      <div className="ambientGlow ambientGlowLeft" />
-      <div className="ambientGlow ambientGlowRight" />
-
-      <header className="topBar">
-        <div className="brandLink" aria-label="SMDN Viewer">
-          <img src={logo} alt="SMDN Viewer" className="brandLogo logoLight" />
-          <img src={logoClara} alt="SMDN Viewer" className="brandLogo logoDark" />
-        </div>
-
-        <AccessibilityMenu accessibility={accessibility} setAccessibility={setAccessibility} />
+    <div className="siteShell">
+      <header className="siteHeader" id="home">
+        <a className="brand" href="#home" aria-label="SMDN">
+          <img src={logo} alt="SMDN" />
+        </a>
+        <nav className="navLinks" aria-label="Navegação principal">
+          <a href="#home">Home</a>
+          <a href="#system">Product</a>
+          <a href="#tech">Tech</a>
+        </nav>
       </header>
 
-      <main className="pageStack">
-        <section className="webHeroSection" aria-label="Apresentação do SMDN Web">
-          <article className="heroCopy">
-            <span className="eyebrow">SMDN Web · painel de monitoramento</span>
-
-            <h1>
-              Para mais segurança e agilidade, SMDN apresenta seu primeiro painel web.
-              <span>Em tempo real, para decisões críticas.</span>
-            </h1>
-
-            <p className="lead">
-              Uma vitrine visual do sistema para apresentar o painel web, seus recursos
-              operacionais e a integração com a experiência mobile.
-            </p>
-          </article>
-
-          <AutoCarousel slides={webSlides} paused={webPaused} setPaused={setWebPaused} variant="web" />
+      <main>
+        <section className="heroSection" aria-label="Apresentação inicial">
+          <div className="heroCopy">
+            <h1>Acreditamos que a tecnologia e a colaboração cidadã mudam o mundo!</h1>
+            <div className="heroActions">
+              <a href="#system">Acessar o Sistema</a>
+              <a href="#contact">Entrar em Contato</a>
+            </div>
+          </div>
+          <div className="wave waveDeep" />
+          <div className="wave waveMid" />
+          <div className="wave waveLight" />
         </section>
 
-        <section className="mobileShowcase" aria-label="Apresentação do aplicativo mobile">
-          <article className="mobileCopy">
-            <span className="eyebrow">Aplicativo Mobile · cidadão conectado</span>
-            <h2>Uma experiência pensada para quem acessa pelo celular.</h2>
+        <section className="missionSection" aria-label="Missão SMDN">
+          <div className="pinOutline" aria-hidden="true" />
+          <article className="missionText">
+            <h2>Conectando inteligência climática e colaboração cidadã para salvar vidas.</h2>
             <p>
-              No mobile, o viewer vira uma apresentação vertical: leitura rápida, cards empilhados,
-              controles grandes e navegação confortável para toque.
+              O SMDN resolve a falha no envio de alertas de desastres no Vale do Paraíba ao unir inteligência climática e colaboração cidadã. A plataforma cruza dados meteorológicos oficiais com relatos em tempo real da comunidade (crowdsourcing), transformando mapas estáticos em ações preventivas imediatas e unificando as informações para a Defesa Civil, SAMU e Bombeiros para salvar vidas.
+            </p>
+          </article>
+        </section>
+
+        <section className="systemSection" id="system" aria-label="O sistema">
+          <div className="systemsTitle" aria-hidden="true">O SISTEMA</div>
+          <div className="systemDevices">
+            <PhoneMockup className="systemPhone" />
+            <MonitorMockup className="systemMonitor">
+              <img src={systemHallway} alt="Corredor claro em perspectiva" />
+            </MonitorMockup>
+          </div>
+        </section>
+
+        <section className="techSection" id="tech" aria-label="Tecnologias utilizadas">
+          <h2>Tecnologias utilizadas:</h2>
+          <div className="techGrid">
+            {techs.map((tech) => (
+              <article className={`techCard tech-${tech.kind}`} key={tech.name}>
+                {tech.icon ? (
+                  <img className="techIcon" src={tech.icon} alt="" aria-hidden="true" />
+                ) : (
+                  <span className="techPlaceholderIcon" aria-hidden="true">GIS</span>
+                )}
+                <span>{tech.name}</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="featuresSection" aria-label="Novidades da gestão de desastres">
+          <div className="featuresInner">
+            <div className="featureIntro">
+              <h2>O que trazemos de novo para a <strong>gestão de desastres?</strong></h2>
+              <img className="dashboardMockup" src={dashboardMobileMockup} alt="Dashboard web e mobile do SMDN" />
+            </div>
+
+            <div className="featureList">
+              {featureItems.map((item) => (
+                <article className="featureItem" key={item.title}>
+                  <div className="featureIcon"><img src={item.icon} alt="" aria-hidden="true" /></div>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="contactSection" id="contact" aria-label="Contato">
+          <article className="contactCopy">
+            <h2>Conecte-se ao futuro da <span>gestão de riscos</span></h2>
+            <p>
+              Quer levar nossa tecnologia para a sua região ou entender como apoiar e investir no projeto? Dê o primeiro passo preenchendo o formulário.
             </p>
           </article>
 
-          <AutoCarousel slides={mobileSlides} paused={mobilePaused} setPaused={setMobilePaused} variant="mobile" />
+          <form className="contactForm" onSubmit={handleSubmit}>
+            <label>
+              <span>Nome completo:</span>
+              <input
+                type="text"
+                name="name"
+                autoComplete="name"
+                maxLength="120"
+                placeholder="Nome Completo"
+                required
+              />
+            </label>
+            <label>
+              <span>Email:</span>
+              <input
+                type="email"
+                name="email"
+                autoComplete="email"
+                maxLength="254"
+                placeholder="exemplo@gmail.com"
+                required
+              />
+            </label>
+            <label>
+              <span>Telefone:</span>
+              <input
+                type="tel"
+                name="phone"
+                autoComplete="tel"
+                inputMode="numeric"
+                value={phone}
+                onChange={(event) => setPhone(formatBrazilianPhone(event.target.value))}
+                minLength="14"
+                maxLength="15"
+                pattern="\(\d{2}\) \d{4,5}-\d{4}"
+                placeholder="(99) 99999-9999"
+                required
+              />
+            </label>
+
+            <label>
+              <span>Como podemos ajudar?</span>
+              <textarea
+                name="message"
+                rows="5"
+                maxLength="5000"
+                placeholder="Olá, gostaria de conhecer melhor o Visualizer SMDN e entender como ele pode ajudar na gestão de riscos da minha região."
+                required
+              />
+            </label>
+
+            <div className="formHoneypot" aria-hidden="true">
+              <label htmlFor="website">Não preencha este campo</label>
+              <input
+                id="website"
+                type="text"
+                name="website"
+                tabIndex="-1"
+                autoComplete="off"
+              />
+            </div>
+
+            <button type="submit" disabled={formStatus.type === 'loading'}>
+              {formStatus.type === 'loading' ? 'Enviando...' : 'Enviar formulário'}
+            </button>
+
+            <p
+              className={`formStatus formStatus--${formStatus.type}`}
+              role="status"
+              aria-live="polite"
+            >
+              {formStatus.message}
+            </p>
+          </form>
+        </section>
+
+        <section className="connectSection" aria-label="Outras formas de se conectar">
+          <h2>Outras formas de se conectar</h2>
+          <p className="connectLead">
+            Acreditamos na transparência para salvar vidas. Baixe nossa solução mobile, acompanhe o desenvolvimento do código em tempo real, ou entre em contato direto com os desenvolvedores.
+          </p>
+
+          <div className="connectCards">
+            {connectCards.map((card) => (
+              <article className="connectCard" key={card.title}>
+                <div className="connectCardHeader">
+                  <div className="connectIcon"><img src={card.icon} alt="" aria-hidden="true" /></div>
+                  <h3>{card.title}</h3>
+                </div>
+                <p>{card.text}</p>
+                {card.title === 'Solução Mobile' ? (
+                  <button className="connectAction" type="button" onClick={handleMobileAppClick}>
+                    {card.action}
+                  </button>
+                ) : (
+                  <a className="connectAction" href="#contact">{card.action}</a>
+                )}
+              </article>
+            ))}
+          </div>
         </section>
       </main>
+
+      <footer className="siteFooter">
+        <img src={logo} alt="SMDN" />
+        <small>Sistemas de Monitoramento de Desastres Naturais</small>
+      </footer>
     </div>
   )
 }
+
+export default App
