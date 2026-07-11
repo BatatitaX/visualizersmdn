@@ -4390,3 +4390,141 @@ svg text {
     font-size: 0.58rem !important;
   }
 }
+
+
+/* v19: remove a área transparente interna dos SVGs de tecnologia */
+.tech-react .techIcon,
+.tech-flutter .techIcon,
+.tech-vercel .techIcon,
+.tech-node .techIcon,
+.tech-supabase .techIcon,
+.tech-firebase .techIcon,
+.tech-vertex .techIcon {
+  clip-path: inset(35%);
+}
+
+.tech-react {
+  --tech-icon-scale: 3.6 !important;
+}
+
+.tech-flutter {
+  --tech-icon-scale: 3.35 !important;
+}
+
+.tech-vercel {
+  --tech-icon-scale: 3.8 !important;
+}
+
+.tech-node {
+  --tech-icon-scale: 3.35 !important;
+}
+
+.tech-supabase {
+  --tech-icon-scale: 3.5 !important;
+}
+
+.tech-firebase {
+  --tech-icon-scale: 3.2 !important;
+}
+
+.tech-vertex {
+  --tech-icon-scale: 3.5 !important;
+}
+
+.tech-github {
+  --tech-icon-scale: 1 !important;
+}
+
+/* v20: restaura o brilho suave dos SVGs e inclui PostGIS/GitHub */
+.techIcon {
+  clip-path: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tech-postgis {
+  --tech-icon-size: clamp(54px, 4vw, 68px) !important;
+  --tech-icon-top: clamp(-42px, -3vw, -30px) !important;
+  --tech-icon-scale: 1 !important;
+}
+
+.tech-postgis .techIcon {
+  left: 50% !important;
+  top: var(--tech-icon-top) !important;
+  width: var(--tech-icon-size) !important;
+  height: var(--tech-icon-size) !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  transform: translateX(-50%) scale(var(--tech-icon-scale)) !important;
+  filter:
+    brightness(1.16)
+    drop-shadow(0 0 7px rgba(193, 200, 209, 0.92))
+    drop-shadow(0 0 18px rgba(92, 151, 196, 0.6)) !important;
+}
+
+.tech-github .techIcon {
+  filter:
+    drop-shadow(0 0 6px rgba(166, 193, 212, 0.95))
+    drop-shadow(0 0 18px rgba(82, 157, 211, 0.62)) !important;
+}
+
+@media (max-width: 700px) {
+  .tech-postgis {
+    --tech-icon-size: clamp(43px, 11vw, 52px) !important;
+    --tech-icon-top: clamp(-31px, -7vw, -25px) !important;
+    --tech-icon-scale: 1 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .tech-postgis {
+    --tech-icon-size: 38px !important;
+    --tech-icon-top: -23px !important;
+  }
+
+  .tech-github .techIcon {
+    filter:
+      drop-shadow(0 0 5px rgba(166, 193, 212, 0.95))
+      drop-shadow(0 0 14px rgba(82, 157, 211, 0.58)) !important;
+  }
+}
+
+
+/* v21: corrige o card e o recorte do novo ícone PostGIS */
+.tech-postgis {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  justify-self: stretch !important;
+  align-self: stretch !important;
+}
+
+.tech-postgis .techIcon {
+  left: 50% !important;
+  top: var(--tech-icon-top) !important;
+  width: var(--tech-icon-size) !important;
+  height: var(--tech-icon-size) !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: translateX(-50%) scale(1.08) !important;
+  transform-origin: center !important;
+  filter:
+    brightness(1.08)
+    drop-shadow(0 0 6px rgba(198, 221, 244, 0.9))
+    drop-shadow(0 0 18px rgba(56, 151, 214, 0.72)) !important;
+}
+
+@media (max-width: 700px) {
+  .tech-postgis .techIcon {
+    transform: translateX(-50%) scale(1.04) !important;
+  }
+}

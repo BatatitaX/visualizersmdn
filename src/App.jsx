@@ -10,6 +10,7 @@ import githubOutlineIcon from './assets/landing/github-outline.svg'
 import mailIcon from './assets/landing/mail.svg'
 import monitoringIcon from './assets/landing/monitoring.svg'
 import nodeIcon from './assets/landing/nodejs.svg'
+import postgisIcon from './assets/landing/postgis.svg'
 import reactIcon from './assets/landing/react.svg'
 import rescueCentralizationIcon from './assets/landing/rescue-centralization.svg'
 import supabaseIcon from './assets/landing/supabase.svg'
@@ -23,11 +24,14 @@ const techs = [
   { name: 'Vercel', icon: vercelIcon, kind: 'vercel' },
   { name: 'Node.js', icon: nodeIcon, kind: 'node' },
   { name: 'Supabase', icon: supabaseIcon, kind: 'supabase' },
-  { name: 'Geodados', icon: null, kind: 'placeholder' },
+  { name: 'PostGIS', icon: postgisIcon, kind: 'postgis' },
   { name: 'Firebase', icon: firebaseIcon, kind: 'firebase' },
   { name: 'GitHub', icon: githubOutlineIcon, kind: 'github' },
   { name: 'VertexAI', icon: vertexIcon, kind: 'vertex' },
 ]
+
+// Seção temporariamente oculta. Troque para true para reativá-la.
+const SHOW_SYSTEM_SECTION = false
 
 const featureItems = [
   {
@@ -199,7 +203,7 @@ function App() {
         </a>
         <nav className="navLinks" aria-label="Navegação principal">
           <a href="#home">Home</a>
-          <a href="#system">Product</a>
+          <a href={SHOW_SYSTEM_SECTION ? '#system' : '#tech'}>Product</a>
           <a href="#tech">Tech</a>
         </nav>
       </header>
@@ -209,7 +213,7 @@ function App() {
           <div className="heroCopy">
             <h1>Acreditamos que a tecnologia e a colaboração cidadã mudam o mundo!</h1>
             <div className="heroActions">
-              <a href="#system">Acessar o Sistema</a>
+              <a href={SHOW_SYSTEM_SECTION ? '#system' : '#tech'}>Acessar o Sistema</a>
               <a href="#contact">Entrar em Contato</a>
             </div>
           </div>
@@ -228,15 +232,17 @@ function App() {
           </article>
         </section>
 
-        <section className="systemSection" id="system" aria-label="O sistema">
-          <div className="systemsTitle" aria-hidden="true">O SISTEMA</div>
-          <div className="systemDevices">
-            <PhoneMockup className="systemPhone" />
-            <MonitorMockup className="systemMonitor">
-              <img src={systemHallway} alt="Corredor claro em perspectiva" />
-            </MonitorMockup>
-          </div>
-        </section>
+        {SHOW_SYSTEM_SECTION && (
+          <section className="systemSection" id="system" aria-label="O sistema">
+            <div className="systemsTitle" aria-hidden="true">O SISTEMA</div>
+            <div className="systemDevices">
+              <PhoneMockup className="systemPhone" />
+              <MonitorMockup className="systemMonitor">
+                <img src={systemHallway} alt="Corredor claro em perspectiva" />
+              </MonitorMockup>
+            </div>
+          </section>
+        )}
 
         <section className="techSection" id="tech" aria-label="Tecnologias utilizadas">
           <h2>Tecnologias utilizadas:</h2>
@@ -329,7 +335,7 @@ function App() {
                 name="message"
                 rows="5"
                 maxLength="5000"
-                placeholder="Olá, gostaria de conhecer melhor o Visualizer SMDN e entender como ele pode ajudar na gestão de riscos da minha região."
+                placeholder="Olá, gostaria de conhecer melhor o SMDN e entender como ele pode ajudar na gestão de riscos da minha região."
                 required
               />
             </label>
