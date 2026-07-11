@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logo from './assets/brand/logo-clara.svg'
 import aiNavigationIcon from './assets/landing/ai-navigation.svg'
 import criticalSecurityIcon from './assets/landing/critical-security.svg.svg'
@@ -58,12 +58,14 @@ const connectCards = [
     text: 'Dúvidas, propostas ou investimento: fale diretamente pelo e-mail e receba acolhimento personalizado.',
     action: 'Enviar email',
     icon: mailIcon,
+    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=smdn.pi%40outlook.com&su=Contato%20Visualizer%20SMDN',
   },
   {
     title: 'Repositório Tech',
     text: 'Explore nossa arquitetura, acompanhe o desenvolvimento em tempo real e contribua com melhorias.',
     action: 'Ver no GitHub',
     icon: githubOutlineIcon,
+    href: 'https://github.com/Beto-Ribeiro/Projeto-Integrador-SMDN',
   },
   {
     title: 'Solução Mobile',
@@ -114,6 +116,27 @@ function formatBrazilianPhone(value) {
 function App() {
   const [formStatus, setFormStatus] = useState({ type: 'idle', message: '' })
   const [phone, setPhone] = useState('')
+  const [isAppModalOpen, setIsAppModalOpen] = useState(false)
+
+  useEffect(() => {
+    if (!isAppModalOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    function handleEscape(event) {
+      if (event.key === 'Escape') {
+        setIsAppModalOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleEscape)
+    }
+  }, [isAppModalOpen])
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -165,7 +188,7 @@ function App() {
   }
 
   function handleMobileAppClick() {
-    window.alert('Aplicativo em desenvolvimento')
+    setIsAppModalOpen(true)
   }
 
   return (
@@ -355,7 +378,14 @@ function App() {
                     {card.action}
                   </button>
                 ) : (
-                  <a className="connectAction" href="#contact">{card.action}</a>
+                  <a
+                    className="connectAction"
+                    href={card.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {card.action}
+                  </a>
                 )}
               </article>
             ))}
@@ -367,6 +397,53 @@ function App() {
         <img src={logo} alt="SMDN" />
         <small>Sistemas de Monitoramento de Desastres Naturais</small>
       </footer>
+
+      {isAppModalOpen && (
+        <div
+          className="appModalBackdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setIsAppModalOpen(false)
+            }
+          }}
+        >
+          <section
+            className="appModal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="app-modal-title"
+            aria-describedby="app-modal-description"
+          >
+            <button
+              className="appModalClose"
+              type="button"
+              aria-label="Fechar aviso"
+              onClick={() => setIsAppModalOpen(false)}
+            >
+              ×
+            </button>
+
+            <div className="appModalIcon" aria-hidden="true">
+              <img src={downloadIcon} alt="" />
+            </div>
+
+            <h2 id="app-modal-title">Aplicativo em desenvolvimento</h2>
+            <p id="app-modal-description">
+              A solução mobile do SMDN ainda está sendo preparada. O acesso será disponibilizado por aqui em breve.
+            </p>
+
+            <button
+              className="appModalAction"
+              type="button"
+              autoFocus
+              onClick={() => setIsAppModalOpen(false)}
+            >
+              Entendi
+            </button>
+          </section>
+        </div>
+      )}
     </div>
   )
 }
