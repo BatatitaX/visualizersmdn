@@ -56,19 +56,31 @@ const featureItems = [
   },
 ]
 
+const CONTACT_EMAIL = 'smdn.pi@outlook.com'
+const CONTACT_SUBJECT = 'Contato SMDN'
+
+const encodedContactEmail = encodeURIComponent(CONTACT_EMAIL)
+const encodedContactSubject = encodeURIComponent(CONTACT_SUBJECT)
+const contactMailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodedContactSubject}`
+const gmailWebComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodedContactEmail}&su=${encodedContactSubject}`
+const gmailIosComposeUrl = `googlegmail:///co?to=${encodedContactEmail}&subject=${encodedContactSubject}`
+const gmailAndroidIntentUrl = `intent://co?to=${encodedContactEmail}&subject=${encodedContactSubject}#Intent;scheme=googlegmail;package=com.google.android.gm;S.browser_fallback_url=${encodeURIComponent(contactMailtoUrl)};end`
+
 const connectCards = [
   {
     title: 'Canal Direto',
     text: 'Dúvidas, propostas ou investimento: fale diretamente pelo e-mail e receba acolhimento personalizado.',
     action: 'Enviar email',
     icon: mailIcon,
-    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=smdn.pi%40outlook.com&su=Contato%20Visualizer%20SMDN',
+    kind: 'email',
+    href: contactMailtoUrl,
   },
   {
     title: 'Repositório Tech',
     text: 'Explore nossa arquitetura, acompanhe o desenvolvimento em tempo real e contribua com melhorias.',
     action: 'Ver no GitHub',
     icon: githubOutlineIcon,
+    kind: 'external',
     href: 'https://github.com/Beto-Ribeiro/Projeto-Integrador-SMDN',
   },
   {
@@ -193,6 +205,39 @@ function App() {
 
   function handleMobileAppClick() {
     setIsAppModalOpen(true)
+  }
+
+  function handleEmailClick(event) {
+    event.preventDefault()
+
+    const userAgent = window.navigator.userAgent || ''
+    const isAndroid = /Android/i.test(userAgent)
+    const isIos = /iPhone|iPad|iPod/i.test(userAgent)
+
+    if (isAndroid) {
+      window.location.assign(gmailAndroidIntentUrl)
+      return
+    }
+
+    if (isIos) {
+      let fallbackTimer
+
+      const cancelFallback = () => {
+        window.clearTimeout(fallbackTimer)
+      }
+
+      document.addEventListener('visibilitychange', cancelFallback, { once: true })
+      fallbackTimer = window.setTimeout(() => {
+        if (!document.hidden) {
+          window.location.assign(contactMailtoUrl)
+        }
+      }, 900)
+
+      window.location.assign(gmailIosComposeUrl)
+      return
+    }
+
+    window.open(gmailWebComposeUrl, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -383,6 +428,14 @@ function App() {
                   <button className="connectAction" type="button" onClick={handleMobileAppClick}>
                     {card.action}
                   </button>
+                ) : card.kind === 'email' ? (
+                  <a
+                    className="connectAction"
+                    href={card.href}
+                    onClick={handleEmailClick}
+                  >
+                    {card.action}
+                  </a>
                 ) : (
                   <a
                     className="connectAction"
