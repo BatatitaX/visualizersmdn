@@ -4528,3 +4528,32 @@ svg text {
     transform: translateX(-50%) scale(1.04) !important;
   }
 }
+
+
+/* v22: amplia o PostGIS para igualar o peso visual dos demais ícones */
+.tech-postgis {
+  --tech-icon-size: clamp(78px, 5.8vw, 94px) !important;
+  --tech-icon-top: clamp(-58px, -4.3vw, -42px) !important;
+}
+
+.tech-postgis .techIcon {
+  transform: translateX(-50%) scale(1.12) !important;
+}
+
+@media (max-width: 700px) {
+  .tech-postgis {
+    --tech-icon-size: clamp(66px, 17vw, 76px) !important;
+    --tech-icon-top: clamp(-47px, -11vw, -38px) !important;
+  }
+
+  .tech-postgis .techIcon {
+    transform: translateX(-50%) scale(1.12) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .tech-postgis {
+    --tech-icon-size: 60px !important;
+    --tech-icon-top: -37px !important;
+  }
+}

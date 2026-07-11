@@ -63,8 +63,6 @@ const encodedContactEmail = encodeURIComponent(CONTACT_EMAIL)
 const encodedContactSubject = encodeURIComponent(CONTACT_SUBJECT)
 const contactMailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodedContactSubject}`
 const gmailWebComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodedContactEmail}&su=${encodedContactSubject}`
-const gmailIosComposeUrl = `googlegmail:///co?to=${encodedContactEmail}&subject=${encodedContactSubject}`
-const gmailAndroidIntentUrl = `intent://co?to=${encodedContactEmail}&subject=${encodedContactSubject}#Intent;scheme=googlegmail;package=com.google.android.gm;S.browser_fallback_url=${encodeURIComponent(contactMailtoUrl)};end`
 
 const connectCards = [
   {
@@ -211,29 +209,12 @@ function App() {
     event.preventDefault()
 
     const userAgent = window.navigator.userAgent || ''
-    const isAndroid = /Android/i.test(userAgent)
-    const isIos = /iPhone|iPad|iPod/i.test(userAgent)
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(userAgent)
 
-    if (isAndroid) {
-      window.location.assign(gmailAndroidIntentUrl)
-      return
-    }
-
-    if (isIos) {
-      let fallbackTimer
-
-      const cancelFallback = () => {
-        window.clearTimeout(fallbackTimer)
-      }
-
-      document.addEventListener('visibilitychange', cancelFallback, { once: true })
-      fallbackTimer = window.setTimeout(() => {
-        if (!document.hidden) {
-          window.location.assign(contactMailtoUrl)
-        }
-      }, 900)
-
-      window.location.assign(gmailIosComposeUrl)
+    if (isMobile) {
+      // Usa o protocolo padrão de e-mail do sistema. No Android, isso abre
+      // o Gmail diretamente quando ele está definido como app padrão.
+      window.location.href = contactMailtoUrl
       return
     }
 
