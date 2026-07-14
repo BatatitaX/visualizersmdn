@@ -4557,3 +4557,65 @@ svg text {
     --tech-icon-top: -37px !important;
   }
 }
+
+/* v23: aumenta somente o PostGIS no mobile para igualar o peso visual */
+@media (max-width: 700px) {
+  .tech-postgis {
+    --tech-icon-size: clamp(90px, 24vw, 104px) !important;
+    --tech-icon-top: clamp(-64px, -15vw, -54px) !important;
+  }
+
+  .tech-postgis .techIcon {
+    transform: translateX(-50%) scale(1.18) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .tech-postgis {
+    --tech-icon-size: 88px !important;
+    --tech-icon-top: -54px !important;
+  }
+}
+
+/* v25: escala intermediária do PostGIS no mobile */
+@media (max-width: 700px) {
+  .tech-postgis .techIcon {
+    left: 50% !important;
+    top: clamp(-57px, -13vw, -47px) !important;
+    width: clamp(62px, 17vw, 72px) !important;
+    height: clamp(78px, 21vw, 90px) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    transform: translateX(-50%) !important;
+    transform-origin: center bottom !important;
+    z-index: 2 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .tech-postgis .techIcon {
+    top: -50px !important;
+    width: 64px !important;
+    height: 80px !important;
+  }
+}
+
+/* v26: ajuste fino final do PostGIS no mobile */
+@media (max-width: 700px) {
+  .tech-postgis .techIcon {
+    top: clamp(-61px, -14vw, -51px) !important;
+    width: clamp(66px, 18vw, 76px) !important;
+    height: clamp(84px, 23vw, 96px) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .tech-postgis .techIcon {
+    top: -53px !important;
+    width: 68px !important;
+    height: 86px !important;
+  }
+}

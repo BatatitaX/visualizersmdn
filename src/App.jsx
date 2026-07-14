@@ -75,11 +75,10 @@ const connectCards = [
   },
   {
     title: 'Repositório Tech',
-    text: 'Explore nossa arquitetura, acompanhe o desenvolvimento em tempo real e contribua com melhorias.',
+    text: 'O repositório técnico do projeto está temporariamente restrito à equipe de desenvolvimento.',
     action: 'Ver no GitHub',
     icon: githubOutlineIcon,
-    kind: 'external',
-    href: 'https://github.com/Beto-Ribeiro/Projeto-Integrador-SMDN',
+    kind: 'github',
   },
   {
     title: 'Solução Mobile',
@@ -131,6 +130,7 @@ function App() {
   const [formStatus, setFormStatus] = useState({ type: 'idle', message: '' })
   const [phone, setPhone] = useState('')
   const [isAppModalOpen, setIsAppModalOpen] = useState(false)
+  const [modalKind, setModalKind] = useState('mobile')
 
   useEffect(() => {
     if (!isAppModalOpen) return undefined
@@ -201,8 +201,17 @@ function App() {
     }
   }
 
-  function handleMobileAppClick() {
+  function openNoticeModal(kind) {
+    setModalKind(kind)
     setIsAppModalOpen(true)
+  }
+
+  function handleMobileAppClick() {
+    openNoticeModal('mobile')
+  }
+
+  function handleGithubClick() {
+    openNoticeModal('github')
   }
 
   function handleEmailClick(event) {
@@ -417,16 +426,11 @@ function App() {
                   >
                     {card.action}
                   </a>
-                ) : (
-                  <a
-                    className="connectAction"
-                    href={card.href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                ) : card.kind === 'github' ? (
+                  <button className="connectAction" type="button" onClick={handleGithubClick}>
                     {card.action}
-                  </a>
-                )}
+                  </button>
+                ) : null}
               </article>
             ))}
           </div>
@@ -465,12 +469,16 @@ function App() {
             </button>
 
             <div className="appModalIcon" aria-hidden="true">
-              <img src={downloadIcon} alt="" />
+              <img src={modalKind === 'github' ? githubOutlineIcon : downloadIcon} alt="" />
             </div>
 
-            <h2 id="app-modal-title">Aplicativo em desenvolvimento</h2>
+            <h2 id="app-modal-title">
+              {modalKind === 'github' ? 'Indisponível no momento' : 'Aplicativo em desenvolvimento'}
+            </h2>
             <p id="app-modal-description">
-              A solução mobile do SMDN ainda está sendo preparada. O acesso será disponibilizado por aqui em breve.
+              {modalKind === 'github'
+                ? 'O repositório do SMDN não está público no momento.'
+                : 'A solução mobile do SMDN ainda está sendo preparada. O acesso será disponibilizado por aqui em breve.'}
             </p>
 
             <button
