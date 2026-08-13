@@ -1,6 +1,6 @@
-# Visualizer SMDN
+# Visualizer PREVER
 
-Landing page do projeto SMDN construída com React e Vite.
+Landing page do projeto PREVER construída com React e Vite.
 
 ## Instalação
 
@@ -16,7 +16,7 @@ O formulário usa uma função serverless em `api/contact.js` e envia a mensagem
 A mensagem é enviada para `smdn.pi@outlook.com`, com cópia para o e-mail digitado no formulário e com o seguinte assunto:
 
 ```text
-Formulário Visualizer SMDN
+Formulário PREVER
 ```
 
 O corpo contém:
@@ -38,7 +38,7 @@ Texto: ...
 ```env
 GMAIL_USER=seu.remetente@gmail.com
 GMAIL_APP_PASSWORD=senha_de_app_com_16_caracteres
-GMAIL_SENDER_NAME=Visualizer SMDN
+GMAIL_SENDER_NAME=PREVER
 ```
 
 Não use a senha normal da Conta Google. O arquivo `.env.local` não deve ser enviado ao GitHub.

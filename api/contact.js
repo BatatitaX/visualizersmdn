@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer'
 
 const DESTINATION_EMAIL = 'smdn.pi@outlook.com'
-const EMAIL_SUBJECT = 'Formulário Visualizer SMDN'
+const EMAIL_SUBJECT = 'Formulário PREVER'
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function parseRequestBody(body) {
@@ -36,7 +36,7 @@ function getMailConfiguration() {
   const user = cleanSingleLine(process.env.GMAIL_USER, 254).toLowerCase()
   const password = String(process.env.GMAIL_APP_PASSWORD ?? '').replace(/\s+/g, '')
   const senderName = cleanSingleLine(
-    process.env.GMAIL_SENDER_NAME || 'Visualizer SMDN',
+    process.env.GMAIL_SENDER_NAME || 'PREVER',
     100,
   )
 

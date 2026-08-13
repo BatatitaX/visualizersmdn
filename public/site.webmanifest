@@ -1,14 +1,14 @@
 {
-  "name": "SMDN Viewer",
-  "short_name": "SMDN",
+  "name": "PREVER",
+  "short_name": "PREVER",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "64x64",
-      "type": "image/svg+xml"
+      "src": "/favicon-prever.png",
+      "sizes": "128x128",
+      "type": "image/png"
     }
   ],
-  "theme_color": "#071226",
-  "background_color": "#071226",
+  "theme_color": "#09162E",
+  "background_color": "#09162E",
   "display": "standalone"
 }
