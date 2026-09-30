@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ShelterSection, ShelterRequestsPage } from './Shelters'
 import preverLogo from './assets/brand/prever-logo.png'
 import preverLogoLight from './assets/brand/prever-logo-light.png'
 import aiNavigationIcon from './assets/landing/ai-navigation.svg'
@@ -311,6 +312,10 @@ function formatBrazilianPhone(value) {
 function getRouteFromHash() {
   const hash = window.location.hash || '#home'
 
+  if (hash === '#/abrigos' || hash === '#/abrigos/') {
+    return { type: 'shelters' }
+  }
+
   if (hash === '#/ongs' || hash === '#/ongs/') {
     return { type: 'directory' }
   }
@@ -537,10 +542,12 @@ function App() {
       return
     }
 
-    document.title = route.type === 'detail' && selectedOng
+    document.title = route.type === 'shelters'
+      ? 'Pedidos dos abrigos | PREVER'
+      : route.type === 'detail' && selectedOng
       ? `${selectedOng.shortName} | ONGs PREVER`
       : 'Todas as ONGs | PREVER'
-    window.scrollTo({ top: 0, behavior: 'auto' })
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [route, selectedOng])
 
   useEffect(() => {
@@ -680,7 +687,8 @@ function App() {
         </a>
         <nav className="navLinks" aria-label="Navegação principal">
           <a href="#home" aria-current={route.type === 'landing' && route.anchor === 'home' ? 'page' : undefined}>Home</a>
-          <a href="#/ongs" aria-current={route.type !== 'landing' ? 'page' : undefined}>ONGs</a>
+          <a href="#/ongs" aria-current={['directory', 'detail'].includes(route.type) ? 'page' : undefined}>ONGs</a>
+          <a href="#/abrigos" aria-current={route.type === 'shelters' ? 'page' : undefined}>Abrigos</a>
           <a href="#tech" aria-current={route.type === 'landing' && route.anchor === 'tech' ? 'page' : undefined}>Tech</a>
         </nav>
         <a className="navContact" href="#contact">
@@ -689,7 +697,9 @@ function App() {
       </header>
 
       <main>
-        {route.type === 'directory' ? (
+        {route.type === 'shelters' ? (
+          <ShelterRequestsPage />
+        ) : route.type === 'directory' ? (
           <OngDirectoryPage />
         ) : route.type === 'detail' ? (
           <OngDetailPage ong={selectedOng} />
@@ -775,6 +785,8 @@ function App() {
             O apoio é realizado diretamente nos canais oficiais de cada instituição.
           </p>
         </section>
+
+        <ShelterSection />
 
         {SHOW_SYSTEM_SECTION && (
           <section className="systemSection" id="system" aria-label="O sistema">

@@ -1,0 +1,132 @@
+/* Área de abrigos — prévia visual isolada das páginas existentes. */
+.shelterSection, .shelterRequestsPage, .shelterDialog { font-family: 'K2D', sans-serif; }
+.shelterSection { padding: 90px max(24px, 7vw) 30px; background: #44769b; color: #091b30; scroll-margin-top: 130px; }
+.shelterSectionInner { max-width: 1150px; margin: auto; display: grid; grid-template-columns: 1fr 1.12fr; gap: clamp(48px, 8vw, 120px); align-items: center; }
+.shelterShowcase { position: relative; max-width: 370px; width: 100%; margin: auto; padding: 0 25px; }
+.shelterShowcaseBack { position: absolute; inset: 28px 0 65px; background: #2e5b7d; border-radius: 28px; transform: rotate(-5deg); }
+.shelterSpotlight { position: relative; background: #e5edf1; padding: 24px; border-radius: 28px; box-shadow: 0 22px 40px #132e4430; }
+.shelterDemoBadge { display: inline-block; font-size: .66rem; text-transform: uppercase; letter-spacing: .12em; color: #395b72; }
+.shelterSpotlightArt { position: relative; height: 180px; display: grid; place-items: center; color: #214b6b; }
+.shelterArtRing { position: absolute; width: 140px; height: 140px; border-radius: 50%; background: #c6d8e4; border: 18px solid #d5e1e9; }
+.shelterSpotlightArt > svg { position: relative; width: 74px; height: 74px; }
+.shelterArtHeart { position: absolute; display: grid; place-items: center; width: 44px; height: 44px; right: 14%; bottom: 25px; border-radius: 50%; background: #f6fafc; transform: rotate(12deg); }
+.shelterArtHeart svg { width: 24px; }
+.shelterSpotlightCopy { min-height: 116px; }
+.shelterSpotlightCopy small { color: #40627a; font-size: .76rem; }
+.shelterSpotlightCopy h3 { font-size: 1.3rem; margin: 6px 0; line-height: 1.2; }
+.shelterSpotlightCopy p { font-size: .83rem; margin: 0 0 18px; color: #40627a; }
+.shelterButton { border: 1px solid transparent; border-radius: 999px; padding: 12px 22px; display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 46px; cursor: pointer; font: inherit; font-size: .9rem; font-weight: 600; text-decoration: none; transition: background .18s, transform .18s; }
+.shelterButton:hover:not(:disabled) { transform: translateY(-2px); }
+.shelterButtonPrimary { background: #18395c; color: #f7fbff; }
+.shelterButtonPrimary:hover:not(:disabled) { background: #0a2441; }
+.shelterButtonOutline { background: transparent; border-color: #193d5c; color: #102b43; }
+.shelterButtonOutline:hover { background: #ffffff14; }
+.shelterSpotlight > .shelterButton { width: 100%; }
+.shelterCarousel { display: flex; justify-content: center; }
+.shelterCarousel button { width: 36px; height: 44px; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.shelterCarousel span { width: 8px; height: 8px; border-radius: 50%; background: #ffffff60; }
+.shelterCarousel button[aria-pressed='true'] span { background: #122f4d; width: 20px; border-radius: 10px; }
+.shelterEyebrow { margin: 0 0 16px; text-transform: uppercase; letter-spacing: .17em; font-size: .72rem; font-weight: 600; }
+.shelterSectionCopy h2 { color: #eff6fa; font-size: clamp(2.3rem, 3.8vw, 3.8rem); letter-spacing: -.035em; line-height: 1.12; margin: 0 0 26px; }
+.shelterSectionCopy > p:not(.shelterEyebrow):not(.shelterPreviewNote) { max-width: 460px; line-height: 1.85; font-size: 1.05rem; }
+.shelterActions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.shelterPreviewNote { font-size: .76rem; margin-top: 18px; }
+.shelterDisclaimer { text-align: center; max-width: 1150px; margin: 45px auto 0; font-size: .72rem; line-height: 1.6; }
+.shelterRequestsPage { min-height: 90vh; padding: calc(var(--headerH, 100px) + var(--headerTop, 20px) + 60px) max(24px, 6vw) 85px; background: #0a162e; color: #edf5fa; }
+.shelterRequestsInner { max-width: 1280px; margin: auto; }
+.shelterBack { color: #abc6d8; font-size: .88rem; }
+.shelterRequestsHeading { margin-top: 42px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.shelterRequestsHeading .shelterEyebrow { color: #a6c1d4; }
+.shelterRequestsHeading h1 { margin: 0; font-size: clamp(2.3rem, 4.3vw, 4rem); line-height: 1.1; letter-spacing: -.04em; }
+.shelterRequestsHeading h1 span { color: #83b4d3; }
+.shelterRequestsHeading p:last-child { color: #a6c1d4; line-height: 1.6; }
+.shelterRequestsPage .shelterButtonOutline { color: #d9e8f1; border-color: #577c99; }
+.shelterDemoNotice { color: #b5cddd; font-size: .8rem; margin: 20px 0 32px; display: flex; gap: 10px; align-items: center; }
+.shelterDemoNotice > span { font-size: 1.3rem; }
+.shelterToolbar { display: flex; gap: 24px; justify-content: space-between; align-items: center; }
+.shelterSearch { display: flex; align-items: center; flex: 1; max-width: 580px; border: 1px solid #57758f; border-radius: 999px; padding: 0 17px; color: #aac3d6; }
+.shelterSearch > svg { width: 19px; flex-shrink: 0; }
+.shelterSearch input { width: 100%; min-width: 0; min-height: 46px; border: 0; background: transparent; color: #edf5fa; padding: 10px; font: inherit; font-size: .83rem; outline: 0; }
+.shelterSearch:focus-within { outline: 2px solid #c1e5fc; outline-offset: 3px; }
+.shelterSearch input::placeholder { color: #acc1d1; opacity: 1; }
+.shelterFilters { display: flex; gap: 7px; flex-wrap: wrap; }
+.shelterFilters button { border: 1px solid #57758f; background: transparent; color: #c1d2de; border-radius: 999px; min-height: 42px; padding: 8px 15px; cursor: pointer; font: inherit; font-size: .78rem; }
+.shelterFilters button[aria-pressed='true'] { background: #b9d4e5; color: #10243a; border-color: #b9d4e5; }
+.shelterResultCount { font-size: .76rem; color: #9cb7cb; margin: 22px 0 16px; }
+.shelterRequestsGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.shelterRequestCard { padding: 26px; border: 1px solid #345773; border-radius: 20px; background: linear-gradient(145deg, #203f5c, #172f4a); display: flex; flex-direction: column; }
+.shelterCardTop { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.shelterIcon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 13px; background: #98bfd81a; color: #b5d5e9; }
+.shelterIcon svg { width: 24px; height: 24px; }
+.shelterPriority { padding: 5px 10px; border-radius: 7px; font-size: .68rem; font-weight: 600; }
+.shelterPriority--urgente { color: #ffbdc1; background: #712c3b77; }
+.shelterPriority--moderado { color: #ffe0a3; background: #76572c77; }
+.shelterPriority--done { color: #c1e7b9; background: #4f6c3877; }
+.shelterCardCategory { text-transform: uppercase; letter-spacing: .13em; font-size: .65rem; color: #a9c7dc; margin: 24px 0 9px; }
+.shelterRequestCard h2 { font-size: 1.19rem; line-height: 1.45; margin: 0 0 14px; min-height: 3em; }
+.shelterCardLocation { font-size: .85rem; color: #d0e1ed; margin: 0 0 28px; }
+.shelterCardLocation span { display: block; font-size: .75rem; color: #a4bed2; margin-top: 4px; }
+.shelterProgressLabels { display: flex; justify-content: space-between; gap: 8px; font-size: .72rem; color: #bed3e2; margin-top: auto; }
+.shelterProgressLabels strong { color: #eef8ff; }
+.shelterRequestCard progress { appearance: none; border: 0; border-radius: 99px; overflow: hidden; width: 100%; height: 6px; margin-top: 10px; background: #0d213a; accent-color: #8dbdda; }
+.shelterRequestCard progress::-webkit-progress-bar { background: #0d213a; border-radius: 99px; }
+.shelterRequestCard progress::-webkit-progress-value { background: #8dbdda; border-radius: 99px; }
+.shelterRequestCard progress::-moz-progress-bar { background: #8dbdda; border-radius: 99px; }
+.shelterRemaining { font-size: .72rem; color: #b2cbdd; margin: 12px 0 25px; min-height: 2.8em; }
+.shelterCardActions { display: flex; gap: 10px; }
+.shelterCardActions .shelterButton { border-radius: 10px; padding: 10px 12px; font-size: .8rem; flex: 1; }
+.shelterCardActions .shelterButtonPrimary { background: #a6cbe2; color: #102b43; }
+.shelterCardActions .shelterButtonPrimary:hover:not(:disabled) { background: #d0e7f5; }
+.shelterCardActions .shelterButton:disabled { background: #31516a; color: #bed0db; cursor: default; }
+.shelterRequestsFootnote { color: #9eb7c9; text-align: center; font-size: .78rem; margin-top: 48px; line-height: 1.7; }
+.shelterEmpty { text-align: center; padding: 50px 24px; border: 1px dashed #3a5973; border-radius: 20px; }
+.shelterEmpty > svg { width: 40px; height: 40px; margin: auto; color: #a6c1d4; }
+.shelterEmpty p { color: #b4cada; }
+.shelterDialog { border: 1px solid #4a6a83; border-radius: 24px; background: #142d47; color: #edf5fa; padding: 0; width: min(520px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); margin: auto; box-shadow: 0 30px 100px #0007; }
+.shelterDialog::backdrop { background: #030c1ac9; backdrop-filter: blur(7px); }
+.shelterDialogInner { padding: 36px; position: relative; }
+.shelterDialogClose { position: absolute; right: 12px; top: 12px; width: 44px; height: 44px; border: none; background: transparent; color: #e5f0f7; font-size: 1.7rem; cursor: pointer; border-radius: 50%; }
+.shelterDialog .shelterEyebrow { margin: 24px 0 12px; color: #b4cee0; font-size: .65rem; }
+.shelterDialog h2 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 18px; }
+.shelterDialog p, .shelterDialog li { line-height: 1.7; font-size: .9rem; color: #c8dce9; }
+.shelterDialog li { margin-bottom: 10px; }
+.shelterDialog ol { padding-left: 20px; }
+.shelterDialogNotice { background: #ffffff08; padding: 16px; border-radius: 12px; border: 1px solid #ffffff16; }
+.shelterDialog .shelterButtonPrimary { background: #b8d6e9; color: #132d44; margin-top: 10px; width: 100%; }
+.shelterDialog .shelterButtonPrimary:hover { background: #d5e9f6; }
+.shelterRequestSummary { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 18px 0; border-block: 1px solid #476079; }
+.shelterRequestSummary dt { color: #afc9da; font-size: .75rem; }
+.shelterRequestSummary dd { margin: 6px 0 0; font-size: 1.1rem; }
+:is(.shelterSection, .shelterRequestsPage, .shelterDialog) :is(button, a, input):focus-visible { outline: 3px solid #e8c977; outline-offset: 4px; }
+.siteHeader .navLinks { gap: clamp(15px, 3vw, 50px) !important; }
+@media (max-width: 1050px) { .shelterToolbar { align-items: stretch; flex-direction: column; gap: 16px; } .shelterSearch { max-width: none; } .shelterRequestsGrid { gap: 16px; } .shelterRequestCard { padding: 20px; } }
+@media (max-width: 760px) {
+  .shelterSection { padding: 60px 24px 28px; }
+  .shelterSectionInner { grid-template-columns: 1fr; gap: 36px; }
+  .shelterShowcase { max-width: 330px; }
+  .shelterSectionCopy h2 { font-size: 2.6rem; }
+  .shelterSectionCopy > p:not(.shelterEyebrow):not(.shelterPreviewNote) { font-size: 1rem; }
+  .shelterActions { gap: 10px; }
+  .shelterActions .shelterButton { padding: 12px 16px; font-size: .82rem; }
+  .shelterRequestsPage { padding: calc(var(--headerH, 100px) + var(--headerTop, 20px) + 35px) 20px 60px; }
+  .shelterRequestsHeading { flex-direction: column; align-items: flex-start; margin-top: 32px; }
+  .shelterRequestsHeading h1 { font-size: 2.7rem; }
+  .shelterRequestsGrid { grid-template-columns: 1fr; }
+  .shelterRequestCard { padding: 24px; }
+  .shelterRequestCard h2 { min-height: 0; }
+  .shelterSearch input { font-size: .73rem; }
+  .shelterFilters { gap: 6px; }
+  .shelterFilters button { padding: 9px 11px; font-size: .73rem; }
+  .shelterDemoNotice { align-items: flex-start; line-height: 1.7; }
+  .shelterDialogInner { padding: 28px 22px; }
+  .siteHeader .navLinks { gap: 10px !important; }
+}
+@media (prefers-reduced-motion: reduce) { .shelterButton { transition: none; } }
+
+@media (max-width: 380px) { .siteHeader .brand { width: 76px !important; flex-shrink: 0; } .siteHeader .navLinks { font-size: .7rem !important; gap: 8px !important; } }
+
+.shelterRequestCard--urgente { --progress-color: #ec8790; }
+.shelterRequestCard--moderado { --progress-color: #e7ba6c; }
+.shelterRequestCard--done { --progress-color: #acd198; }
+.shelterRequestCard progress::-webkit-progress-value { background: var(--progress-color, #8dbdda); }
+.shelterRequestCard progress::-moz-progress-bar { background: var(--progress-color, #8dbdda); }
